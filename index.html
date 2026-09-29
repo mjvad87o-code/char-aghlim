@@ -157,21 +157,15 @@ nav a:hover{
     position:absolute;
     top:-6px;
     left:-6px;
-
     min-width:18px;
     height:18px;
-
     padding:0 4px;
-
     display:none;
     align-items:center;
     justify-content:center;
-
     border-radius:50%;
-
     background:#88a967;
     color:white;
-
     font-size:10px;
     font-weight:700;
 }
@@ -203,11 +197,9 @@ nav a:hover{
 
 .hero{
     min-height:720px;
-
     display:flex;
     justify-content:center;
     align-items:center;
-
     text-align:center;
     padding:120px 20px 70px;
 
@@ -246,16 +238,12 @@ nav a:hover{
     display:inline-flex;
     align-items:center;
     gap:8px;
-
     color:#edf5ef;
     border:1px solid rgba(255,255,255,.25);
     background:rgba(255,255,255,.10);
-
     backdrop-filter:blur(8px);
-
     padding:6px 17px;
     border-radius:40px;
-
     font-size:12px;
     margin-bottom:17px;
 }
@@ -296,14 +284,11 @@ nav a:hover{
     display:inline-block;
     padding:12px 30px;
     border-radius:40px;
-
     color:white;
     background:#83a95e;
-
     text-decoration:none;
     font-size:14px;
     font-weight:600;
-
     box-shadow:0 10px 30px rgba(0,0,0,.18);
     transition:.3s;
 }
@@ -353,7 +338,7 @@ section{
 
 .category-grid{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(5,1fr);
     gap:18px;
     max-width:1200px;
     margin:auto;
@@ -364,13 +349,10 @@ section{
     border-radius:24px;
     overflow:hidden;
     position:relative;
-
     display:flex;
     align-items:flex-end;
-
     box-shadow:0 8px 30px rgba(18,63,45,.08);
     transition:.35s;
-
     cursor:pointer;
 }
 
@@ -416,10 +398,8 @@ section{
     display:flex;
     align-items:center;
     justify-content:center;
-
     border-radius:12px;
     margin-bottom:10px;
-
     background:rgba(255,255,255,.15);
     border:1px solid rgba(255,255,255,.20);
     backdrop-filter:blur(8px);
@@ -453,11 +433,8 @@ section{
 .coming{
     max-width:1050px;
     margin:auto;
-
     padding:65px 25px;
-
     text-align:center;
-
     border-radius:26px;
     border:1px dashed #bacbbb;
 
@@ -475,13 +452,10 @@ section{
     width:72px;
     height:72px;
     margin:0 auto 20px;
-
     border-radius:22px;
-
     display:flex;
     justify-content:center;
     align-items:center;
-
     background:#e8f0e3;
 }
 
@@ -539,7 +513,6 @@ section{
 .feature-grid{
     max-width:1050px;
     margin:auto;
-
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:40px;
@@ -555,11 +528,9 @@ section{
     width:62px;
     height:62px;
     margin:0 auto 15px;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     background:rgba(255,255,255,.07);
     border:1px solid rgba(255,255,255,.10);
     border-radius:18px;
@@ -608,7 +579,6 @@ footer{
 .footer-grid{
     max-width:1100px;
     margin:auto;
-
     display:grid;
     grid-template-columns:2fr 1fr 1fr;
     gap:50px;
@@ -670,10 +640,8 @@ footer{
     background:rgba(0,0,0,.45);
     backdrop-filter:blur(3px);
     z-index:2000;
-
     opacity:0;
     pointer-events:none;
-
     transition:.3s;
 }
 
@@ -688,19 +656,13 @@ footer{
     position:fixed;
     top:0;
     right:0;
-
     width:min(430px,92vw);
     height:100vh;
-
     background:#f8faf7;
-
     z-index:2100;
-
     transform:translateX(105%);
     transition:.35s ease;
-
     box-shadow:-15px 0 50px rgba(0,0,0,.18);
-
     display:flex;
     flex-direction:column;
 }
@@ -712,11 +674,9 @@ footer{
 .panel-header{
     height:80px;
     padding:0 24px;
-
     display:flex;
     align-items:center;
     justify-content:space-between;
-
     background:#103c2b;
     color:white;
 }
@@ -728,15 +688,11 @@ footer{
 .close-panel{
     width:40px;
     height:40px;
-
     border:1px solid rgba(255,255,255,.15);
     border-radius:12px;
-
     background:rgba(255,255,255,.07);
-
     color:white;
     font-size:24px;
-
     cursor:pointer;
 }
 
@@ -750,25 +706,20 @@ footer{
 
 .empty-cart{
     min-height:70%;
-
     display:flex;
     align-items:center;
     justify-content:center;
     flex-direction:column;
-
     text-align:center;
 }
 
 .empty-cart-icon{
     width:80px;
     height:80px;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     border-radius:25px;
-
     background:#e7efe2;
     margin-bottom:18px;
 }
@@ -776,7 +727,6 @@ footer{
 .empty-cart-icon svg{
     width:38px;
     height:38px;
-
     fill:none;
     stroke:#315e43;
     stroke-width:1.5;
@@ -798,37 +748,27 @@ footer{
 
 .empty-cart-btn{
     margin-top:20px;
-
     padding:10px 22px;
-
     border:0;
     border-radius:30px;
-
     background:#83a95e;
     color:white;
-
     font-family:inherit;
     font-size:13px;
     cursor:pointer;
 }
 
-/* ================= CLIMATE PANEL ================= */
+/* ================= CLIMATE / ALL PRODUCTS PANEL ================= */
 
 .climate-panel{
     position:fixed;
     inset:0;
-
     z-index:2200;
-
     background:#f7f9f5;
-
     overflow:auto;
-
     opacity:0;
     pointer-events:none;
-
     transform:translateY(25px);
-
     transition:.3s;
 }
 
@@ -840,16 +780,11 @@ footer{
 
 .climate-top{
     height:330px;
-
     position:relative;
-
     display:flex;
     align-items:flex-end;
-
     padding:45px 7%;
-
     color:white;
-
     overflow:hidden;
 }
 
@@ -857,7 +792,6 @@ footer{
     content:"";
     position:absolute;
     inset:0;
-
     background:linear-gradient(
         transparent 20%,
         rgba(4,30,20,.78)
@@ -867,17 +801,14 @@ footer{
 .climate-top img{
     position:absolute;
     inset:0;
-
     width:100%;
     height:100%;
-
     object-fit:cover;
 }
 
 .climate-info{
     position:relative;
     z-index:2;
-
     max-width:700px;
 }
 
@@ -897,38 +828,27 @@ footer{
 
 .climate-close{
     position:absolute;
-
     top:25px;
     left:7%;
-
     z-index:5;
-
     width:45px;
     height:45px;
-
     border-radius:13px;
-
     border:1px solid rgba(255,255,255,.25);
-
     background:rgba(0,0,0,.25);
-
     backdrop-filter:blur(8px);
-
     color:white;
-
     font-size:25px;
-
     cursor:pointer;
 }
 
 .climate-content{
     max-width:1100px;
     margin:auto;
-
     padding:55px 7%;
 }
 
-/* ================= PRODUCT CARD ================= */
+/* ================= PRODUCT GRID ================= */
 
 .product-grid{
     display:grid;
@@ -938,15 +858,19 @@ footer{
     margin:auto;
 }
 
+/* مخصوص همه محصولات */
+
+.all-products-grid{
+    max-width:1050px;
+    grid-template-columns:repeat(2,1fr);
+}
+
 .product-card{
     background:white;
     border-radius:25px;
     overflow:hidden;
-
     box-shadow:0 10px 35px rgba(20,65,46,.10);
-
     border:1px solid #e3eae1;
-
     transition:.3s;
 }
 
@@ -970,16 +894,12 @@ footer{
 
 .product-tag{
     display:inline-block;
-
     background:#e8f0e3;
     color:#527044;
-
     padding:4px 12px;
     border-radius:20px;
-
     font-size:11px;
     font-weight:600;
-
     margin-bottom:8px;
 }
 
@@ -999,7 +919,6 @@ footer{
     display:flex;
     align-items:center;
     justify-content:space-between;
-
     padding-top:14px;
     border-top:1px solid #edf1ec;
 }
@@ -1031,6 +950,14 @@ footer{
 
 /* ================= MOBILE ================= */
 
+@media(max-width:1100px){
+
+    .category-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+}
+
 @media(max-width:900px){
 
     .category-grid{
@@ -1049,6 +976,11 @@ footer{
     .footer-brand{
         grid-column:1/-1;
     }
+
+    .all-products-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
 }
 
 @media(max-width:700px){
@@ -1075,22 +1007,16 @@ footer{
         top:70px;
         right:0;
         left:0;
-
         display:flex;
         flex-direction:column;
         gap:0;
-
         padding:8px 5% 18px;
-
         background:#103c2b;
-
         transform:translateY(-130%);
         opacity:0;
         pointer-events:none;
-
         transition:.3s;
         z-index:-1;
-
         box-shadow:0 12px 20px rgba(0,0,0,.12);
     }
 
@@ -1200,6 +1126,10 @@ footer{
         height:250px;
     }
 
+    .all-products-grid{
+        grid-template-columns:1fr;
+    }
+
 }
 
 /* ================= SMALL MOBILE ================= */
@@ -1254,8 +1184,6 @@ footer{
 <a href="#about">درباره ما</a>
 
 </nav>
-
-<!-- CART -->
 
 <button class="cart-btn" id="cartBtn" aria-label="سبد خرید">
 
@@ -1452,6 +1380,37 @@ alt="دریا">
 
 </div>
 
+
+<!-- ALL PRODUCTS -->
+
+<div class="category-card reveal"
+     onclick="openClimate('all')">
+
+<img
+class="category-bg"
+src="https://uploadkon.ir/uploads/b60929_26file-000000000cc8820ab8e50e624e626707.png"
+alt="همه محصولات">
+
+<div class="category-content">
+
+<div class="category-symbol">
+
+<svg viewBox="0 0 24 24">
+<path d="M7 8V6a5 5 0 0 1 10 0v2"/>
+<path d="M5 8h14l1 13H4L5 8z"/>
+<path d="M8 12h8"/>
+</svg>
+
+</div>
+
+<h3>همه محصولات</h3>
+
+<p>مشاهده تمام تجهیزات چهار اقلیم در یکجا</p>
+
+</div>
+
+</div>
+
 </div>
 
 </section>
@@ -1518,7 +1477,6 @@ alt="دریا">
 
 
 <div class="feature-grid">
-
 
 <div class="feature reveal">
 
@@ -1666,6 +1624,11 @@ alt="دریا">
 دریا
 </a>
 
+<a href="#categories"
+   onclick="openClimate('all');return false;">
+همه محصولات
+</a>
+
 </div>
 
 </div>
@@ -1739,9 +1702,7 @@ alt="دریا">
 </aside>
 
 
-<!-- ================= CLIMATE PANELS ================= -->
-
-<!-- MOUNTAIN -->
+<!-- ================= MOUNTAIN PANEL ================= -->
 
 <div class="climate-panel" id="mountainPanel">
 
@@ -1813,7 +1774,7 @@ alt="کفش کوهنوردی">
 </div>
 
 
-<!-- FOREST -->
+<!-- ================= FOREST PANEL ================= -->
 
 <div class="climate-panel" id="forestPanel">
 
@@ -1885,7 +1846,7 @@ alt="اجاق کمپینگ">
 </div>
 
 
-<!-- DESERT -->
+<!-- ================= DESERT PANEL ================= -->
 
 <div class="climate-panel" id="desertPanel">
 
@@ -1957,7 +1918,7 @@ alt="کمل بک">
 </div>
 
 
-<!-- SEA -->
+<!-- ================= SEA PANEL ================= -->
 
 <div class="climate-panel" id="seaPanel">
 
@@ -2029,6 +1990,243 @@ alt="فین غواصی">
 </div>
 
 
+<!-- ================= ALL PRODUCTS PANEL ================= -->
+
+<div class="climate-panel" id="allPanel">
+
+<button class="climate-close"
+        onclick="closePanels()">
+×
+</button>
+
+<div class="climate-top">
+
+<img
+src="https://uploadkon.ir/uploads/b60929_26file-000000000cc8820ab8e50e624e626707.png"
+alt="همه محصولات">
+
+<div class="climate-info">
+
+<div class="mini-title">
+فروشگاه چهار اقلیم
+</div>
+
+<h2>همه محصولات</h2>
+
+<p>
+تمام تجهیزات چهار اقلیم را یکجا مشاهده کنید.
+برچسب زیر هر محصول، اقلیم مربوط به آن را مشخص می‌کند.
+</p>
+
+</div>
+
+</div>
+
+<div class="climate-content">
+
+<div class="product-grid all-products-grid">
+
+
+<!-- PRODUCT 1 -->
+
+<div class="product-card reveal active">
+
+<img
+class="product-image"
+src="https://uploadkon.ir/uploads/24ff29_266656518a.jpg"
+alt="کفش کوهنوردی">
+
+<div class="product-info">
+
+<span class="product-tag">
+کوهستان
+</span>
+
+<h3>کفش کوهنوردی</h3>
+
+<p>
+مناسب برای مسیرهای کوهستانی و ماجراجویی در طبیعت.
+</p>
+
+<div class="product-price">
+
+<span>قیمت</span>
+
+<strong>به‌زودی</strong>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PRODUCT 2 -->
+
+<div class="product-card reveal active">
+
+<img
+class="product-image"
+src="https://uploadkon.ir/uploads/c78a29_26415887.jpg"
+alt="اجاق کمپینگ">
+
+<div class="product-info">
+
+<span class="product-tag">
+جنگل
+</span>
+
+<h3>اجاق کمپینگ</h3>
+
+<p>
+تجهیز کاربردی برای کمپ و آشپزی در طبیعت.
+</p>
+
+<div class="product-price">
+
+<span>قیمت</span>
+
+<strong>به‌زودی</strong>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PRODUCT 3 -->
+
+<div class="product-card reveal active">
+
+<img
+class="product-image"
+src="https://uploadkon.ir/uploads/f61629_26c7999391c085c4f66faed270c06a43a61997d8d7-1653715500.jpg"
+alt="کمل‌بک">
+
+<div class="product-info">
+
+<span class="product-tag">
+کویر
+</span>
+
+<h3>کمل‌بک</h3>
+
+<p>
+مناسب برای حمل آب در سفرها و مسیرهای طبیعت‌گردی کویری.
+</p>
+
+<div class="product-price">
+
+<span>قیمت</span>
+
+<strong>به‌زودی</strong>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PRODUCT 4 -->
+
+<div class="product-card reveal active">
+
+<img
+class="product-image"
+src="https://uploadkon.ir/uploads/580129_26su5uno5t-thumb3.jpg"
+alt="فین غواصی">
+
+<div class="product-info">
+
+<span class="product-tag">
+دریا
+</span>
+
+<h3>فین غواصی</h3>
+
+<p>
+مناسب برای فعالیت‌های آبی و ماجراجویی در دریا.
+</p>
+
+<div class="product-price">
+
+<span>قیمت</span>
+
+<strong>به‌زودی</strong>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PRODUCT 5 - GENERAL -->
+
+<div class="product-card reveal active">
+
+<div
+class="product-image"
+style="
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,#e8f0e3,#f7faf5);
+">
+
+<svg
+viewBox="0 0 24 24"
+style="
+width:70px;
+height:70px;
+fill:none;
+stroke:#527044;
+stroke-width:1.3;
+stroke-linecap:round;
+stroke-linejoin:round;
+">
+
+<path d="M7 8V6a5 5 0 0 1 10 0v2"/>
+<path d="M5 8h14l1 13H4L5 8z"/>
+<path d="M8 12h8"/>
+
+</svg>
+
+</div>
+
+<div class="product-info">
+
+<span class="product-tag">
+عمومی
+</span>
+
+<h3>محصولات عمومی</h3>
+
+<p>
+تجهیزات کاربردی که برای سفر و طبیعت‌گردی در همه اقلیم‌ها مناسب هستند.
+</p>
+
+<div class="product-price">
+
+<span>قیمت</span>
+
+<strong>به‌زودی</strong>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
 <!-- ================= JAVASCRIPT ================= -->
 
 <script>
@@ -2053,23 +2251,6 @@ document.querySelectorAll("nav a").forEach(link => {
 
 
 /* ================= CART ================= */
-
-/*
-    زیرساخت سبد خرید
-
-    فعلاً محصولی نداریم.
-    در آینده محصولات در این آرایه قرار می‌گیرند.
-
-    نمونه ساختار محصول:
-
-    {
-        id: 1,
-        name: "کوله کوهنوردی",
-        price: 2500000,
-        image: "...",
-        category: "mountain"
-    }
-*/
 
 let cart = [];
 
@@ -2108,15 +2289,6 @@ function updateCart(){
 
 }
 
-
-/*
-    تابع آماده برای آینده:
-
-    addToCart(product)
-
-    وقتی محصولات واقعی اضافه شدند،
-    فقط این تابع را صدا می‌زنیم.
-*/
 
 function addToCart(product){
 
@@ -2160,6 +2332,10 @@ const climateData = {
 
     sea:{
         panel:"seaPanel"
+    },
+
+    all:{
+        panel:"allPanel"
     }
 
 };
@@ -2181,6 +2357,8 @@ function openClimate(type){
 
 }
 
+
+/* ================= CLOSE CLIMATE ================= */
 
 function closeClimatePanels(){
 
