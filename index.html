@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>چهار اقلیم | طبیعت و ماجراجویی</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+font-family:Tahoma,Arial,sans-serif;
+background:#f5f7f3;
+color:#18352a;
+line-height:1.8
+}
+header{
+background:#123d2b;
+color:white;
+padding:18px 6%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:10
+}
+.logo{font-size:25px;font-weight:bold}
+.logo small{display:block;font-size:11px;color:#b9d7bd}
+nav a{
+color:white;
+text-decoration:none;
+margin:0 8px;
+font-size:14px
+}
+.hero{
+min-height:500px;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:50px 20px;
+background:
+linear-gradient(#123d2bcc,#123d2bcc),
+url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=80")
+center/cover
+}
+.hero h1{font-size:48px;color:white}
+.hero p{color:#e5f2e8;font-size:19px;margin:15px 0}
+.btn{
+display:inline-block;
+background:#6c9b58;
+color:white;
+padding:11px 25px;
+border-radius:25px;
+text-decoration:none;
+margin-top:12px
+}
+section{padding:55px 7%}
+.title{text-align:center;margin-bottom:30px}
+.title h2{font-size:30px;color:#174c35}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:18px
+}
+.card{
+background:white;
+padding:25px;
+border-radius:18px;
+text-align:center;
+box-shadow:0 5px 18px #00000012
+}
+.card .icon{font-size:42px;margin-bottom:8px}
+.products .card{text-align:right}
+.price{
+color:#477c42;
+font-weight:bold;
+margin-top:10px
+}
+.about{
+background:#e7efe4;
+text-align:center
+}
+footer{
+background:#123d2b;
+color:white;
+text-align:center;
+padding:30px 15px
+}
+footer p{color:#c7d8ca;font-size:13px}
+@media(max-width:650px){
+nav{display:none}
+.hero h1{font-size:36px}
+.hero{min-height:440px}
+section{padding:40px 5%}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">
+چهار اقلیم
+<small>کوه · جنگل · کویر · دریا</small>
+</div>
+
+<nav>
+<a href="#home">خانه</a>
+<a href="#products">محصولات</a>
+<a href="#magazine">مجله</a>
+<a href="#about">درباره ما</a>
+</nav>
+</header>
+
+<section class="hero" id="home">
+<div>
+<h1>چهار اقلیم</h1>
+<p>همراه شما در مسیرهای بکر طبیعت</p>
+<p>تجهیزات کمپینگ، سفر و طبیعت‌گردی</p>
+<a class="btn" href="#products">مشاهده محصولات</a>
+</div>
+</section>
+
+<section>
+<div class="title">
+<h2>چهار اقلیم طبیعت ایران</h2>
+<p>کوه · جنگل · کویر · دریا</p>
+</div>
+
+<div class="grid">
+<div class="card"><div class="icon">🏔️</div><h3>کوه</h3><p>برای مسیرهای کوهستانی و ماجراجویی</p></div>
+<div class="card"><div class="icon">🌲</div><h3>جنگل</h3><p>تجربه آرامش در دل طبیعت</p></div>
+<div class="card"><div class="icon">🏜️</div><h3>کویر</h3><p>سفر به سرزمین‌های بکر و ناشناخته</p></div>
+<div class="card"><div class="icon">🌊</div><h3>دریا</h3><p>همراه سفرهای ساحلی و طبیعت‌گردی</p></div>
+</div>
+</section>
+
+<section class="products" id="products">
+<div class="title">
+<h2>محصولات پیشنهادی</h2>
+<p>تجهیزات کاربردی برای سفر و کمپ</p>
+</div>
+
+<div class="grid">
+
+<div class="card">
+<h3>چادر مسافرتی ۲ نفره</h3>
+<p>سبک و مناسب سفر و کمپ</p>
+<div class="price">۲٬۳۰۰٬۰۰۰ تومان</div>
+</div>
+
+<div class="card">
+<h3>چراغ کمپینگ شارژی</h3>
+<p>مناسب کمپ و شرایط اضطراری</p>
+<div class="price">۴۵۰٬۰۰۰ تومان</div>
+</div>
+
+<div class="card">
+<h3>دستبند پاراکورد چندکاره</h3>
+<p>سبک، کاربردی و مناسب طبیعت‌گردی</p>
+<div class="price">۳۵۰٬۰۰۰ تومان</div>
+</div>
+
+<div class="card">
+<h3>ابزار چندکاره ۱۱ کاره</h3>
+<p>یک ابزار کاربردی برای سفر</p>
+<div class="price">۹۸۰٬۰۰۰ تومان</div>
+</div>
+
+</div>
+</section>
+
+<section id="magazine">
+<div class="title">
+<h2>مجله چهار اقلیم</h2>
+<p>آموزش، سفر و طبیعت‌گردی</p>
+</div>
+
+<div class="grid">
+<div class="card"><h3>🎒 راهنمای شروع کمپینگ</h3><p>وسایل ضروری برای اولین کمپ</p></div>
+<div class="card"><h3>🔥 نکات کمپ در طبیعت</h3><p>تجربه‌ای بهتر و آماده‌تر در سفر</p></div>
+<div class="card"><h3>🗺️ مسیرهای دیدنی</h3><p>معرفی مکان‌های بکر و دیدنی</p></div>
+</div>
+</section>
+
+<section class="about" id="about">
+<div class="title">
+<h2>درباره چهار اقلیم</h2>
+</div>
+<p>
+چهار اقلیم با عشق به طبیعت شکل گرفته است؛
+جایی برای معرفی طبیعت، سفر، ماجراجویی و تجهیزات مورد نیاز طبیعت‌گردان.
+</p>
+<br>
+<p>
+هدف ما این است که در آینده چهار اقلیم به یک مرجع برای علاقه‌مندان طبیعت و سفر تبدیل شود.
+</p>
+</section>
+
+<footer>
+<h2>چهار اقلیم</h2>
+<p>کوه · جنگل · کویر · دریا</p>
+<p>طبیعت، خانه دوم ماست 🌿</p>
+</footer>
+
+</body>
+  </html>
