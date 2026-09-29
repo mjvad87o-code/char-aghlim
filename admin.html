@@ -1,1 +1,905 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>مدیریت چهار اقلیم</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:"Vazirmatn",sans-serif;
+    background:#f5f7f2;
+    color:#19372b;
+}
+
+.container{
+    width:min(100% - 30px,900px);
+    margin:auto;
+}
+
+header{
+    background:#103c2b;
+    color:white;
+    padding:22px 0;
+    margin-bottom:30px;
+}
+
+.header-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:800;
+}
+
+.logo span{
+    display:block;
+    font-size:12px;
+    font-weight:400;
+    opacity:.8;
+    margin-top:3px;
+}
+
+button{
+    border:0;
+    cursor:pointer;
+    font-family:inherit;
+}
+
+.logout{
+    background:#fff;
+    color:#103c2b;
+    padding:10px 18px;
+    border-radius:10px;
+}
+
+.card{
+    background:white;
+    border-radius:18px;
+    padding:25px;
+    margin-bottom:22px;
+    box-shadow:0 5px 25px rgba(0,0,0,.06);
+}
+
+h1,h2{
+    margin-top:0;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:13px;
+    margin-top:7px;
+    margin-bottom:15px;
+    border:1px solid #d9e0da;
+    border-radius:10px;
+    font-family:inherit;
+    font-size:14px;
+    outline:none;
+}
+
+textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:#103c2b;
+}
+
+label{
+    font-size:14px;
+    font-weight:600;
+}
+
+.main-btn{
+    background:#103c2b;
+    color:white;
+    padding:13px 22px;
+    border-radius:10px;
+    font-size:14px;
+}
+
+.main-btn:hover{
+    background:#174f38;
+}
+
+.cancel-btn{
+    background:#e8eee9;
+    color:#19372b;
+    padding:13px 22px;
+    border-radius:10px;
+    margin-right:8px;
+}
+
+.login{
+    max-width:450px;
+    margin:80px auto;
+}
+
+.message{
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:15px;
+    display:none;
+}
+
+.error{
+    background:#ffe7e7;
+    color:#9b2020;
+}
+
+.success{
+    background:#e4f5e9;
+    color:#176b35;
+}
+
+.product{
+    display:flex;
+    gap:18px;
+    align-items:center;
+    padding:15px 0;
+    border-bottom:1px solid #eee;
+}
+
+.product:last-child{
+    border-bottom:0;
+}
+
+.product img{
+    width:90px;
+    height:90px;
+    object-fit:cover;
+    border-radius:12px;
+    background:#eee;
+}
+
+.product-info{
+    flex:1;
+}
+
+.product-name{
+    font-weight:700;
+    margin-bottom:5px;
+}
+
+.product-climate{
+    font-size:13px;
+    color:#6d7b72;
+}
+
+.actions{
+    display:flex;
+    gap:7px;
+}
+
+.edit{
+    background:#e8eee9;
+    color:#19372b;
+    padding:8px 13px;
+    border-radius:8px;
+}
+
+.delete{
+    background:#ffe4e4;
+    color:#a32222;
+    padding:8px 13px;
+    border-radius:8px;
+}
+
+.hidden{
+    display:none !important;
+}
+
+@media(max-width:600px){
+
+    .header-inner{
+        align-items:flex-start;
+    }
+
+    .product{
+        align-items:flex-start;
+        flex-wrap:wrap;
+    }
+
+    .actions{
+        width:100%;
+    }
+
+    .actions button{
+        flex:1;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<section id="loginSection" class="login container">
+
+    <div class="card">
+
+        <h1>ورود مدیریت</h1>
+
+        <p>ورود به پنل مدیریت چهار اقلیم</p>
+
+        <div id="loginMessage" class="message"></div>
+
+        <label>ایمیل</label>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="ایمیل حساب مدیر"
+        >
+
+        <label>رمز عبور</label>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="رمز عبور"
+        >
+
+        <button class="main-btn" onclick="login()">
+            ورود به پنل
+        </button>
+
+    </div>
+
+</section>
+
+
+<div id="adminPanel" class="hidden">
+
+<header>
+
+    <div class="container header-inner">
+
+        <div class="logo">
+            چهار اقلیم
+            <span>پنل مدیریت</span>
+        </div>
+
+        <button class="logout" onclick="logout()">
+            خروج
+        </button>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <div class="card">
+
+        <h2 id="formTitle">افزودن محصول</h2>
+
+        <div id="formMessage" class="message"></div>
+
+        <input type="hidden" id="productId">
+
+        <label>نام محصول</label>
+
+        <input
+            type="text"
+            id="productName"
+            placeholder="مثلاً کفش کوهنوردی"
+        >
+
+        <label>توضیحات</label>
+
+        <textarea
+            id="productDescription"
+            placeholder="توضیحات محصول"
+        ></textarea>
+
+        <label>لینک تصویر</label>
+
+        <input
+            type="url"
+            id="productImage"
+            placeholder="https://..."
+        >
+
+        <label>قیمت</label>
+
+        <input
+            type="number"
+            id="productPrice"
+            placeholder="مثلاً 2500000"
+        >
+
+        <label>اقلیم</label>
+
+        <select id="productClimate">
+
+            <option value="کوهستان">کوهستان</option>
+            <option value="جنگل">جنگل</option>
+            <option value="کویر">کویر</option>
+            <option value="دریا">دریا</option>
+            <option value="عمومی">عمومی</option>
+
+        </select>
+
+        <button class="main-btn" onclick="saveProduct()">
+            ذخیره محصول
+        </button>
+
+        <button
+            id="cancelEdit"
+            class="cancel-btn hidden"
+            onclick="cancelEdit()"
+        >
+            لغو ویرایش
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>محصولات</h2>
+
+        <div id="productsList">
+            در حال دریافت محصولات...
+        </div>
+
+    </div>
+
+</main>
+
+</div>
+
+
+<script>
+
+/* اتصال به Supabase */
+
+const SUPABASE_URL =
+"https://viridgxzaxswjhwfvcij.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_6sNq0COlyIB4up8s-_H7Zg_Tz7b91ub";
+
+const supabaseClient =
+supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+/* ورود مدیر */
+
+async function login(){
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    const message =
+        document.getElementById("loginMessage");
+
+    if(!email || !password){
+
+        showMessage(
+            message,
+            "ایمیل و رمز عبور را وارد کنید.",
+            "error"
+        );
+
+        return;
+    }
+
+    const { data, error } =
+        await supabaseClient.auth.signInWithPassword({
+            email: email,
+            password: password
+        });
+
+    if(error){
+
+        showMessage(
+            message,
+            "ایمیل یا رمز عبور اشتباه است.",
+            "error"
+        );
+
+        console.error(error);
+
+        return;
+    }
+
+
+    /* بررسی اینکه کاربر مدیر است */
+
+    const { data: adminUser, error: adminError } =
+        await supabaseClient
+        .from("admin_users")
+        .select("user_id")
+        .eq("user_id", data.user.id)
+        .maybeSingle();
+
+
+    if(adminError || !adminUser){
+
+        await supabaseClient.auth.signOut();
+
+        showMessage(
+            message,
+            "این حساب دسترسی مدیریت ندارد.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    document
+        .getElementById("loginSection")
+        .classList.add("hidden");
+
+    document
+        .getElementById("adminPanel")
+        .classList.remove("hidden");
+
+    loadProducts();
+}
+
+
+/* خروج */
+
+async function logout(){
+
+    await supabaseClient.auth.signOut();
+
+    location.reload();
+}
+
+
+/* دریافت محصولات */
+
+async function loadProducts(){
+
+    const list =
+        document.getElementById("productsList");
+
+    list.innerHTML =
+        "در حال دریافت محصولات...";
+
+
+    const { data, error } =
+        await supabaseClient
+        .from("products")
+        .select("*")
+        .order("created_at", {
+            ascending:false
+        });
+
+
+    if(error){
+
+        list.innerHTML =
+            "خطا در دریافت محصولات.";
+
+        console.error(error);
+
+        return;
+    }
+
+
+    if(!data || data.length === 0){
+
+        list.innerHTML =
+            "هنوز محصولی ثبت نشده است.";
+
+        return;
+    }
+
+
+    list.innerHTML = "";
+
+
+    data.forEach(product => {
+
+        const div =
+            document.createElement("div");
+
+        div.className = "product";
+
+
+        div.innerHTML = `
+
+            ${
+                product.image
+                ?
+                `<img src="${escapeHtml(product.image)}">`
+                :
+                `<img src="https://via.placeholder.com/90">`
+            }
+
+            <div class="product-info">
+
+                <div class="product-name">
+                    ${escapeHtml(product.name || "")}
+                </div>
+
+                <div class="product-climate">
+                    اقلیم:
+                    ${escapeHtml(product.climate || "")}
+                </div>
+
+                <div class="product-climate">
+                    ${
+                        product.price
+                        ?
+                        Number(product.price)
+                        .toLocaleString("fa-IR")
+                        + " تومان"
+                        :
+                        "به‌زودی"
+                    }
+                </div>
+
+            </div>
+
+            <div class="actions">
+
+                <button
+                    class="edit"
+                    onclick='editProduct(${JSON.stringify(product)})'
+                >
+                    ویرایش
+                </button>
+
+                <button
+                    class="delete"
+                    onclick="deleteProduct('${product.id}')"
+                >
+                    حذف
+                </button>
+
+            </div>
+
+        `;
+
+        list.appendChild(div);
+
+    });
+}
+
+
+/* ذخیره محصول */
+
+async function saveProduct(){
+
+    const id =
+        document.getElementById("productId").value;
+
+    const name =
+        document.getElementById("productName")
+        .value.trim();
+
+    const description =
+        document.getElementById("productDescription")
+        .value.trim();
+
+    const image =
+        document.getElementById("productImage")
+        .value.trim();
+
+    const price =
+        document.getElementById("productPrice")
+        .value;
+
+    const climate =
+        document.getElementById("productClimate")
+        .value;
+
+    const message =
+        document.getElementById("formMessage");
+
+
+    if(!name){
+
+        showMessage(
+            message,
+            "نام محصول را وارد کنید.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    const productData = {
+
+        name: name,
+
+        description: description,
+
+        image: image || null,
+
+        price: price
+            ? Number(price)
+            : null,
+
+        climate: climate
+
+    };
+
+
+    let result;
+
+
+    if(id){
+
+        result =
+            await supabaseClient
+            .from("products")
+            .update(productData)
+            .eq("id", id);
+
+    }else{
+
+        result =
+            await supabaseClient
+            .from("products")
+            .insert([productData]);
+
+    }
+
+
+    if(result.error){
+
+        console.error(result.error);
+
+        showMessage(
+            message,
+            "ذخیره محصول انجام نشد.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    showMessage(
+        message,
+        "محصول با موفقیت ذخیره شد.",
+        "success"
+    );
+
+
+    cancelEdit();
+
+    loadProducts();
+}
+
+
+/* ویرایش */
+
+function editProduct(product){
+
+    document
+        .getElementById("productId")
+        .value = product.id || "";
+
+    document
+        .getElementById("productName")
+        .value = product.name || "";
+
+    document
+        .getElementById("productDescription")
+        .value = product.description || "";
+
+    document
+        .getElementById("productImage")
+        .value = product.image || "";
+
+    document
+        .getElementById("productPrice")
+        .value = product.price || "";
+
+    document
+        .getElementById("productClimate")
+        .value = product.climate || "عمومی";
+
+
+    document
+        .getElementById("formTitle")
+        .textContent = "ویرایش محصول";
+
+
+    document
+        .getElementById("cancelEdit")
+        .classList.remove("hidden");
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+/* لغو ویرایش */
+
+function cancelEdit(){
+
+    document
+        .getElementById("productId")
+        .value = "";
+
+    document
+        .getElementById("productName")
+        .value = "";
+
+    document
+        .getElementById("productDescription")
+        .value = "";
+
+    document
+        .getElementById("productImage")
+        .value = "";
+
+    document
+        .getElementById("productPrice")
+        .value = "";
+
+    document
+        .getElementById("productClimate")
+        .value = "کوهستان";
+
+
+    document
+        .getElementById("formTitle")
+        .textContent = "افزودن محصول";
+
+
+    document
+        .getElementById("cancelEdit")
+        .classList.add("hidden");
+}
+
+
+/* حذف */
+
+async function deleteProduct(id){
+
+    if(!confirm(
+        "آیا از حذف این محصول مطمئن هستید؟"
+    )){
+        return;
+    }
+
+
+    const { error } =
+        await supabaseClient
+        .from("products")
+        .delete()
+        .eq("id", id);
+
+
+    if(error){
+
+        console.error(error);
+
+        alert(
+            "حذف محصول انجام نشد."
+        );
+
+        return;
+    }
+
+
+    loadProducts();
+}
+
+
+/* پیام */
+
+function showMessage(
+    element,
+    text,
+    type
+){
+
+    element.textContent = text;
+
+    element.className =
+        "message " + type;
+
+    element.style.display =
+        "block";
+
+
+    setTimeout(() => {
+
+        element.style.display =
+            "none";
+
+    },4000);
+}
+
+
+/* جلوگیری از HTML ناخواسته */
+
+function escapeHtml(value){
+
+    return String(value)
+
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+}
+
+
+/* بررسی نشست قبلی */
+
+async function checkSession(){
+
+    const { data } =
+        await supabaseClient.auth
+        .getSession();
+
+
+    if(!data.session){
+        return;
+    }
+
+
+    const { data: adminUser } =
+        await supabaseClient
+        .from("admin_users")
+        .select("user_id")
+        .eq(
+            "user_id",
+            data.session.user.id
+        )
+        .maybeSingle();
+
+
+    if(adminUser){
+
+        document
+            .getElementById("loginSection")
+            .classList.add("hidden");
+
+        document
+            .getElementById("adminPanel")
+            .classList.remove("hidden");
+
+        loadProducts();
+    }
+}
+
+
+checkSession();
+
+</script>
+
+</body>
+  </html>
