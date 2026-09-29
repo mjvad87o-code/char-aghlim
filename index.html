@@ -50,18 +50,14 @@ header{
     display:flex;
     align-items:center;
     justify-content:space-between;
-
     position:fixed;
     top:0;
     right:0;
     left:0;
-
     z-index:1000;
-
     background:rgba(11,48,34,.94);
     backdrop-filter:blur(12px);
     -webkit-backdrop-filter:blur(12px);
-
     border-bottom:1px solid rgba(255,255,255,.08);
     transition:.3s;
 }
@@ -155,7 +151,7 @@ nav a:hover{
         rgba(7,38,25,.52),
         rgba(7,38,25,.82)
     ),
-    url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1800&q=90")
+    url("https://uploadkon.ir/uploads/b60929_26file-000000000cc8820ab8e50e624e626707.png")
     center/cover no-repeat;
 
     position:relative;
@@ -520,71 +516,6 @@ section{
     font-size:12px;
 }
 
-/* ================= MAGAZINE ================= */
-
-.magazine{
-    background:#fff;
-}
-
-.magazine-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:22px;
-    max-width:1100px;
-    margin:auto;
-}
-
-.article{
-    background:#fff;
-    border-radius:22px;
-    overflow:hidden;
-    border:1px solid #edf0eb;
-    box-shadow:0 8px 25px rgba(15,59,41,.06);
-    transition:.3s;
-}
-
-.article:hover{
-    transform:translateY(-6px);
-    box-shadow:0 15px 35px rgba(15,59,41,.12);
-}
-
-.article-image{
-    width:100%;
-    height:190px;
-    overflow:hidden;
-}
-
-.article-image img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    transition:.5s;
-}
-
-.article:hover img{
-    transform:scale(1.06);
-}
-
-.article-content{
-    padding:22px;
-}
-
-.article-label{
-    color:#759458;
-    font-size:11px;
-    font-weight:600;
-}
-
-.article h3{
-    font-size:18px;
-    margin:4px 0;
-}
-
-.article p{
-    color:#738078;
-    font-size:12px;
-}
-
 /* ================= ABOUT ================= */
 
 .about{
@@ -685,11 +616,6 @@ footer{
 
     .category-grid{
         grid-template-columns:repeat(2,1fr);
-    }
-
-    .magazine-grid{
-        grid-template-columns:1fr;
-        max-width:600px;
     }
 
     .feature-grid{
@@ -835,7 +761,6 @@ footer{
 
 <body>
 
-
 <!-- ================= HEADER ================= -->
 
 <header>
@@ -856,7 +781,6 @@ footer{
 <a href="#home">خانه</a>
 <a href="#categories">دسته‌بندی</a>
 <a href="#shop">فروشگاه</a>
-<a href="#magazine">مجله</a>
 <a href="#about">درباره ما</a>
 
 </nav>
@@ -923,7 +847,7 @@ footer{
 
 <img
 class="category-bg"
-src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80"
+src="https://uploadkon.ir/uploads/6ee529_26file-000000007cd0820abf9566001640c595.png"
 alt="کوهستان">
 
 <div class="category-content">
@@ -952,7 +876,7 @@ alt="کوهستان">
 
 <img
 class="category-bg"
-src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=700&q=80"
+src="https://uploadkon.ir/uploads/259f29_26file-000000001a0881f4b265165e92ba347e.png"
 alt="جنگل">
 
 <div class="category-content">
@@ -981,7 +905,7 @@ alt="جنگل">
 
 <img
 class="category-bg"
-src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=700&q=80"
+src="https://uploadkon.ir/uploads/b24529_26file-00000000bbb4820a9d88195cac3b22ba.png"
 alt="کویر">
 
 <div class="category-content">
@@ -1011,7 +935,7 @@ alt="کویر">
 
 <img
 class="category-bg"
-src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=80"
+src="https://uploadkon.ir/uploads/b6a529_26file-0000000050288210958d09b7e1206692.png"
 alt="دریا">
 
 <div class="category-content">
@@ -1165,112 +1089,6 @@ alt="دریا">
 </section>
 
 
-<!-- ================= MAGAZINE ================= -->
-
-<section class="magazine" id="magazine">
-
-<div class="title reveal">
-
-<div class="mini-title">مجله</div>
-
-<h2>مجله چهار اقلیم</h2>
-
-<p>
-دانش، تجربه و الهام برای مسیر بعدی
-</p>
-
-</div>
-
-
-<div class="magazine-grid">
-
-
-<article class="article reveal">
-
-<div class="article-image">
-
-<img
-src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=800&q=80"
-alt="کمپینگ">
-
-</div>
-
-<div class="article-content">
-
-<div class="article-label">
-راهنمای کمپینگ
-</div>
-
-<h3>شروع کمپینگ از کجا؟</h3>
-
-<p>
-وسایل و نکاتی که برای اولین تجربه کمپ باید بشناسید.
-</p>
-
-</div>
-
-</article>
-
-
-<article class="article reveal">
-
-<div class="article-image">
-
-<img
-src="https://images.unsplash.com/photo-1475483768296-6163e08872a1?auto=format&fit=crop&w=800&q=80"
-alt="طبیعت گردی">
-
-</div>
-
-<div class="article-content">
-
-<div class="article-label">
-مهارت‌های سفر
-</div>
-
-<h3>آماده‌تر وارد طبیعت شو</h3>
-
-<p>
-نکاتی کاربردی برای تجربه‌ای بهتر و برنامه‌ریزی‌شده‌تر.
-</p>
-
-</div>
-
-</article>
-
-
-<article class="article reveal">
-
-<div class="article-image">
-
-<img
-src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80"
-alt="مسیر طبیعت">
-
-</div>
-
-<div class="article-content">
-
-<div class="article-label">
-مقصد و مسیر
-</div>
-
-<h3>کشف مسیرهای تازه</h3>
-
-<p>
-آشنایی با طبیعت و مقصدهایی برای ماجراجویی بعدی.
-</p>
-
-</div>
-
-</article>
-
-
-</div>
-
-</section>
-
-
 <!-- ================= ABOUT ================= -->
 
 <section class="about" id="about">
@@ -1323,7 +1141,6 @@ alt="مسیر طبیعت">
 <a href="#home">خانه</a>
 <a href="#categories">دسته‌بندی‌ها</a>
 <a href="#shop">فروشگاه</a>
-<a href="#magazine">مجله</a>
 
 </div>
 
