@@ -3,14 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#103c2b">
 
-<title>چهار اقلیم | فروشگاه طبیعت‌گردی و کمپینگ</title>
+<title>چهار اقلیم | تجهیزات کمپینگ و طبیعت‌گردی</title>
 
 <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
+
+:root{
+    --green:#103c2b;
+    --green2:#174f38;
+    --light-green:#88a967;
+    --cream:#f5f7f2;
+    --white:#ffffff;
+    --text:#19372b;
+    --gray:#6d7b72;
+}
+
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
 }
 
 html{
@@ -18,288 +32,433 @@ html{
 }
 
 body{
-    font-family:Tahoma,Arial,sans-serif;
-    background:#f5f7f2;
-    color:#19372b;
-    line-height:1.8;
+    font-family:"Vazirmatn",Tahoma,Arial,sans-serif;
+    background:var(--cream);
+    color:var(--text);
+    line-height:1.9;
 }
 
-/* HEADER */
+a{
+    -webkit-tap-highlight-color:transparent;
+}
+
+/* ================= HEADER ================= */
+
 header{
-    background:rgba(15,59,41,.97);
-    color:white;
-    padding:15px 6%;
+    height:78px;
+    padding:0 7%;
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    position:sticky;
+    justify-content:space-between;
+
+    position:fixed;
     top:0;
-    z-index:100;
-    box-shadow:0 3px 15px rgba(0,0,0,.12);
+    right:0;
+    left:0;
+
+    z-index:1000;
+
+    background:rgba(11,48,34,.94);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+    transition:.3s;
 }
 
 .logo{
+    color:white;
     font-size:25px;
-    font-weight:bold;
+    line-height:1.4;
+    font-weight:800;
+    cursor:pointer;
 }
 
-.logo small{
+.logo span{
     display:block;
-    font-size:11px;
-    color:#bcd2c1;
-    font-weight:normal;
+    font-size:10px;
+    color:#b8cec0;
+    letter-spacing:.5px;
+    font-weight:400;
 }
 
 nav{
     display:flex;
-    gap:20px;
+    gap:30px;
+    align-items:center;
 }
 
 nav a{
-    color:white;
+    position:relative;
+    color:#eaf1ec;
     text-decoration:none;
     font-size:14px;
-    transition:.2s;
+    font-weight:400;
+}
+
+nav a::after{
+    content:"";
+    position:absolute;
+    height:2px;
+    width:0;
+    right:0;
+    bottom:-7px;
+    background:#9abb77;
+    transition:.25s;
+}
+
+nav a:hover::after{
+    width:100%;
 }
 
 nav a:hover{
-    color:#a9cf86;
+    color:white;
 }
 
-/* HERO */
-.hero{
-    min-height:570px;
-    display:flex;
+/* MOBILE MENU BUTTON */
+
+.menu-btn{
+    display:none;
+    width:43px;
+    height:43px;
     align-items:center;
     justify-content:center;
+    flex-direction:column;
+    gap:5px;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:12px;
+    cursor:pointer;
+}
+
+.menu-btn span{
+    display:block;
+    width:20px;
+    height:2px;
+    background:white;
+    border-radius:5px;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:720px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
     text-align:center;
-    padding:50px 20px;
+    padding:120px 20px 70px;
 
     background:
-    linear-gradient(rgba(10,48,32,.67),rgba(10,48,32,.80)),
-    url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=85")
-    center/cover;
+    linear-gradient(
+        rgba(7,38,25,.52),
+        rgba(7,38,25,.82)
+    ),
+    url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1800&q=90")
+    center/cover no-repeat;
+
+    position:relative;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    height:130px;
+
+    background:linear-gradient(
+        transparent,
+        rgba(5,32,22,.25)
+    );
 }
 
 .hero-content{
-    max-width:700px;
+    position:relative;
+    z-index:2;
+    max-width:760px;
 }
 
 .hero-badge{
-    display:inline-block;
-    padding:5px 16px;
-    background:rgba(255,255,255,.12);
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    color:#edf5ef;
     border:1px solid rgba(255,255,255,.25);
-    border-radius:30px;
-    color:#eaf3e7;
-    margin-bottom:15px;
-    font-size:13px;
+    background:rgba(255,255,255,.10);
+
+    backdrop-filter:blur(8px);
+
+    padding:6px 17px;
+    border-radius:40px;
+
+    font-size:12px;
+    margin-bottom:17px;
+}
+
+.hero-badge::before{
+    content:"";
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#a7ca7d;
 }
 
 .hero h1{
-    font-size:55px;
     color:white;
-    margin-bottom:5px;
+    font-size:68px;
+    font-weight:800;
+    letter-spacing:-2px;
+    line-height:1.4;
 }
 
-.hero p{
-    color:#e5eee6;
-    font-size:18px;
-    margin:8px 0;
+.hero-sub{
+    color:#f0f5f1;
+    font-size:21px;
+    margin-top:8px;
+}
+
+.hero-desc{
+    color:#cbd9cf;
+    font-size:15px;
+    margin-top:7px;
+}
+
+.hero-buttons{
+    margin-top:30px;
 }
 
 .btn{
     display:inline-block;
-    background:#7da65b;
-    color:white;
     padding:12px 30px;
-    border-radius:30px;
+    border-radius:40px;
+
+    color:white;
+    background:#83a95e;
+
     text-decoration:none;
-    margin-top:20px;
-    transition:.25s;
-    box-shadow:0 5px 15px rgba(0,0,0,.15);
+    font-size:14px;
+    font-weight:600;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.18);
+    transition:.3s;
 }
 
 .btn:hover{
-    transform:translateY(-2px);
-    background:#6b954c;
+    background:#739950;
+    transform:translateY(-3px);
+    box-shadow:0 14px 35px rgba(0,0,0,.25);
 }
 
-/* GENERAL */
+/* ================= GENERAL ================= */
+
 section{
-    padding:65px 7%;
+    padding:85px 7%;
 }
 
 .title{
+    max-width:650px;
+    margin:0 auto 45px;
     text-align:center;
-    margin-bottom:35px;
+}
+
+.mini-title{
+    color:#729354;
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:4px;
 }
 
 .title h2{
-    font-size:31px;
-    color:#174b35;
+    color:#123f2d;
+    font-size:34px;
+    font-weight:800;
 }
 
 .title p{
-    color:#6a776e;
-    margin-top:3px;
+    color:#78857c;
+    font-size:14px;
+    margin-top:5px;
 }
 
-/* CATEGORY */
+/* ================= CATEGORIES ================= */
+
 .categories{
     background:#fff;
 }
 
-.grid{
+.category-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
     gap:18px;
+    max-width:1200px;
+    margin:auto;
 }
 
 .category-card{
-    background:#f7f8f4;
-    padding:30px 15px;
-    border-radius:22px;
-    text-align:center;
-    transition:.25s;
-    border:1px solid #e9eee6;
+    height:300px;
+    border-radius:24px;
+    overflow:hidden;
+    position:relative;
+
+    display:flex;
+    align-items:flex-end;
+
+    box-shadow:0 8px 30px rgba(18,63,45,.08);
+    transition:.35s;
+}
+
+.category-card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        transparent 25%,
+        rgba(5,35,23,.82)
+    );
 }
 
 .category-card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 12px 30px rgba(28,70,48,.12);
+    transform:translateY(-8px);
+    box-shadow:0 18px 40px rgba(18,63,45,.18);
 }
 
-.category-icon{
-    width:80px;
-    height:80px;
-    margin:0 auto 15px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    border-radius:50%;
-    background:#e3edda;
-    font-size:40px;
+.category-card:hover .category-bg{
+    transform:scale(1.08);
 }
 
-.category-card h3{
-    color:#194a36;
-    font-size:20px;
-}
-
-.category-card p{
-    color:#68746c;
-    font-size:13px;
-}
-
-/* STORE */
-.store{
-    background:#f3f6f0;
-}
-
-.products{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:22px;
-}
-
-.product{
-    background:white;
-    border-radius:22px;
-    overflow:hidden;
-    box-shadow:0 5px 20px rgba(0,0,0,.06);
-    transition:.25s;
-}
-
-.product:hover{
-    transform:translateY(-5px);
-    box-shadow:0 15px 35px rgba(0,0,0,.10);
-}
-
-.product-image{
-    height:210px;
-    background:#e8eee5;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:55px;
-    position:relative;
-}
-
-.product-badge{
+.category-bg{
     position:absolute;
-    top:12px;
-    right:12px;
-    background:#174b35;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.6s;
+}
+
+.category-content{
+    position:relative;
+    z-index:3;
     color:white;
-    padding:4px 12px;
-    border-radius:20px;
-    font-size:11px;
+    padding:23px;
+    width:100%;
 }
 
-.product-info{
-    padding:20px;
-}
-
-.product-info h3{
-    font-size:18px;
-    margin-bottom:5px;
-}
-
-.product-info p{
-    font-size:13px;
-    color:#748078;
-}
-
-.product-bottom{
+.category-symbol{
+    width:42px;
+    height:42px;
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    margin-top:17px;
+    justify-content:center;
+
+    border-radius:12px;
+    margin-bottom:10px;
+
+    background:rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.20);
+    backdrop-filter:blur(8px);
 }
 
-.price{
-    color:#598246;
-    font-weight:bold;
+.category-symbol svg{
+    width:22px;
+    height:22px;
+    fill:none;
+    stroke:white;
+    stroke-width:1.7;
+    stroke-linecap:round;
+    stroke-linejoin:round;
 }
 
-.product-btn{
-    text-decoration:none;
-    background:#173f30;
-    color:white;
-    padding:7px 16px;
-    border-radius:20px;
+.category-content h3{
+    font-size:21px;
+}
+
+.category-content p{
+    color:#dce7df;
     font-size:12px;
 }
 
-/* EMPTY STORE */
+/* ================= STORE ================= */
+
+.store{
+    background:#f2f5ef;
+}
+
 .coming{
-    grid-column:1/-1;
-    background:white;
-    border:2px dashed #ccd8c8;
-    border-radius:25px;
+    max-width:1050px;
+    margin:auto;
+
+    padding:65px 25px;
+
     text-align:center;
-    padding:50px 20px;
+
+    border-radius:26px;
+    border:1px dashed #bacbbb;
+
+    background:
+    radial-gradient(
+        circle at top,
+        #ffffff,
+        #f9fbf8
+    );
+
+    box-shadow:0 8px 30px rgba(20,65,46,.05);
 }
 
 .coming-icon{
-    font-size:50px;
-    margin-bottom:10px;
+    width:72px;
+    height:72px;
+    margin:0 auto 20px;
+
+    border-radius:22px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:#e8f0e3;
+}
+
+.coming-icon svg{
+    width:34px;
+    height:34px;
+    stroke:#315e43;
+    fill:none;
+    stroke-width:1.6;
 }
 
 .coming h3{
-    font-size:22px;
     color:#174b35;
+    font-size:23px;
 }
 
 .coming p{
-    color:#768078;
+    color:#78837b;
+    font-size:14px;
+    max-width:550px;
+    margin:5px auto 0;
 }
 
-/* FEATURES */
+/* ================= FEATURES ================= */
+
 .features{
-    background:#173f30;
-    color:white;
+    background:#103c2b;
+    position:relative;
+    overflow:hidden;
+}
+
+.features::before{
+    content:"";
+    position:absolute;
+    width:450px;
+    height:450px;
+    border-radius:50%;
+    background:rgba(255,255,255,.025);
+    top:-250px;
+    right:-150px;
 }
 
 .features .title h2{
@@ -307,292 +466,570 @@ section{
 }
 
 .features .title p{
-    color:#c5d4c8;
+    color:#bfd0c3;
+}
+
+.features .mini-title{
+    color:#9abb77;
 }
 
 .feature-grid{
+    max-width:1050px;
+    margin:auto;
+
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:20px;
+    gap:40px;
 }
 
 .feature{
     text-align:center;
-    padding:20px;
+    color:white;
+    padding:15px;
 }
 
 .feature-icon{
-    font-size:36px;
+    width:62px;
+    height:62px;
+    margin:0 auto 15px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:18px;
+}
+
+.feature-icon svg{
+    width:28px;
+    height:28px;
+    fill:none;
+    stroke:#a8c888;
+    stroke-width:1.6;
 }
 
 .feature h3{
-    margin:7px 0;
+    font-size:18px;
+    margin-bottom:4px;
 }
 
 .feature p{
-    color:#cbd9ce;
-    font-size:13px;
+    color:#bfd0c3;
+    font-size:12px;
 }
 
-/* MAGAZINE */
+/* ================= MAGAZINE ================= */
+
+.magazine{
+    background:#fff;
+}
+
 .magazine-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:20px;
+    gap:22px;
+    max-width:1100px;
+    margin:auto;
 }
 
 .article{
-    background:white;
-    border-radius:20px;
-    padding:25px;
-    box-shadow:0 5px 20px rgba(0,0,0,.05);
+    background:#fff;
+    border-radius:22px;
+    overflow:hidden;
+    border:1px solid #edf0eb;
+    box-shadow:0 8px 25px rgba(15,59,41,.06);
+    transition:.3s;
 }
 
-.article-icon{
-    font-size:35px;
+.article:hover{
+    transform:translateY(-6px);
+    box-shadow:0 15px 35px rgba(15,59,41,.12);
+}
+
+.article-image{
+    width:100%;
+    height:190px;
+    overflow:hidden;
+}
+
+.article-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.5s;
+}
+
+.article:hover img{
+    transform:scale(1.06);
+}
+
+.article-content{
+    padding:22px;
+}
+
+.article-label{
+    color:#759458;
+    font-size:11px;
+    font-weight:600;
 }
 
 .article h3{
-    margin:8px 0;
+    font-size:18px;
+    margin:4px 0;
 }
 
 .article p{
-    color:#6f7c73;
-    font-size:13px;
+    color:#738078;
+    font-size:12px;
 }
 
-/* ABOUT */
+/* ================= ABOUT ================= */
+
 .about{
-    background:#e4ecdf;
+    background:#e6ede2;
     text-align:center;
 }
 
-.about p{
-    max-width:750px;
+.about-text{
+    max-width:780px;
     margin:auto;
-    color:#496054;
+    color:#4f6659;
+    font-size:14px;
 }
 
-/* FOOTER */
+/* ================= FOOTER ================= */
+
 footer{
-    background:#0e3022;
+    background:#092c1e;
     color:white;
-    padding:45px 7% 25px;
-    text-align:center;
+    padding:60px 7% 25px;
 }
 
-footer h2{
-    font-size:27px;
+.footer-grid{
+    max-width:1100px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:50px;
 }
 
-footer p{
-    color:#bfd0c3;
-    font-size:13px;
-    margin-top:5px;
+.footer-brand h2{
+    font-size:28px;
+}
+
+.footer-brand .climates{
+    color:#a8bdad;
+    font-size:12px;
+}
+
+.footer-brand p{
+    color:#aabdaf;
+    font-size:12px;
+    max-width:370px;
+    margin-top:12px;
+}
+
+.footer-links h3{
+    font-size:15px;
+    margin-bottom:10px;
+}
+
+.footer-links a{
+    display:block;
+    color:#aabdaf;
+    text-decoration:none;
+    font-size:12px;
+    margin:5px 0;
+}
+
+.footer-links a:hover{
+    color:white;
 }
 
 .footer-line{
+    max-width:1100px;
+    margin:35px auto 20px;
     height:1px;
-    background:rgba(255,255,255,.1);
-    margin:25px 0 15px;
+    background:rgba(255,255,255,.08);
 }
 
 .copyright{
+    max-width:1100px;
+    margin:auto;
+    text-align:center;
+    color:#789084;
     font-size:11px;
-    color:#91a598;
 }
 
-/* MOBILE */
-@media(max-width:850px){
+/* ================= SCROLL ANIMATION ================= */
 
-    .grid{
+.reveal{
+    opacity:0;
+    transform:translateY(25px);
+    transition:
+        opacity .7s ease,
+        transform .7s ease;
+}
+
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:900px){
+
+    .category-grid{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .products{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .feature-grid,
     .magazine-grid{
         grid-template-columns:1fr;
+        max-width:600px;
+    }
+
+    .feature-grid{
+        grid-template-columns:1fr;
+        gap:15px;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .footer-brand{
+        grid-column:1/-1;
     }
 }
 
-@media(max-width:650px){
+@media(max-width:700px){
 
     header{
-        padding:13px 6%;
-    }
-
-    nav{
-        display:none;
+        height:70px;
+        padding:0 5%;
     }
 
     .logo{
-        font-size:24px;
+        font-size:22px;
+    }
+
+    .menu-btn{
+        display:flex;
+    }
+
+    nav{
+        position:absolute;
+        top:70px;
+        right:0;
+        left:0;
+
+        display:flex;
+        flex-direction:column;
+        gap:0;
+
+        padding:8px 5% 18px;
+
+        background:#103c2b;
+
+        transform:translateY(-130%);
+        opacity:0;
+        pointer-events:none;
+
+        transition:.3s;
+        z-index:-1;
+
+        box-shadow:0 12px 20px rgba(0,0,0,.12);
+    }
+
+    nav.open{
+        transform:translateY(0);
+        opacity:1;
+        pointer-events:auto;
+    }
+
+    nav a{
+        width:100%;
+        padding:12px 5px;
+        border-bottom:1px solid rgba(255,255,255,.07);
+    }
+
+    nav a::after{
+        display:none;
     }
 
     .hero{
-        min-height:520px;
+        min-height:650px;
+        padding-top:110px;
     }
 
     .hero h1{
-        font-size:43px;
+        font-size:49px;
     }
 
-    .hero p{
-        font-size:16px;
+    .hero-sub{
+        font-size:18px;
+    }
+
+    .hero-desc{
+        font-size:13px;
     }
 
     section{
-        padding:48px 5%;
+        padding:65px 5%;
+    }
+
+    .title{
+        margin-bottom:30px;
     }
 
     .title h2{
         font-size:27px;
     }
 
-    .grid{
-        grid-template-columns:repeat(2,1fr);
+    .category-grid{
         gap:12px;
     }
 
     .category-card{
-        padding:22px 8px;
+        height:235px;
+        border-radius:19px;
     }
 
-    .category-icon{
-        width:65px;
-        height:65px;
-        font-size:32px;
+    .category-content{
+        padding:17px;
     }
 
-    .category-card h3{
-        font-size:17px;
+    .category-content h3{
+        font-size:18px;
     }
 
-    .products{
+    .category-content p{
+        font-size:10px;
+    }
+
+    .category-symbol{
+        width:37px;
+        height:37px;
+    }
+
+    .coming{
+        padding:50px 18px;
+    }
+
+    .footer-grid{
         grid-template-columns:1fr;
+        gap:30px;
+    }
+
+    .footer-brand{
+        grid-column:auto;
     }
 }
+
 </style>
 </head>
 
 <body>
 
+
+<!-- ================= HEADER ================= -->
+
 <header>
 
-<div class="logo">
+<div class="logo" onclick="location.href='#home'">
 چهار اقلیم
-<small>کوه · جنگل · کویر · دریا</small>
+<span>کوه · جنگل · کویر · دریا</span>
 </div>
 
-<nav>
+<div class="menu-btn" id="menuBtn" aria-label="باز کردن منو">
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+<nav id="nav">
+
 <a href="#home">خانه</a>
 <a href="#categories">دسته‌بندی</a>
 <a href="#shop">فروشگاه</a>
 <a href="#magazine">مجله</a>
 <a href="#about">درباره ما</a>
+
 </nav>
 
 </header>
 
 
-<!-- HERO -->
+<!-- ================= HERO ================= -->
 
 <section class="hero" id="home">
 
 <div class="hero-content">
 
-<span class="hero-badge">
+<div class="hero-badge">
 فروشگاه تخصصی طبیعت‌گردی
-</span>
+</div>
 
 <h1>چهار اقلیم</h1>
 
-<p>
+<div class="hero-sub">
 همراه ماجراجویی‌های تو در طبیعت
-</p>
+</div>
 
-<p>
-تجهیزات کمپینگ، سفر و طبیعت‌گردی
-</p>
+<div class="hero-desc">
+تجهیزات کمپینگ، سفر و طبیعت‌گردی برای کشف مسیرهای تازه
+</div>
 
-<a class="btn" href="#shop">
-ورود به فروشگاه
+<div class="hero-buttons">
+
+<a href="#shop" class="btn">
+مشاهده فروشگاه
 </a>
 
 </div>
 
+</div>
+
 </section>
 
 
-<!-- CATEGORIES -->
+<!-- ================= CATEGORIES ================= -->
 
 <section class="categories" id="categories">
 
-<div class="title">
+<div class="title reveal">
 
-<h2>چهار اقلیم طبیعت</h2>
+<div class="mini-title">کشف طبیعت</div>
+
+<h2>چهار اقلیم، چهار ماجراجویی</h2>
 
 <p>
-برای هر مسیر، آماده یک ماجراجویی تازه باش
+برای هر مسیر، تجهیزات و تجربه‌ای متفاوت
 </p>
 
 </div>
 
 
-<div class="grid">
+<div class="category-grid">
 
-<div class="category-card">
 
-<div class="category-icon">🏔️</div>
+<!-- MOUNTAIN -->
+
+<div class="category-card reveal">
+
+<img
+class="category-bg"
+src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80"
+alt="کوهستان">
+
+<div class="category-content">
+
+<div class="category-symbol">
+
+<svg viewBox="0 0 24 24">
+<path d="M3 20L10 7l4 7 2-3 5 9"/>
+<path d="M8 11l2 2 2-2"/>
+</svg>
+
+</div>
 
 <h3>کوهستان</h3>
 
-<p>
-تجهیزات مسیرهای کوهستانی
-</p>
+<p>برای مسیرهای مرتفع و ماجراجویی‌های کوهستانی</p>
+
+</div>
 
 </div>
 
 
-<div class="category-card">
+<!-- FOREST -->
 
-<div class="category-icon">🌲</div>
+<div class="category-card reveal">
+
+<img
+class="category-bg"
+src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=700&q=80"
+alt="جنگل">
+
+<div class="category-content">
+
+<div class="category-symbol">
+
+<svg viewBox="0 0 24 24">
+<path d="M12 3L6 11h4l-5 7h14l-5-7h4z"/>
+<path d="M12 18v3"/>
+</svg>
+
+</div>
 
 <h3>جنگل</h3>
 
-<p>
-وسایل کمپ و طبیعت‌گردی
-</p>
+<p>کمپ و طبیعت‌گردی میان مسیرهای سبز</p>
+
+</div>
 
 </div>
 
 
-<div class="category-card">
+<!-- DESERT -->
 
-<div class="category-icon">🏜️</div>
+<div class="category-card reveal">
+
+<img
+class="category-bg"
+src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=700&q=80"
+alt="کویر">
+
+<div class="category-content">
+
+<div class="category-symbol">
+
+<svg viewBox="0 0 24 24">
+<circle cx="17" cy="6" r="3"/>
+<path d="M3 19c4-6 8-6 11 0"/>
+<path d="M10 19c4-4 7-4 11 0"/>
+</svg>
+
+</div>
 
 <h3>کویر</h3>
 
-<p>
-تجهیزات سفرهای کویری
-</p>
+<p>برای سفر در سکوت و وسعت مسیرهای کویری</p>
+
+</div>
 
 </div>
 
 
-<div class="category-card">
+<!-- SEA -->
 
-<div class="category-icon">🌊</div>
+<div class="category-card reveal">
+
+<img
+class="category-bg"
+src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=80"
+alt="دریا">
+
+<div class="category-content">
+
+<div class="category-symbol">
+
+<svg viewBox="0 0 24 24">
+<path d="M2 15c3-3 5 3 8 0s5 3 8 0 4 0 4 0"/>
+<path d="M2 19c3-3 5 3 8 0s5 3 8 0 4 0 4 0"/>
+</svg>
+
+</div>
 
 <h3>دریا</h3>
 
-<p>
-لوازم سفر و کمپ ساحلی
-</p>
+<p>تجهیزات سفر، ساحل و کمپ کنار آب</p>
+
+</div>
 
 </div>
 
@@ -601,11 +1038,13 @@ footer p{
 </section>
 
 
-<!-- STORE -->
+<!-- ================= STORE ================= -->
 
 <section class="store" id="shop">
 
-<div class="title">
+<div class="title reveal">
+
+<div class="mini-title">فروشگاه</div>
 
 <h2>فروشگاه چهار اقلیم</h2>
 
@@ -616,35 +1055,44 @@ footer p{
 </div>
 
 
-<div class="products">
+<div class="coming reveal">
 
-<div class="coming">
+<div class="coming-icon">
 
-<div class="coming-icon">🎒</div>
+<svg viewBox="0 0 24 24">
 
-<h3>محصولات جدید در راه‌اند</h3>
+<path d="M7 8V6a5 5 0 0 1 10 0v2"/>
 
-<p>
-به‌زودی تجهیزات منتخب طبیعت‌گردی چهار اقلیم اینجا قرار می‌گیرند.
-</p>
+<path d="M5 8h14l1 13H4L5 8z"/>
+
+</svg>
 
 </div>
+
+<h3>در حال آماده‌سازی فروشگاه هستیم</h3>
+
+<p>
+محصولات منتخب چهار اقلیم به‌زودی در این بخش قرار می‌گیرند.
+برای یک ماجراجویی تازه آماده باش.
+</p>
 
 </div>
 
 </section>
 
 
-<!-- FEATURES -->
+<!-- ================= FEATURES ================= -->
 
 <section class="features">
 
-<div class="title">
+<div class="title reveal">
 
-<h2>چرا چهار اقلیم؟</h2>
+<div class="mini-title">چهار اقلیم</div>
+
+<h2>برای مسیرهای واقعی</h2>
 
 <p>
-برای ماجراجویی‌هایی که ارزش به‌یادماندن دارند
+انتخاب تجهیزات با نگاه به نیازهای طبیعت‌گردی
 </p>
 
 </div>
@@ -652,40 +1100,62 @@ footer p{
 
 <div class="feature-grid">
 
-<div class="feature">
 
-<div class="feature-icon">🏕️</div>
+<div class="feature reveal">
+
+<div class="feature-icon">
+
+<svg viewBox="0 0 24 24">
+<path d="M3 20L12 5l9 15"/>
+<path d="M7 20h10"/>
+</svg>
+
+</div>
 
 <h3>مخصوص طبیعت‌گردی</h3>
 
 <p>
-محصولاتی متناسب با سفر، کمپ و فضای باز
+تمرکز روی تجهیزات مناسب کمپ، سفر و فضای باز
 </p>
 
 </div>
 
 
-<div class="feature">
+<div class="feature reveal">
 
-<div class="feature-icon">🧭</div>
+<div class="feature-icon">
+
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="9"/>
+<path d="M15 9l-2 5-5 2 2-5z"/>
+</svg>
+
+</div>
 
 <h3>انتخاب کاربردی</h3>
 
 <p>
-تمرکز روی تجهیزاتی که واقعاً در سفر به کار می‌آیند
+تجهیزاتی برای استفاده واقعی در مسیر و سفر
 </p>
 
 </div>
 
 
-<div class="feature">
+<div class="feature reveal">
 
-<div class="feature-icon">🌿</div>
+<div class="feature-icon">
 
-<h3>عاشق طبیعت</h3>
+<svg viewBox="0 0 24 24">
+<path d="M20 4C11 4 5 8 5 15c0 3 2 5 5 5 7 0 10-8 10-16z"/>
+<path d="M4 21c3-7 8-10 13-13"/>
+</svg>
+
+</div>
+
+<h3>از دل طبیعت</h3>
 
 <p>
-چهار اقلیم از دل علاقه به طبیعت و ماجراجویی ساخته شده
+چهار اقلیم با علاقه به سفر، طبیعت و ماجراجویی شکل گرفته
 </p>
 
 </div>
@@ -695,16 +1165,18 @@ footer p{
 </section>
 
 
-<!-- MAGAZINE -->
+<!-- ================= MAGAZINE ================= -->
 
-<section id="magazine">
+<section class="magazine" id="magazine">
 
-<div class="title">
+<div class="title reveal">
+
+<div class="mini-title">مجله</div>
 
 <h2>مجله چهار اقلیم</h2>
 
 <p>
-آموزش و تجربه برای ماجراجویی بهتر
+دانش، تجربه و الهام برای مسیر بعدی
 </p>
 
 </div>
@@ -712,85 +1184,225 @@ footer p{
 
 <div class="magazine-grid">
 
-<div class="article">
 
-<div class="article-icon">🎒</div>
+<article class="article reveal">
 
-<h3>راهنمای شروع کمپینگ</h3>
+<div class="article-image">
+
+<img
+src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=800&q=80"
+alt="کمپینگ">
+
+</div>
+
+<div class="article-content">
+
+<div class="article-label">
+راهنمای کمپینگ
+</div>
+
+<h3>شروع کمپینگ از کجا؟</h3>
 
 <p>
-وسایل و نکات مهم برای شروع اولین تجربه کمپ.
+وسایل و نکاتی که برای اولین تجربه کمپ باید بشناسید.
 </p>
 
 </div>
 
+</article>
 
-<div class="article">
 
-<div class="article-icon">🔥</div>
+<article class="article reveal">
 
-<h3>مهارت‌های طبیعت‌گردی</h3>
+<div class="article-image">
+
+<img
+src="https://images.unsplash.com/photo-1475483768296-6163e08872a1?auto=format&fit=crop&w=800&q=80"
+alt="طبیعت گردی">
+
+</div>
+
+<div class="article-content">
+
+<div class="article-label">
+مهارت‌های سفر
+</div>
+
+<h3>آماده‌تر وارد طبیعت شو</h3>
 
 <p>
-نکاتی برای داشتن سفری آماده‌تر و مطمئن‌تر.
+نکاتی کاربردی برای تجربه‌ای بهتر و برنامه‌ریزی‌شده‌تر.
 </p>
 
 </div>
 
+</article>
 
-<div class="article">
 
-<div class="article-icon">🗺️</div>
+<article class="article reveal">
 
-<h3>مسیرهای دیدنی ایران</h3>
+<div class="article-image">
+
+<img
+src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80"
+alt="مسیر طبیعت">
+
+</div>
+
+<div class="article-content">
+
+<div class="article-label">
+مقصد و مسیر
+</div>
+
+<h3>کشف مسیرهای تازه</h3>
 
 <p>
-آشنایی با طبیعت و مقصدهای جذاب برای سفر.
+آشنایی با طبیعت و مقصدهایی برای ماجراجویی بعدی.
 </p>
 
 </div>
+
+</article>
+
 
 </div>
 
 </section>
 
 
-<!-- ABOUT -->
+<!-- ================= ABOUT ================= -->
 
 <section class="about" id="about">
 
-<div class="title">
+<div class="title reveal">
+
+<div class="mini-title">داستان ما</div>
 
 <h2>داستان چهار اقلیم</h2>
 
 </div>
 
-<p>
+<div class="about-text reveal">
+
 چهار اقلیم با عشق به طبیعت و ماجراجویی شکل گرفته است؛
-فروشگاهی برای تجهیزات کمپینگ، سفر و طبیعت‌گردی و جایی برای
-به‌اشتراک‌گذاشتن تجربه‌ها و مهارت‌های سفر.
-</p>
+جایی برای تجهیزات کمپینگ، سفر و طبیعت‌گردی و فضایی برای
+به‌اشتراک‌گذاشتن تجربه‌ها، مسیرها و مهارت‌هایی که سفر را
+لذت‌بخش‌تر می‌کنند.
+
+</div>
 
 </section>
 
 
-<!-- FOOTER -->
+<!-- ================= FOOTER ================= -->
 
 <footer>
 
+<div class="footer-grid">
+
+<div class="footer-brand">
+
 <h2>چهار اقلیم</h2>
 
-<p>کوه · جنگل · کویر · دریا</p>
+<div class="climates">
+کوه · جنگل · کویر · دریا
+</div>
 
-<p>برای ماجراجویی بعدی آماده باش 🌿</p>
+<p>
+همراه مسیرها و ماجراجویی‌هایی که بیرون از شهر آغاز می‌شوند.
+</p>
+
+</div>
+
+
+<div class="footer-links">
+
+<h3>دسترسی سریع</h3>
+
+<a href="#home">خانه</a>
+<a href="#categories">دسته‌بندی‌ها</a>
+<a href="#shop">فروشگاه</a>
+<a href="#magazine">مجله</a>
+
+</div>
+
+
+<div class="footer-links">
+
+<h3>چهار اقلیم</h3>
+
+<a href="#about">درباره ما</a>
+<a href="#categories">کوهستان</a>
+<a href="#categories">جنگل</a>
+<a href="#categories">کویر و دریا</a>
+
+</div>
+
+</div>
+
 
 <div class="footer-line"></div>
 
 <div class="copyright">
-© چهار اقلیم
+
+© چهار اقلیم — تمامی حقوق محفوظ است
+
 </div>
 
 </footer>
 
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+/* MOBILE MENU */
+
+const menuBtn = document.getElementById("menuBtn");
+const nav = document.getElementById("nav");
+
+menuBtn.addEventListener("click", () => {
+    nav.classList.toggle("open");
+});
+
+document.querySelectorAll("nav a").forEach(link => {
+
+    link.addEventListener("click", () => {
+        nav.classList.remove("open");
+    });
+
+});
+
+
+/* SCROLL ANIMATION */
+
+const observer = new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("active");
+
+            observer.unobserve(entry.target);
+
+        }
+
+    });
+
+},{
+    threshold:.12
+});
+
+
+document.querySelectorAll(".reveal").forEach(element => {
+
+    observer.observe(element);
+
+});
+
+</script>
+
 </body>
-  </html>
+    </html>
