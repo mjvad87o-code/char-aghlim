@@ -3,96 +3,478 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>چهار اقلیم | طبیعت و ماجراجویی</title>
+
+<title>چهار اقلیم | فروشگاه طبیعت‌گردی و کمپینگ</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
 body{
-font-family:Tahoma,Arial,sans-serif;
-background:#f5f7f3;
-color:#18352a;
-line-height:1.8
+    font-family:Tahoma,Arial,sans-serif;
+    background:#f5f7f2;
+    color:#19372b;
+    line-height:1.8;
 }
+
+/* HEADER */
 header{
-background:#123d2b;
-color:white;
-padding:18px 6%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-position:sticky;
-top:0;
-z-index:10
+    background:rgba(15,59,41,.97);
+    color:white;
+    padding:15px 6%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 3px 15px rgba(0,0,0,.12);
 }
-.logo{font-size:25px;font-weight:bold}
-.logo small{display:block;font-size:11px;color:#b9d7bd}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+}
+
+.logo small{
+    display:block;
+    font-size:11px;
+    color:#bcd2c1;
+    font-weight:normal;
+}
+
+nav{
+    display:flex;
+    gap:20px;
+}
+
 nav a{
-color:white;
-text-decoration:none;
-margin:0 8px;
-font-size:14px
+    color:white;
+    text-decoration:none;
+    font-size:14px;
+    transition:.2s;
 }
+
+nav a:hover{
+    color:#a9cf86;
+}
+
+/* HERO */
 .hero{
-min-height:500px;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:50px 20px;
-background:
-linear-gradient(#123d2bcc,#123d2bcc),
-url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=80")
-center/cover
+    min-height:570px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:50px 20px;
+
+    background:
+    linear-gradient(rgba(10,48,32,.67),rgba(10,48,32,.80)),
+    url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=85")
+    center/cover;
 }
-.hero h1{font-size:48px;color:white}
-.hero p{color:#e5f2e8;font-size:19px;margin:15px 0}
+
+.hero-content{
+    max-width:700px;
+}
+
+.hero-badge{
+    display:inline-block;
+    padding:5px 16px;
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:30px;
+    color:#eaf3e7;
+    margin-bottom:15px;
+    font-size:13px;
+}
+
+.hero h1{
+    font-size:55px;
+    color:white;
+    margin-bottom:5px;
+}
+
+.hero p{
+    color:#e5eee6;
+    font-size:18px;
+    margin:8px 0;
+}
+
 .btn{
-display:inline-block;
-background:#6c9b58;
-color:white;
-padding:11px 25px;
-border-radius:25px;
-text-decoration:none;
-margin-top:12px
+    display:inline-block;
+    background:#7da65b;
+    color:white;
+    padding:12px 30px;
+    border-radius:30px;
+    text-decoration:none;
+    margin-top:20px;
+    transition:.25s;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
 }
-section{padding:55px 7%}
-.title{text-align:center;margin-bottom:30px}
-.title h2{font-size:30px;color:#174c35}
+
+.btn:hover{
+    transform:translateY(-2px);
+    background:#6b954c;
+}
+
+/* GENERAL */
+section{
+    padding:65px 7%;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.title h2{
+    font-size:31px;
+    color:#174b35;
+}
+
+.title p{
+    color:#6a776e;
+    margin-top:3px;
+}
+
+/* CATEGORY */
+.categories{
+    background:#fff;
+}
+
 .grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:18px
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
 }
-.card{
-background:white;
-padding:25px;
-border-radius:18px;
-text-align:center;
-box-shadow:0 5px 18px #00000012
+
+.category-card{
+    background:#f7f8f4;
+    padding:30px 15px;
+    border-radius:22px;
+    text-align:center;
+    transition:.25s;
+    border:1px solid #e9eee6;
 }
-.card .icon{font-size:42px;margin-bottom:8px}
-.products .card{text-align:right}
+
+.category-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 12px 30px rgba(28,70,48,.12);
+}
+
+.category-icon{
+    width:80px;
+    height:80px;
+    margin:0 auto 15px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:50%;
+    background:#e3edda;
+    font-size:40px;
+}
+
+.category-card h3{
+    color:#194a36;
+    font-size:20px;
+}
+
+.category-card p{
+    color:#68746c;
+    font-size:13px;
+}
+
+/* STORE */
+.store{
+    background:#f3f6f0;
+}
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+.product{
+    background:white;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,.06);
+    transition:.25s;
+}
+
+.product:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 35px rgba(0,0,0,.10);
+}
+
+.product-image{
+    height:210px;
+    background:#e8eee5;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:55px;
+    position:relative;
+}
+
+.product-badge{
+    position:absolute;
+    top:12px;
+    right:12px;
+    background:#174b35;
+    color:white;
+    padding:4px 12px;
+    border-radius:20px;
+    font-size:11px;
+}
+
+.product-info{
+    padding:20px;
+}
+
+.product-info h3{
+    font-size:18px;
+    margin-bottom:5px;
+}
+
+.product-info p{
+    font-size:13px;
+    color:#748078;
+}
+
+.product-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:17px;
+}
+
 .price{
-color:#477c42;
-font-weight:bold;
-margin-top:10px
+    color:#598246;
+    font-weight:bold;
 }
+
+.product-btn{
+    text-decoration:none;
+    background:#173f30;
+    color:white;
+    padding:7px 16px;
+    border-radius:20px;
+    font-size:12px;
+}
+
+/* EMPTY STORE */
+.coming{
+    grid-column:1/-1;
+    background:white;
+    border:2px dashed #ccd8c8;
+    border-radius:25px;
+    text-align:center;
+    padding:50px 20px;
+}
+
+.coming-icon{
+    font-size:50px;
+    margin-bottom:10px;
+}
+
+.coming h3{
+    font-size:22px;
+    color:#174b35;
+}
+
+.coming p{
+    color:#768078;
+}
+
+/* FEATURES */
+.features{
+    background:#173f30;
+    color:white;
+}
+
+.features .title h2{
+    color:white;
+}
+
+.features .title p{
+    color:#c5d4c8;
+}
+
+.feature-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.feature{
+    text-align:center;
+    padding:20px;
+}
+
+.feature-icon{
+    font-size:36px;
+}
+
+.feature h3{
+    margin:7px 0;
+}
+
+.feature p{
+    color:#cbd9ce;
+    font-size:13px;
+}
+
+/* MAGAZINE */
+.magazine-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.article{
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,.05);
+}
+
+.article-icon{
+    font-size:35px;
+}
+
+.article h3{
+    margin:8px 0;
+}
+
+.article p{
+    color:#6f7c73;
+    font-size:13px;
+}
+
+/* ABOUT */
 .about{
-background:#e7efe4;
-text-align:center
+    background:#e4ecdf;
+    text-align:center;
 }
+
+.about p{
+    max-width:750px;
+    margin:auto;
+    color:#496054;
+}
+
+/* FOOTER */
 footer{
-background:#123d2b;
-color:white;
-text-align:center;
-padding:30px 15px
+    background:#0e3022;
+    color:white;
+    padding:45px 7% 25px;
+    text-align:center;
 }
-footer p{color:#c7d8ca;font-size:13px}
+
+footer h2{
+    font-size:27px;
+}
+
+footer p{
+    color:#bfd0c3;
+    font-size:13px;
+    margin-top:5px;
+}
+
+.footer-line{
+    height:1px;
+    background:rgba(255,255,255,.1);
+    margin:25px 0 15px;
+}
+
+.copyright{
+    font-size:11px;
+    color:#91a598;
+}
+
+/* MOBILE */
+@media(max-width:850px){
+
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .products{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .feature-grid,
+    .magazine-grid{
+        grid-template-columns:1fr;
+    }
+}
+
 @media(max-width:650px){
-nav{display:none}
-.hero h1{font-size:36px}
-.hero{min-height:440px}
-section{padding:40px 5%}
+
+    header{
+        padding:13px 6%;
+    }
+
+    nav{
+        display:none;
+    }
+
+    .logo{
+        font-size:24px;
+    }
+
+    .hero{
+        min-height:520px;
+    }
+
+    .hero h1{
+        font-size:43px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    section{
+        padding:48px 5%;
+    }
+
+    .title h2{
+        font-size:27px;
+    }
+
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+    }
+
+    .category-card{
+        padding:22px 8px;
+    }
+
+    .category-icon{
+        width:65px;
+        height:65px;
+        font-size:32px;
+    }
+
+    .category-card h3{
+        font-size:17px;
+    }
+
+    .products{
+        grid-template-columns:1fr;
+    }
 }
 </style>
 </head>
@@ -100,6 +482,7 @@ section{padding:40px 5%}
 <body>
 
 <header>
+
 <div class="logo">
 چهار اقلیم
 <small>کوه · جنگل · کویر · دریا</small>
@@ -107,101 +490,306 @@ section{padding:40px 5%}
 
 <nav>
 <a href="#home">خانه</a>
-<a href="#products">محصولات</a>
+<a href="#categories">دسته‌بندی</a>
+<a href="#shop">فروشگاه</a>
 <a href="#magazine">مجله</a>
 <a href="#about">درباره ما</a>
 </nav>
+
 </header>
 
+
+<!-- HERO -->
+
 <section class="hero" id="home">
-<div>
+
+<div class="hero-content">
+
+<span class="hero-badge">
+فروشگاه تخصصی طبیعت‌گردی
+</span>
+
 <h1>چهار اقلیم</h1>
-<p>همراه شما در مسیرهای بکر طبیعت</p>
-<p>تجهیزات کمپینگ، سفر و طبیعت‌گردی</p>
-<a class="btn" href="#products">مشاهده محصولات</a>
+
+<p>
+همراه ماجراجویی‌های تو در طبیعت
+</p>
+
+<p>
+تجهیزات کمپینگ، سفر و طبیعت‌گردی
+</p>
+
+<a class="btn" href="#shop">
+ورود به فروشگاه
+</a>
+
 </div>
+
 </section>
 
-<section>
+
+<!-- CATEGORIES -->
+
+<section class="categories" id="categories">
+
 <div class="title">
-<h2>چهار اقلیم طبیعت ایران</h2>
-<p>کوه · جنگل · کویر · دریا</p>
+
+<h2>چهار اقلیم طبیعت</h2>
+
+<p>
+برای هر مسیر، آماده یک ماجراجویی تازه باش
+</p>
+
 </div>
+
 
 <div class="grid">
-<div class="card"><div class="icon">🏔️</div><h3>کوه</h3><p>برای مسیرهای کوهستانی و ماجراجویی</p></div>
-<div class="card"><div class="icon">🌲</div><h3>جنگل</h3><p>تجربه آرامش در دل طبیعت</p></div>
-<div class="card"><div class="icon">🏜️</div><h3>کویر</h3><p>سفر به سرزمین‌های بکر و ناشناخته</p></div>
-<div class="card"><div class="icon">🌊</div><h3>دریا</h3><p>همراه سفرهای ساحلی و طبیعت‌گردی</p></div>
+
+<div class="category-card">
+
+<div class="category-icon">🏔️</div>
+
+<h3>کوهستان</h3>
+
+<p>
+تجهیزات مسیرهای کوهستانی
+</p>
+
 </div>
+
+
+<div class="category-card">
+
+<div class="category-icon">🌲</div>
+
+<h3>جنگل</h3>
+
+<p>
+وسایل کمپ و طبیعت‌گردی
+</p>
+
+</div>
+
+
+<div class="category-card">
+
+<div class="category-icon">🏜️</div>
+
+<h3>کویر</h3>
+
+<p>
+تجهیزات سفرهای کویری
+</p>
+
+</div>
+
+
+<div class="category-card">
+
+<div class="category-icon">🌊</div>
+
+<h3>دریا</h3>
+
+<p>
+لوازم سفر و کمپ ساحلی
+</p>
+
+</div>
+
+</div>
+
 </section>
 
-<section class="products" id="products">
+
+<!-- STORE -->
+
+<section class="store" id="shop">
+
 <div class="title">
-<h2>محصولات پیشنهادی</h2>
-<p>تجهیزات کاربردی برای سفر و کمپ</p>
+
+<h2>فروشگاه چهار اقلیم</h2>
+
+<p>
+تجهیزات منتخب برای سفر و ماجراجویی
+</p>
+
 </div>
 
-<div class="grid">
 
-<div class="card">
-<h3>چادر مسافرتی ۲ نفره</h3>
-<p>سبک و مناسب سفر و کمپ</p>
-<div class="price">۲٬۳۰۰٬۰۰۰ تومان</div>
-</div>
+<div class="products">
 
-<div class="card">
-<h3>چراغ کمپینگ شارژی</h3>
-<p>مناسب کمپ و شرایط اضطراری</p>
-<div class="price">۴۵۰٬۰۰۰ تومان</div>
-</div>
+<div class="coming">
 
-<div class="card">
-<h3>دستبند پاراکورد چندکاره</h3>
-<p>سبک، کاربردی و مناسب طبیعت‌گردی</p>
-<div class="price">۳۵۰٬۰۰۰ تومان</div>
-</div>
+<div class="coming-icon">🎒</div>
 
-<div class="card">
-<h3>ابزار چندکاره ۱۱ کاره</h3>
-<p>یک ابزار کاربردی برای سفر</p>
-<div class="price">۹۸۰٬۰۰۰ تومان</div>
+<h3>محصولات جدید در راه‌اند</h3>
+
+<p>
+به‌زودی تجهیزات منتخب طبیعت‌گردی چهار اقلیم اینجا قرار می‌گیرند.
+</p>
+
 </div>
 
 </div>
+
 </section>
+
+
+<!-- FEATURES -->
+
+<section class="features">
+
+<div class="title">
+
+<h2>چرا چهار اقلیم؟</h2>
+
+<p>
+برای ماجراجویی‌هایی که ارزش به‌یادماندن دارند
+</p>
+
+</div>
+
+
+<div class="feature-grid">
+
+<div class="feature">
+
+<div class="feature-icon">🏕️</div>
+
+<h3>مخصوص طبیعت‌گردی</h3>
+
+<p>
+محصولاتی متناسب با سفر، کمپ و فضای باز
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">🧭</div>
+
+<h3>انتخاب کاربردی</h3>
+
+<p>
+تمرکز روی تجهیزاتی که واقعاً در سفر به کار می‌آیند
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">🌿</div>
+
+<h3>عاشق طبیعت</h3>
+
+<p>
+چهار اقلیم از دل علاقه به طبیعت و ماجراجویی ساخته شده
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- MAGAZINE -->
 
 <section id="magazine">
+
 <div class="title">
+
 <h2>مجله چهار اقلیم</h2>
-<p>آموزش، سفر و طبیعت‌گردی</p>
+
+<p>
+آموزش و تجربه برای ماجراجویی بهتر
+</p>
+
 </div>
 
-<div class="grid">
-<div class="card"><h3>🎒 راهنمای شروع کمپینگ</h3><p>وسایل ضروری برای اولین کمپ</p></div>
-<div class="card"><h3>🔥 نکات کمپ در طبیعت</h3><p>تجربه‌ای بهتر و آماده‌تر در سفر</p></div>
-<div class="card"><h3>🗺️ مسیرهای دیدنی</h3><p>معرفی مکان‌های بکر و دیدنی</p></div>
+
+<div class="magazine-grid">
+
+<div class="article">
+
+<div class="article-icon">🎒</div>
+
+<h3>راهنمای شروع کمپینگ</h3>
+
+<p>
+وسایل و نکات مهم برای شروع اولین تجربه کمپ.
+</p>
+
 </div>
+
+
+<div class="article">
+
+<div class="article-icon">🔥</div>
+
+<h3>مهارت‌های طبیعت‌گردی</h3>
+
+<p>
+نکاتی برای داشتن سفری آماده‌تر و مطمئن‌تر.
+</p>
+
+</div>
+
+
+<div class="article">
+
+<div class="article-icon">🗺️</div>
+
+<h3>مسیرهای دیدنی ایران</h3>
+
+<p>
+آشنایی با طبیعت و مقصدهای جذاب برای سفر.
+</p>
+
+</div>
+
+</div>
+
 </section>
+
+
+<!-- ABOUT -->
 
 <section class="about" id="about">
+
 <div class="title">
-<h2>درباره چهار اقلیم</h2>
+
+<h2>داستان چهار اقلیم</h2>
+
 </div>
+
 <p>
-چهار اقلیم با عشق به طبیعت شکل گرفته است؛
-جایی برای معرفی طبیعت، سفر، ماجراجویی و تجهیزات مورد نیاز طبیعت‌گردان.
+چهار اقلیم با عشق به طبیعت و ماجراجویی شکل گرفته است؛
+فروشگاهی برای تجهیزات کمپینگ، سفر و طبیعت‌گردی و جایی برای
+به‌اشتراک‌گذاشتن تجربه‌ها و مهارت‌های سفر.
 </p>
-<br>
-<p>
-هدف ما این است که در آینده چهار اقلیم به یک مرجع برای علاقه‌مندان طبیعت و سفر تبدیل شود.
-</p>
+
 </section>
 
+
+<!-- FOOTER -->
+
 <footer>
+
 <h2>چهار اقلیم</h2>
+
 <p>کوه · جنگل · کویر · دریا</p>
-<p>طبیعت، خانه دوم ماست 🌿</p>
+
+<p>برای ماجراجویی بعدی آماده باش 🌿</p>
+
+<div class="footer-line"></div>
+
+<div class="copyright">
+© چهار اقلیم
+</div>
+
 </footer>
 
 </body>
