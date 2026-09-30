@@ -227,983 +227,414 @@ header{
 /* ================= HERO ================= */
 
 .hero{
-    min-height:500px;
+    min-height:620px;
     background:
-        linear-gradient(90deg,rgba(16,60,43,.94),rgba(16,60,43,.42)),
-        url('https://uploadkon.ir/uploads/b60929_26file-000000000cc8820ab8e50e624e626707.png')
-        center/cover no-repeat;
+        linear-gradient(
+            90deg,
+            rgba(16,60,43,.96),
+            rgba(16,60,43,.70),
+            rgba(16,60,43,.15)
+        ),
+        url('https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1800&q=85')
+        center/cover;
     display:flex;
     align-items:center;
     color:white;
 }
 
-.hero-content{
+.hero-inner{
     width:90%;
     max-width:1250px;
     margin:auto;
 }
 
-.hero-text{
-    max-width:620px;
+.hero-content{
+    max-width:650px;
+}
+
+.hero-kicker{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 14px;
+    background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:50px;
+    font-size:12px;
+    margin-bottom:22px;
 }
 
 .hero h2{
-    font-size:clamp(38px,6vw,68px);
-    line-height:1.15;
-    margin-bottom:18px;
+    font-size:52px;
+    line-height:1.35;
     font-weight:800;
+    margin-bottom:20px;
 }
 
 .hero p{
-    font-size:17px;
-    line-height:2;
+    font-size:16px;
+    line-height:2.2;
     opacity:.9;
-    margin-bottom:25px;
+    max-width:600px;
 }
 
-.hero-btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    padding:13px 27px;
-    border-radius:14px;
-    background:#d7e8bd;
+.hero-actions{
+    display:flex;
+    gap:12px;
+    margin-top:30px;
+    flex-wrap:wrap;
+}
+
+.btn-primary{
+    border:0;
+    background:#d4e7b8;
     color:var(--green);
-    text-decoration:none;
+    padding:13px 24px;
+    border-radius:13px;
     font-weight:800;
     transition:.25s;
 }
 
-.hero-btn:hover{
-    transform:translateY(-3px);
+.btn-primary:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 25px rgba(0,0,0,.2);
+}
+
+.btn-secondary{
+    border:1px solid rgba(255,255,255,.35);
+    background:rgba(255,255,255,.08);
+    color:white;
+    padding:13px 24px;
+    border-radius:13px;
+    font-weight:600;
 }
 
 /* ================= GENERAL ================= */
 
-section{
-    padding:55px 5%;
+.section{
+    width:90%;
+    max-width:1250px;
+    margin:80px auto;
+}
+
+.section-head{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:28px;
 }
 
 .section-title{
-    text-align:center;
-    margin-bottom:32px;
+    font-size:30px;
+    font-weight:800;
 }
 
-.section-title h2{
-    font-size:29px;
-    margin-bottom:8px;
-}
-
-.section-title p{
+.section-subtitle{
     color:var(--gray);
-    font-size:14px;
+    font-size:13px;
+    line-height:1.9;
+    margin-top:7px;
 }
 
-/* ================= CATEGORIES ================= */
-
-.categories{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:16px;
-    max-width:1250px;
-    margin:auto;
+.view-all{
+    color:var(--green);
+    text-decoration:none;
+    font-size:13px;
+    font-weight:700;
 }
 
-.category-card{
-    position:relative;
-    height:215px;
-    overflow:hidden;
-    border-radius:20px;
-    cursor:pointer;
+.card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:22px;
     box-shadow:var(--shadow);
 }
 
-.category-card img{
+/* ================= CLIMATE ================= */
+
+.climate-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+}
+
+.climate-card{
+    position:relative;
+    min-height:190px;
+    overflow:hidden;
+    border-radius:22px;
+    color:white;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.climate-card:hover{
+    transform:translateY(-5px);
+}
+
+.climate-card img{
     width:100%;
     height:100%;
+    min-height:190px;
     object-fit:cover;
-    transition:.5s;
+    display:block;
 }
 
-.category-card:hover img{
-    transform:scale(1.07);
-}
-
-.category-overlay{
+.climate-card::after{
+    content:"";
     position:absolute;
     inset:0;
-    background:linear-gradient(transparent 30%,rgba(0,0,0,.75));
-    display:flex;
-    align-items:flex-end;
-    padding:20px;
-    color:white;
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,.75),
+        rgba(0,0,0,.05)
+    );
 }
 
-.category-overlay h3{
-    font-size:20px;
-}
-
-/* ================= STORE ================= */
-
-.store{
-    background:#eef2ed;
-}
-
-.store-container{
-    max-width:1250px;
-    margin:auto;
-}
-
-.store-tools{
-    display:grid;
-    grid-template-columns:1fr 255px;
-    gap:13px;
-    margin-bottom:27px;
-    position:relative;
-    z-index:30;
-}
-
-.search-box input{
-    width:100%;
-    height:54px;
-    border:1px solid #e1e6e1;
-    background:white;
-    border-radius:15px;
-    padding:0 18px;
-    outline:none;
-    font-size:13px;
-    color:var(--text);
-    box-shadow:0 5px 20px rgba(0,0,0,.04);
-}
-
-.search-box input:focus{
-    border-color:var(--light-green);
-}
-
-/* ================= CLIMATE FILTER ================= */
-
-.filter-box{
-    position:relative;
-    z-index:50;
-}
-
-.climate-filter-wrap{
-    position:relative;
-    width:100%;
-    z-index:60;
-}
-
-/* دکمه اصلی */
-
-.climate-filter-trigger{
-    width:100%;
-    height:54px;
-    padding:6px 10px;
-
-    border:1px solid #dfe6df;
-    border-radius:15px;
-
-    background:#fff;
-
-    display:flex;
-    align-items:center;
-    gap:9px;
-
-    color:var(--text);
-    box-shadow:0 5px 18px rgba(16,60,43,.06);
-
-    text-align:right;
-    direction:rtl;
-
-    transition:.2s ease;
-}
-
-.climate-filter-trigger:hover,
-.climate-filter-wrap.open .climate-filter-trigger{
-    border-color:#88a967;
-    box-shadow:0 8px 24px rgba(16,60,43,.10);
-}
-
-.filter-trigger-icon{
-    width:36px;
-    height:36px;
-    flex:0 0 36px;
-
-    border-radius:10px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:#edf1ee;
-    color:var(--green);
-
-    font-size:0;
-}
-
-/* آیکون مینیمال عمومی */
-.filter-trigger-icon::before{
-    content:"";
-    width:15px;
-    height:15px;
-    border:1.7px solid currentColor;
-    border-radius:50%;
-    position:relative;
-}
-
-/* متن */
-
-.filter-trigger-text{
-    flex:1;
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    gap:1px;
-}
-
-.filter-trigger-text small{
-    font-size:9px;
-    color:#8a948e;
-}
-
-.filter-trigger-text strong{
-    font-size:12px;
-}
-
-/* فلش */
-
-.filter-arrow{
-    font-size:18px;
-    color:#78847d;
-    transition:.2s ease;
-}
-
-.climate-filter-wrap.open .filter-arrow{
-    transform:rotate(180deg);
-}
-
-/* پنل بازشونده */
-
-.climate-filter-dropdown{
+.climate-info{
     position:absolute;
-
-    top:calc(100% + 8px);
-    right:0;
-    left:auto;
-
-    width:280px;
-    max-width:calc(100vw - 30px);
-
-    background:rgba(255,255,255,.99);
-
-    border:1px solid #e1e7e2;
-    border-radius:16px;
-
-    padding:8px;
-
-    box-shadow:0 20px 50px rgba(16,60,43,.16);
-
-    opacity:0;
-    visibility:hidden;
-
-    /* فقط حرکت عمودی */
-    transform:translateY(-8px);
-
-    transform-origin:top right;
-
-    transition:
-        opacity .18s ease,
-        transform .18s ease,
-        visibility .18s ease;
-
-    z-index:100;
+    right:20px;
+    bottom:18px;
+    z-index:2;
 }
 
-.climate-filter-wrap.open .climate-filter-dropdown{
-    opacity:1;
-    visibility:visible;
-    transform:translateY(0);
+.climate-info h3{
+    font-size:21px;
 }
 
-/* عنوان پنل */
-
-.climate-filter-head{
-    padding:8px 9px 9px;
-    margin-bottom:2px;
-
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    gap:2px;
-}
-
-.climate-filter-head strong{
-    font-size:12px;
-    color:var(--text);
-}
-
-.climate-filter-head span{
-    color:#8a948e;
-    font-size:9px;
-}
-
-/* لیست عمودی */
-
-.climate-filter-grid{
-    display:flex;
-    flex-direction:column;
-    gap:5px;
-}
-
-/* هر گزینه */
-
-.climate-filter-card{
-    --card-color:var(--general);
-
-    width:100%;
-    min-height:45px;
-
-    border:1px solid #e5e9e5;
-    border-radius:10px;
-
-    background:#fafcf9;
-
-    padding:6px 9px;
-
-    display:flex;
-    flex-direction:row;
-
-    align-items:center;
-
-    gap:9px;
-
-    direction:ltr;
-    text-align:right;
-
-    position:relative;
-    overflow:hidden;
-
-    color:var(--text);
-
-    transition:
-        background .18s ease,
-        border-color .18s ease,
-        transform .18s ease,
-        box-shadow .18s ease;
-}
-
-/* نوار رنگی سمت راست */
-.climate-filter-card::before{
-    content:"";
-
-    position:absolute;
-
-    right:0;
-    top:0;
-    bottom:0;
-
-    width:3px;
-
-    background:var(--card-color);
-}
-
-/* آیکون در سمت چپ */
-
-.climate-filter-icon{
-    width:28px;
-    height:28px;
-    flex:0 0 28px;
-
-    border-radius:8px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    position:relative;
-
-    color:var(--card-color);
-    background:transparent;
-
-    font-size:0;
-}
-
-/* ساخت آیکون‌های مینیمال */
-
-.climate-filter-icon::before,
-.climate-filter-icon::after{
-    content:"";
-    position:absolute;
-}
-
-/* عمومی - قطب‌نما */
-.climate-general .climate-filter-icon::before{
-    width:17px;
-    height:17px;
-    border:1.6px solid currentColor;
-    border-radius:50%;
-}
-
-.climate-general .climate-filter-icon::after{
-    width:6px;
-    height:6px;
-    border-left:1.5px solid currentColor;
-    border-top:1.5px solid currentColor;
-    transform:rotate(45deg);
-}
-
-/* کوهستان */
-.climate-mountain .climate-filter-icon::before{
-    width:18px;
-    height:14px;
-    border-left:1.7px solid currentColor;
-    border-top:1.7px solid currentColor;
-    transform:rotate(45deg) skew(-8deg,-8deg);
-}
-
-.climate-mountain .climate-filter-icon::after{
-    width:12px;
-    height:9px;
-    border-left:1.5px solid currentColor;
-    border-top:1.5px solid currentColor;
-    transform:translate(4px,2px) rotate(45deg) skew(-8deg,-8deg);
-}
-
-/* جنگل */
-.climate-forest .climate-filter-icon::before{
-    width:12px;
-    height:17px;
-    border:1.6px solid currentColor;
-    border-radius:60% 45% 55% 40%;
-    transform:rotate(45deg);
-}
-
-.climate-forest .climate-filter-icon::after{
-    width:1.5px;
-    height:11px;
-    background:currentColor;
-    transform:rotate(18deg) translate(1px,7px);
-}
-
-/* کویر */
-.climate-desert .climate-filter-icon::before{
-    width:20px;
-    height:9px;
-    border-top:1.7px solid currentColor;
-    border-radius:50%;
-    transform:translateY(3px);
-}
-
-.climate-desert .climate-filter-icon::after{
-    width:8px;
-    height:8px;
-    border:1.5px solid currentColor;
-    border-radius:50%;
-    transform:translate(4px,-5px);
-}
-
-/* دریا */
-.climate-sea .climate-filter-icon::before{
-    width:21px;
-    height:8px;
-    border-top:1.7px solid currentColor;
-    border-radius:50%;
-    transform:translateY(2px);
-}
-
-.climate-sea .climate-filter-icon::after{
-    width:21px;
-    height:8px;
-    border-bottom:1.7px solid currentColor;
-    border-radius:50%;
-    transform:translateY(7px);
-}
-
-/* متن گزینه */
-
-.climate-filter-card strong,
-.climate-filter-card small{
-    direction:rtl;
-    text-align:right;
-}
-
-.climate-filter-card strong{
+.climate-info span{
+    display:block;
+    margin-top:4px;
     font-size:11px;
-    line-height:16px;
+    opacity:.85;
 }
 
-.climate-filter-card small{
-    font-size:8px;
-    color:#89938d;
-    line-height:12px;
-}
-
-/* متن در سمت راست */
-
-.climate-filter-card strong{
-    margin-left:auto;
-}
-
-/* هاور */
-
-.climate-filter-card:hover{
-    border-color:var(--card-color);
-    transform:translateX(-2px);
-    box-shadow:0 6px 16px rgba(16,60,43,.07);
-}
-
-/* انتخاب شده */
-
-.climate-filter-card.active{
-    background:var(--card-color);
-    border-color:var(--card-color);
-    color:white;
-}
-
-.climate-filter-card.active small{
-    color:rgba(255,255,255,.75);
-}
-
-.climate-filter-card.active .climate-filter-icon{
-    color:white;
-}
-
-/* تیک مینیمال */
-
-.climate-filter-card.active::after{
-    content:"✓";
-
-    width:17px;
-    height:17px;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.16);
-
-    color:white;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:10px;
-
-    position:absolute;
-    left:9px;
-    top:50%;
-    transform:translateY(-50%);
-}
-
-/* رنگ‌ها */
-
-.climate-general{
-    --card-color:var(--general);
-}
-
-.climate-mountain{
-    --card-color:var(--mountain);
-}
-
-.climate-forest{
-    --card-color:var(--forest);
-}
-
-.climate-desert{
-    --card-color:var(--desert);
-}
-
-.climate-sea{
-    --card-color:var(--sea);
-}
-
-/* سلکت مخفی */
-
-#climateFilter{
-    display:none;
-}
-
-/* ================= PRODUCTS INFO ================= */
-
-.products-info{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:16px;
-    color:var(--gray);
-    font-size:13px;
-}
+/* ================= PRODUCTS ================= */
 
 .products-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:16px;
+    gap:18px;
 }
 
-/* ================= PRODUCT CARD ================= */
-
 .product-card{
-    background:white;
-    border-radius:18px;
-    overflow:hidden;
-    border:1px solid rgba(16,60,43,.06);
-    box-shadow:0 8px 28px rgba(16,60,43,.08);
-    cursor:pointer;
-    transition:.3s;
     position:relative;
+    background:white;
+    border:1px solid var(--border);
+    border-radius:20px;
+    overflow:hidden;
+    transition:.3s;
 }
 
 .product-card:hover{
     transform:translateY(-5px);
-    box-shadow:0 18px 38px rgba(16,60,43,.14);
+    box-shadow:var(--shadow);
 }
 
 .product-image{
-    width:100%;
-    height:205px;
-    background:
-        radial-gradient(circle at center,#ffffff 0%,#f0f4ef 100%);
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    position:relative;
+    height:230px;
+    background:#eef2ed;
     overflow:hidden;
-    padding:14px;
 }
 
 .product-image img{
     width:100%;
     height:100%;
-    object-fit:contain;
-    transition:.35s;
+    object-fit:cover;
+    transition:.4s;
 }
 
 .product-card:hover .product-image img{
-    transform:scale(1.05);
+    transform:scale(1.04);
 }
 
-.product-content{
-    padding:16px;
+.product-info{
+    padding:17px;
 }
 
 .product-climate{
-    display:inline-flex;
-    padding:5px 10px;
+    display:inline-block;
+    padding:5px 9px;
     border-radius:50px;
-    background:#edf3e9;
-    color:#507443;
-    font-size:10px;
-    margin-bottom:10px;
+    font-size:9px;
+    background:#edf3ed;
+    color:var(--green);
+    margin-bottom:8px;
 }
 
-.product-name{
+.product-title{
     font-size:16px;
     font-weight:800;
-    margin-bottom:8px;
-    color:var(--text);
+    line-height:1.7;
 }
 
 .product-description{
     color:var(--gray);
     font-size:11px;
     line-height:1.8;
-    min-height:40px;
-    display:-webkit-box;
-    -webkit-line-clamp:2;
-    -webkit-box-orient:vertical;
-    overflow:hidden;
+    margin-top:6px;
+    min-height:39px;
 }
 
 .product-bottom{
-    margin-top:14px;
-    padding-top:12px;
-    border-top:1px solid #edf0ed;
-}
-
-.product-price-label{
-    color:#8a948e;
-    font-size:9px;
-    margin-bottom:3px;
-}
-
-.product-price{
-    font-weight:800;
-    font-size:15px;
-    color:var(--green2);
-}
-
-.add-cart-btn{
-    width:100%;
-    border:0;
-    background:#14583e;
-    color:white;
-    height:43px;
-    border-radius:12px;
-    margin-top:12px;
-    font-weight:600;
-    font-size:12px;
-    transition:.25s;
-}
-
-.add-cart-btn:hover{
-    background:#0d4932;
-    transform:translateY(-2px);
-}
-
-.no-products{
-    grid-column:1/-1;
-    text-align:center;
-    padding:60px 20px;
-    background:white;
-    border-radius:20px;
-    color:var(--gray);
-}
-
-/* ================= PRODUCT PAGE ================= */
-
-.product-page{
-    position:fixed;
-    inset:0;
-    z-index:4000;
-    background:#f1f4ef;
-    display:none;
-    overflow-y:auto;
-}
-
-.product-page.active{
-    display:block;
-    animation:pageFade .25s ease;
-}
-
-@keyframes pageFade{
-    from{opacity:0;}
-    to{opacity:1;}
-}
-
-.product-page-top{
-    height:70px;
-    position:sticky;
-    top:0;
-    z-index:10;
-    background:rgba(241,244,239,.9);
-    backdrop-filter:blur(16px);
-    border-bottom:1px solid rgba(16,60,43,.08);
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:0 5%;
+    gap:10px;
+    margin-top:15px;
 }
 
-.product-back{
-    border:0;
-    background:white;
+.product-price{
+    font-size:15px;
+    font-weight:800;
     color:var(--green);
-    height:43px;
-    padding:0 17px;
-    border-radius:13px;
-    display:flex;
-    align-items:center;
-    gap:8px;
-    font-weight:700;
-    box-shadow:0 5px 18px rgba(0,0,0,.06);
 }
 
-.product-page-cart{
+.add-cart-btn{
     border:0;
     background:var(--green);
     color:white;
-    height:43px;
-    padding:0 16px;
-    border-radius:13px;
-    font-weight:700;
-}
-
-.product-page-inner{
-    max-width:1180px;
-    margin:auto;
-    padding:28px 25px 60px;
-}
-
-.product-page-card{
-    background:white;
-    border-radius:30px;
-    overflow:hidden;
-    box-shadow:0 20px 60px rgba(16,60,43,.11);
-    display:grid;
-    grid-template-columns:1.08fr .92fr;
-    min-height:600px;
-}
-
-.product-visual{
-    position:relative;
-    min-height:600px;
-    background:
-        radial-gradient(
-            circle at 50% 45%,
-            #ffffff 0%,
-            #f5f7f3 45%,
-            #e8eee7 100%
-        );
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:45px;
-    overflow:hidden;
-}
-
-.product-visual::before{
-    content:"";
-    position:absolute;
-    width:350px;
-    height:350px;
-    border-radius:50%;
-    border:1px solid rgba(16,60,43,.08);
-}
-
-.product-visual::after{
-    content:"";
-    position:absolute;
-    width:430px;
-    height:430px;
-    border-radius:50%;
-    border:1px solid rgba(16,60,43,.045);
-}
-
-.product-visual img{
-    position:relative;
-    z-index:2;
-    width:100%;
-    max-width:480px;
-    height:480px;
-    object-fit:contain;
-    filter:drop-shadow(0 22px 25px rgba(0,0,0,.13));
-    transition:.4s;
-}
-
-.product-visual img:hover{
-    transform:scale(1.035);
-}
-
-.visual-climate{
-    position:absolute;
-    top:22px;
-    right:22px;
-    z-index:3;
-    background:rgba(16,60,43,.92);
-    color:white;
-    padding:9px 15px;
-    border-radius:50px;
-    font-size:12px;
-    box-shadow:0 7px 20px rgba(0,0,0,.1);
-}
-
-.product-info-panel{
-    padding:50px 48px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    background:white;
-}
-
-.product-small-label{
-    color:#78917f;
-    font-size:11px;
-    margin-bottom:10px;
-}
-
-.product-info-panel h1{
-    font-size:38px;
-    line-height:1.35;
-    font-weight:800;
-    color:var(--text);
-    margin-bottom:19px;
-}
-
-.product-description-large{
-    color:#64736b;
-    line-height:2.1;
-    font-size:14px;
-    white-space:pre-line;
-    margin-bottom:27px;
-}
-
-.product-divider{
-    width:100%;
-    height:1px;
-    background:#e9ede9;
-    margin-bottom:22px;
-}
-
-.product-price-title{
-    color:#87938c;
-    font-size:11px;
-    margin-bottom:4px;
-}
-
-.product-price-large{
-    color:var(--green2);
-    font-size:28px;
-    font-weight:800;
-    margin-bottom:22px;
-}
-
-.product-buy-row{
-    display:flex;
-    gap:10px;
-    align-items:center;
-}
-
-.quantity-box{
-    height:54px;
-    border:1px solid #dfe6df;
-    border-radius:15px;
-    display:flex;
-    align-items:center;
-    padding:0 6px;
-    background:#fafcf9;
-}
-
-.quantity-box button{
     width:40px;
     height:40px;
-    border:0;
-    background:white;
-    border-radius:11px;
-    color:var(--green);
-    font-size:20px;
-    font-weight:700;
+    border-radius:12px;
+    font-size:18px;
 }
 
-.quantity-box span{
-    min-width:40px;
+.empty-state{
     text-align:center;
-    font-weight:700;
+    padding:60px 20px;
+    color:var(--gray);
+    background:white;
+    border-radius:20px;
+    border:1px dashed var(--border);
 }
 
-.product-add-large{
-    flex:1;
-    height:54px;
-    border:0;
+/* ================= FEATURES ================= */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.feature{
+    padding:28px;
+    background:white;
+    border:1px solid var(--border);
+    border-radius:20px;
+}
+
+.feature-icon{
+    width:50px;
+    height:50px;
     border-radius:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#edf3ed;
+    font-size:23px;
+    margin-bottom:18px;
+}
+
+.feature h3{
+    font-size:16px;
+    margin-bottom:8px;
+}
+
+.feature p{
+    color:var(--gray);
+    font-size:12px;
+    line-height:2;
+}
+
+/* ================= ABOUT ================= */
+
+.about-box{
     background:var(--green);
     color:white;
-    font-size:14px;
-    font-weight:800;
-    transition:.25s;
-    box-shadow:0 9px 22px rgba(16,60,43,.2);
+    border-radius:28px;
+    padding:55px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:center;
 }
 
-.product-add-large:hover{
-    background:var(--green2);
-    transform:translateY(-2px);
+.about-box h2{
+    font-size:32px;
+    margin-bottom:18px;
 }
 
-.product-note{
-    margin-top:16px;
-    padding:12px 14px;
-    border-radius:12px;
-    background:#f2f6f1;
-    color:#6e7d74;
-    font-size:11px;
-    line-height:1.8;
+.about-box p{
+    line-height:2.3;
+    color:rgba(255,255,255,.78);
+    font-size:13px;
+}
+
+.about-list{
+    display:grid;
+    gap:14px;
+}
+
+.about-list-item{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    padding:14px;
+    border-radius:15px;
+    background:rgba(255,255,255,.07);
+}
+
+.about-list-item span{
+    font-size:12px;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#0c2e22;
+    color:white;
+    padding:60px 5% 25px;
+    margin-top:100px;
+}
+
+.footer-inner{
+    width:100%;
+    max-width:1250px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1.5fr 1fr 1fr;
+    gap:50px;
+}
+
+.footer-col h3{
+    font-size:17px;
+    margin-bottom:18px;
+}
+
+.footer-col p,
+.footer-col a{
+    color:rgba(255,255,255,.65);
+    font-size:12px;
+    line-height:2.2;
+}
+
+.footer-col a{
+    display:block;
+    text-decoration:none;
+}
+
+.footer-bottom{
+    width:100%;
+    max-width:1250px;
+    margin:40px auto 0;
+    padding-top:20px;
+    border-top:1px solid rgba(255,255,255,.1);
+    text-align:center;
+    color:rgba(255,255,255,.45);
+    font-size:10px;
 }
 
 /* ================= CART ================= */
@@ -1211,11 +642,12 @@ section{
 .cart-panel{
     position:fixed;
     top:0;
-    left:-430px;
-    width:min(430px,94vw);
+    left:-100%;
+    width:420px;
+    max-width:92%;
     height:100vh;
     background:white;
-    z-index:5000;
+    z-index:3000;
     box-shadow:10px 0 40px rgba(0,0,0,.2);
     transition:.35s;
     display:flex;
@@ -1226,519 +658,191 @@ section{
     left:0;
 }
 
-.cart-header{
-    height:75px;
-    padding:0 22px;
+.cart-head{
+    padding:22px;
     display:flex;
-    align-items:center;
     justify-content:space-between;
+    align-items:center;
     border-bottom:1px solid var(--border);
 }
 
-.cart-header h3{
-    font-size:19px;
+.cart-head h3{
+    font-size:18px;
 }
 
-.cart-close{
-    width:42px;
-    height:42px;
+.close-btn{
     border:0;
     background:#f0f3ef;
     color:var(--green);
-    border-radius:50%;
-    font-size:23px;
+    width:38px;
+    height:38px;
+    border-radius:12px;
+    font-size:20px;
 }
 
 .cart-items{
     flex:1;
-    overflow-y:auto;
+    overflow:auto;
     padding:20px;
-}
-
-.cart-empty{
-    text-align:center;
-    color:var(--gray);
-    padding:60px 20px;
 }
 
 .cart-item{
     display:grid;
-    grid-template-columns:75px 1fr;
-    gap:13px;
-    padding:13px;
-    background:#f7f9f6;
-    border-radius:17px;
-    margin-bottom:12px;
-}
-
-.cart-item-image{
-    width:75px;
-    height:75px;
-    border-radius:13px;
-    background:white;
-    display:flex;
+    grid-template-columns:65px 1fr auto;
+    gap:12px;
     align-items:center;
-    justify-content:center;
-    overflow:hidden;
+    padding:13px 0;
+    border-bottom:1px solid var(--border);
 }
 
-.cart-item-image img{
-    width:100%;
-    height:100%;
-    object-fit:contain;
+.cart-item img{
+    width:65px;
+    height:65px;
+    border-radius:12px;
+    object-fit:cover;
+    background:#eee;
 }
 
-.cart-item-name{
+.cart-item-title{
+    font-size:12px;
     font-weight:700;
-    font-size:14px;
+    line-height:1.6;
 }
 
 .cart-item-price{
-    font-size:12px;
-    color:var(--green2);
-    margin-top:4px;
-    font-weight:600;
+    font-size:11px;
+    color:var(--gray);
+    margin-top:5px;
 }
 
-.cart-controls{
+.cart-item-controls{
     display:flex;
     align-items:center;
-    gap:8px;
+    gap:5px;
     margin-top:8px;
 }
 
 .qty-btn{
-    width:27px;
-    height:27px;
+    width:25px;
+    height:25px;
     border:0;
-    border-radius:8px;
-    background:#dfe8dd;
+    background:#edf3ed;
+    border-radius:7px;
     color:var(--green);
-    font-weight:800;
 }
 
-.qty-number{
-    min-width:22px;
-    text-align:center;
-    font-size:13px;
-}
-
-.remove-item{
+.cart-item-remove{
     border:0;
     background:none;
     color:var(--red);
-    font-size:12px;
-    margin-right:auto;
-}
-
-.cart-summary{
-    padding:20px;
-    border-top:1px solid var(--border);
-    background:#fafcf9;
-}
-
-.summary-row{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:10px;
-    color:var(--gray);
-    font-size:14px;
-}
-
-.summary-row.total{
-    border-top:1px solid #e1e7e1;
-    padding-top:14px;
-    margin-top:12px;
-    color:var(--text);
-    font-size:17px;
-}
-
-.summary-row.total strong{
-    color:var(--green2);
-    font-size:20px;
-}
-
-.clear-cart{
-    width:100%;
-    height:45px;
-    border:0;
-    border-radius:13px;
-    background:#f0dfdf;
-    color:#a13d3d;
-    margin-top:12px;
-}
-
-.cart-overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.45);
-    z-index:4900;
-    display:none;
-}
-
-.cart-overlay.active{
-    display:block;
-}
-
-/* ================= FEATURES ================= */
-
-.features{
-    max-width:1200px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
-
-.feature{
-    background:white;
-    padding:26px;
-    border-radius:20px;
-    box-shadow:var(--shadow);
-    text-align:center;
-}
-
-.feature-icon{
-    font-size:32px;
-    margin-bottom:13px;
-}
-
-.feature h3{
-    margin-bottom:9px;
-}
-
-.feature p{
-    color:var(--gray);
-    line-height:1.9;
     font-size:13px;
 }
 
-/* ================= ABOUT ================= */
-
-.about{
-    background:var(--green);
-    color:white;
-}
-
-.about-content{
-    max-width:900px;
-    margin:auto;
-    text-align:center;
-}
-
-.about-content h2{
-    font-size:31px;
-    margin-bottom:17px;
-}
-
-.about-content p{
-    line-height:2.2;
-    opacity:.85;
-}
-
-/* ================= FOOTER ================= */
-
-footer{
-    background:#0b2b1f;
-    color:white;
-    padding:35px 5%;
-    text-align:center;
-}
-
-footer p{
-    opacity:.65;
-    font-size:12px;
-}
-
-/* ================= CLIMATE PANEL ================= */
-
-.climate-panel{
-    position:fixed;
-    inset:0;
-    background:var(--cream);
-    z-index:4500;
-    display:none;
-    overflow-y:auto;
-}
-
-.climate-panel.active{
-    display:block;
-}
-
-.climate-header{
-    height:75px;
-    background:var(--green);
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 5%;
-}
-
-.climate-header button{
-    width:43px;
-    height:43px;
-    border:0;
-    border-radius:50%;
-    background:rgba(255,255,255,.12);
-    color:white;
-    font-size:24px;
-}
-
-.climate-content{
-    max-width:1200px;
-    margin:auto;
-    padding:45px 5%;
-}
-
-.climate-content h2{
-    font-size:31px;
-    margin-bottom:25px;
-}
-
-/* ================= ADMIN ================= */
-
-.admin-panel{
-    position:fixed;
-    inset:0;
-    background:#f4f6f2;
-    z-index:7000;
-    display:none;
-    overflow-y:auto;
-}
-
-.admin-panel.active{
-    display:block;
-}
-
-.admin-login{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.cart-footer{
     padding:20px;
+    border-top:1px solid var(--border);
 }
 
-.admin-login-box{
-    width:100%;
-    max-width:420px;
-    background:white;
-    border-radius:25px;
-    padding:35px;
-    box-shadow:var(--shadow);
-}
-
-.admin-login-box h2{
-    margin-bottom:25px;
-}
-
-.admin-input{
-    width:100%;
-    height:52px;
-    border:1px solid #dfe5df;
-    border-radius:13px;
-    padding:0 15px;
-    outline:none;
-    margin-bottom:13px;
-}
-
-.admin-primary{
-    width:100%;
-    height:52px;
-    background:var(--green);
-    color:white;
-    border:0;
-    border-radius:13px;
-    font-weight:700;
-}
-
-.admin-close{
-    margin-top:12px;
-    width:100%;
-    height:48px;
-    background:#edf1ed;
-    border:0;
-    border-radius:13px;
-    color:var(--text);
-}
-
-.admin-dashboard{
-    max-width:1200px;
-    margin:auto;
-    padding:30px 5%;
-}
-
-.admin-top{
+.cart-total{
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    margin-bottom:30px;
+    margin-bottom:15px;
+    font-weight:800;
 }
 
-.admin-top h2{
-    font-size:27px;
-}
-
-.admin-actions{
-    display:flex;
-    gap:10px;
-}
-
-.admin-small-btn{
+.checkout-btn{
+    width:100%;
     border:0;
-    border-radius:12px;
-    padding:12px 17px;
     background:var(--green);
     color:white;
+    padding:15px;
+    border-radius:13px;
+    font-weight:800;
 }
 
-.admin-small-btn.logout{
-    background:#eadede;
-    color:#963f3f;
-}
+/* ================= MODALS ================= */
 
-.admin-products{
-    display:grid;
-    gap:12px;
-}
-
-.admin-product{
-    background:white;
-    border-radius:17px;
-    padding:17px;
-    display:flex;
-    align-items:center;
-    gap:15px;
-    box-shadow:0 5px 18px rgba(0,0,0,.05);
-}
-
-.admin-product img{
-    width:65px;
-    height:65px;
-    object-fit:contain;
-    border-radius:10px;
-    background:#f3f5f2;
-}
-
-.admin-product-info{
-    flex:1;
-}
-
-.admin-product-info strong{
-    display:block;
-    margin-bottom:5px;
-}
-
-.admin-product-info span{
-    color:var(--gray);
-    font-size:12px;
-}
-
-.admin-product-buttons{
-    display:flex;
-    gap:7px;
-}
-
-.admin-edit,
-.admin-delete{
-    border:0;
-    padding:9px 13px;
-    border-radius:10px;
-}
-
-.admin-edit{
-    background:#e2eee0;
-    color:#35622e;
-}
-
-.admin-delete{
-    background:#f2dfdf;
-    color:#9c3d3d;
-}
-
-/* ================= PRODUCT FORM ================= */
-
-.product-form-modal{
+.modal{
     position:fixed;
     inset:0;
     background:rgba(0,0,0,.55);
-    z-index:8000;
+    z-index:5000;
     display:none;
     align-items:center;
     justify-content:center;
     padding:20px;
 }
 
-.product-form-modal.active{
+.modal.active{
     display:flex;
 }
 
-.product-form-box{
+.modal-box{
     width:100%;
-    max-width:550px;
-    max-height:92vh;
-    overflow-y:auto;
+    max-width:600px;
+    max-height:90vh;
+    overflow:auto;
     background:white;
     border-radius:25px;
-    padding:30px;
+    padding:28px;
+    box-shadow:0 25px 70px rgba(0,0,0,.25);
 }
 
-.product-form-box h2{
-    margin-bottom:20px;
+.modal-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:25px;
+}
+
+.modal-head h3{
+    font-size:20px;
+}
+
+.form-group{
+    margin-bottom:15px;
 }
 
 .form-label{
     display:block;
-    font-size:13px;
-    color:var(--gray);
-    margin:12px 0 6px;
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:7px;
 }
 
 .form-input,
-.form-textarea,
-.form-select{
+.form-select,
+.form-textarea{
     width:100%;
-    border:1px solid #dfe5df;
+    border:1px solid var(--border);
+    background:#f9fbf8;
     border-radius:12px;
-    padding:12px 14px;
+    padding:12px 13px;
     outline:none;
+    color:var(--text);
+    font-size:12px;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus{
+    border-color:var(--green3);
     background:white;
 }
 
-.form-input,
-.form-select{
-    height:48px;
-}
-
 .form-textarea{
-    min-height:110px;
+    min-height:100px;
     resize:vertical;
 }
 
-.form-buttons{
+.form-actions{
     display:flex;
     gap:10px;
     margin-top:20px;
 }
 
-.form-save,
-.form-cancel{
+.form-actions button{
     flex:1;
-    height:48px;
-    border:0;
-    border-radius:12px;
-    font-weight:700;
-}
-
-.form-save{
-    background:var(--green);
-    color:white;
-}
-
-.form-cancel{
-    background:#edf0ed;
-    color:var(--text);
 }
 
 /* ================= TOAST ================= */
@@ -1746,22 +850,329 @@ footer p{
 .toast{
     position:fixed;
     bottom:25px;
-    right:50%;
-    transform:translateX(50%) translateY(100px);
-    background:#173f2f;
+    right:25px;
+    background:var(--green);
     color:white;
     padding:13px 20px;
     border-radius:13px;
-    z-index:10000;
+    font-size:12px;
+    z-index:9000;
     opacity:0;
+    transform:translateY(20px);
+    pointer-events:none;
     transition:.3s;
-    font-size:13px;
-    box-shadow:0 10px 30px rgba(0,0,0,.2);
 }
 
 .toast.show{
     opacity:1;
-    transform:translateX(50%) translateY(0);
+    transform:translateY(0);
+}
+
+/* ================= ADMIN ================= */
+
+.admin-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(7,24,17,.75);
+    z-index:7000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.admin-overlay.active{
+    display:flex;
+}
+
+.admin-login{
+    width:100%;
+    max-width:400px;
+    background:white;
+    border-radius:25px;
+    padding:35px;
+}
+
+.admin-login h2{
+    color:var(--green);
+    margin-bottom:10px;
+}
+
+.admin-login p{
+    color:var(--gray);
+    font-size:12px;
+    margin-bottom:25px;
+}
+
+.admin-panel{
+    position:fixed;
+    inset:0;
+    background:#f5f7f2;
+    z-index:6500;
+    display:none;
+    overflow:auto;
+}
+
+.admin-panel.active{
+    display:block;
+}
+
+.admin-header{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:var(--green);
+    color:white;
+    min-height:70px;
+    padding:12px 5%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.admin-header-title h2{
+    font-size:20px;
+}
+
+.admin-header-title span{
+    font-size:10px;
+    opacity:.7;
+}
+
+.admin-header-actions{
+    display:flex;
+    gap:8px;
+}
+
+.admin-btn{
+    border:1px solid rgba(255,255,255,.2);
+    background:rgba(255,255,255,.08);
+    color:white;
+    padding:10px 14px;
+    border-radius:11px;
+    font-size:11px;
+}
+
+.admin-main{
+    width:90%;
+    max-width:1250px;
+    margin:35px auto;
+}
+
+.admin-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.admin-stat{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:20px;
+}
+
+.admin-stat-label{
+    color:var(--gray);
+    font-size:11px;
+}
+
+.admin-stat-value{
+    color:var(--green);
+    font-size:25px;
+    font-weight:800;
+    margin-top:7px;
+}
+
+.admin-section{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:22px;
+    margin-bottom:20px;
+}
+
+.admin-section-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.admin-section-head h3{
+    font-size:16px;
+}
+
+.admin-add-btn{
+    border:0;
+    background:var(--green);
+    color:white;
+    padding:10px 15px;
+    border-radius:11px;
+    font-size:11px;
+}
+
+.admin-products{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.admin-product{
+    border:1px solid var(--border);
+    border-radius:17px;
+    overflow:hidden;
+    background:#fafcf9;
+}
+
+.admin-product-image{
+    height:170px;
+    background:#edf1ec;
+}
+
+.admin-product-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.admin-product-body{
+    padding:15px;
+}
+
+.admin-product-title{
+    font-weight:800;
+    font-size:13px;
+}
+
+.admin-product-price{
+    color:var(--green);
+    font-weight:700;
+    font-size:12px;
+    margin-top:7px;
+}
+
+.admin-product-actions{
+    display:flex;
+    gap:7px;
+    margin-top:13px;
+}
+
+.admin-product-actions button{
+    flex:1;
+    padding:9px;
+    border:0;
+    border-radius:9px;
+    font-size:10px;
+}
+
+.edit-btn{
+    background:#e9f0ea;
+    color:var(--green);
+}
+
+.delete-btn{
+    background:#f8e8e8;
+    color:#a13d3d;
+}
+
+/* ================= SUPPORT ================= */
+
+.support-layout{
+    display:grid;
+    grid-template-columns:320px 1fr;
+    min-height:500px;
+    border:1px solid var(--border);
+    border-radius:17px;
+    overflow:hidden;
+}
+
+.support-conversations{
+    border-left:1px solid var(--border);
+    background:#fafcf9;
+    overflow:auto;
+}
+
+.support-conversation{
+    padding:15px;
+    border-bottom:1px solid var(--border);
+    cursor:pointer;
+}
+
+.support-conversation.active{
+    background:#eaf1eb;
+}
+
+.support-conversation-name{
+    font-weight:800;
+    font-size:12px;
+}
+
+.support-conversation-last{
+    font-size:10px;
+    color:var(--gray);
+    margin-top:4px;
+}
+
+.support-chat{
+    display:flex;
+    flex-direction:column;
+    background:white;
+}
+
+.support-chat-head{
+    padding:15px 18px;
+    border-bottom:1px solid var(--border);
+    font-size:13px;
+    font-weight:800;
+}
+
+.support-messages{
+    flex:1;
+    padding:18px;
+    overflow:auto;
+}
+
+.support-message{
+    max-width:75%;
+    padding:10px 13px;
+    border-radius:13px;
+    margin-bottom:10px;
+    font-size:11px;
+    line-height:1.8;
+}
+
+.support-message.customer{
+    background:#f0f3ef;
+    margin-left:auto;
+}
+
+.support-message.admin{
+    background:var(--green);
+    color:white;
+    margin-right:auto;
+}
+
+.support-reply{
+    padding:12px;
+    border-top:1px solid var(--border);
+    display:flex;
+    gap:8px;
+}
+
+.support-reply input{
+    flex:1;
+}
+
+.support-reply button{
+    border:0;
+    background:var(--green);
+    color:white;
+    padding:0 20px;
+    border-radius:10px;
 }
 
 /* ================= RESPONSIVE ================= */
@@ -1772,225 +1183,146 @@ footer p{
         grid-template-columns:repeat(3,1fr);
     }
 
-    .categories{
+    .climate-grid{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .desktop-nav{
-        display:none;
+    .admin-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .product-page-card{
-        grid-template-columns:1fr;
-    }
-
-    .product-visual{
-        min-height:500px;
-    }
-
-    .product-info-panel{
-        padding:45px;
+    .admin-products{
+        grid-template-columns:repeat(2,1fr);
     }
 }
 
 @media(max-width:700px){
 
     header{
-        height:76px;
-        padding:0 18px;
+        height:65px;
+        padding:0 4%;
+    }
+
+    .desktop-nav{
+        display:none;
     }
 
     .logo h1{
-        font-size:23px;
-    }
-
-    .logo span{
-        font-size:9px;
-    }
-
-    .header-inner{
-        flex-direction:row-reverse;
+        font-size:21px;
     }
 
     .hero{
-        min-height:560px;
-    }
-
-    .hero h2{
-        font-size:42px;
-    }
-
-    .hero p{
-        font-size:15px;
-    }
-
-    section{
-        padding:55px 18px;
-    }
-
-    .categories{
-        grid-template-columns:1fr 1fr;
-        gap:12px;
-    }
-
-    .category-card{
-        height:190px;
-        border-radius:19px;
-    }
-
-    .category-overlay{
-        padding:15px;
-    }
-
-    .category-overlay h3{
-        font-size:17px;
-    }
-
-    .store-tools{
-        grid-template-columns:1fr;
-    }
-
-    .climate-filter-dropdown{
-        width:100%;
-        max-width:none;
-    }
-
-    .products-grid{
-        grid-template-columns:1fr;
-        gap:18px;
-    }
-
-    .product-image{
-        height:270px;
-    }
-
-    .product-content{
-        padding:18px;
-    }
-
-    .product-name{
-        font-size:20px;
-    }
-
-    /* صفحه محصول موبایل */
-
-    .product-page-top{
-        height:68px;
-        padding:0 15px;
-    }
-
-    .product-page-inner{
-        padding:0 0 30px;
-    }
-
-    .product-page-card{
-        border-radius:0;
-        display:block;
-        min-height:0;
-        box-shadow:none;
-    }
-
-    .product-visual{
-        height:390px;
-        min-height:390px;
-        padding:35px;
-    }
-
-    .product-visual img{
-        height:330px;
-    }
-
-    .product-visual::before{
-        width:260px;
-        height:260px;
-    }
-
-    .product-visual::after{
-        width:330px;
-        height:330px;
-    }
-
-    .visual-climate{
-        top:18px;
-        right:18px;
-    }
-
-    .product-info-panel{
-        padding:30px 22px 35px;
-    }
-
-    .product-info-panel h1{
-        font-size:30px;
-    }
-
-    .product-description-large{
-        font-size:14px;
-        line-height:2.1;
-    }
-
-    .product-price-large{
-        font-size:27px;
-    }
-
-    .product-buy-row{
-        flex-direction:column;
-        align-items:stretch;
-    }
-
-    .quantity-box{
-        justify-content:center;
-        width:100%;
-    }
-
-    .product-add-large{
-        width:100%;
-    }
-
-    .features{
-        grid-template-columns:1fr;
-    }
-
-    .admin-top{
-        align-items:flex-start;
-        gap:15px;
-        flex-direction:column;
-    }
-
-    .admin-product{
-        align-items:flex-start;
-    }
-
-    .admin-product-buttons{
-        flex-direction:column;
-    }
-}
-
-@media(max-width:390px){
-
-    .header-btn{
-        width:43px;
-        height:43px;
-    }
-
-    .categories{
-        grid-template-columns:1fr;
-    }
-
-    .category-card{
-        height:170px;
+        min-height:570px;
     }
 
     .hero h2{
         font-size:36px;
     }
 
-    .product-visual{
-        height:340px;
-        min-height:340px;
+    .hero p{
+        font-size:13px;
     }
 
-    .product-visual img{
-        height:285px;
+    .section{
+        margin:55px auto;
+    }
+
+    .section-title{
+        font-size:24px;
+    }
+
+    .products-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+    }
+
+    .product-image{
+        height:170px;
+    }
+
+    .product-info{
+        padding:12px;
+    }
+
+    .product-title{
+        font-size:13px;
+    }
+
+    .product-description{
+        font-size:10px;
+    }
+
+    .product-bottom{
+        align-items:center;
+    }
+
+    .product-price{
+        font-size:12px;
+    }
+
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .about-box{
+        grid-template-columns:1fr;
+        padding:30px;
+        gap:30px;
+    }
+
+    .about-box h2{
+        font-size:25px;
+    }
+
+    .footer-inner{
+        grid-template-columns:1fr;
+        gap:30px;
+    }
+
+    .support-layout{
+        grid-template-columns:1fr;
+    }
+
+    .support-conversations{
+        max-height:220px;
+        border-left:0;
+        border-bottom:1px solid var(--border);
+    }
+
+    .admin-products{
+        grid-template-columns:1fr;
+    }
+
+    .admin-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .admin-header-title h2{
+        font-size:16px;
+    }
+
+    .admin-main{
+        width:94%;
+    }
+}
+
+@media(max-width:430px){
+
+    .products-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .hero h2{
+        font-size:31px;
+    }
+
+    .climate-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .cart-panel{
+        width:100%;
+        max-width:100%;
     }
 }
 </style>
@@ -2001,926 +1333,1161 @@ footer p{
 <!-- ================= HEADER ================= -->
 
 <header>
-<div class="header-inner">
+    <div class="header-inner">
 
-<div class="logo" onclick="scrollToStore()">
-    <h1>چهار اقلیم</h1>
-    <span>کوه · جنگل · کویر · دریا</span>
-</div>
+        <div
+            class="logo"
+            onclick="window.scrollTo({top:0,behavior:'smooth'})"
+        >
+            <h1>چهار اقلیم</h1>
+            <span>تجهیزات کمپینگ و طبیعت‌گردی</span>
+        </div>
 
-<nav class="desktop-nav">
-    <a href="#home">خانه</a>
-    <a href="#categories">اقلیم‌ها</a>
-    <a href="#store">فروشگاه</a>
-    <a href="#about">درباره ما</a>
-</nav>
+        <nav class="desktop-nav">
+            <a href="#home">خانه</a>
+            <a href="#products">محصولات</a>
+            <a href="#climates">چهار اقلیم</a>
+            <a href="#about">درباره ما</a>
+        </nav>
 
-<div class="header-actions">
+        <div class="header-actions">
 
-<button class="header-btn" onclick="openMobileMenu()">
-    ☰
-</button>
+            <button
+                class="header-btn"
+                onclick="openMobileMenu()"
+                aria-label="منو"
+            >
+                ☰
+            </button>
 
-<button class="header-btn cart-btn" onclick="openCart()">
-    🛍
-    <span class="cart-count" id="cartCount">0</span>
-</button>
+            <button
+                class="header-btn cart-btn"
+                onclick="openCart()"
+                aria-label="سبد خرید"
+            >
+                🛒
+                <span
+                    id="cartCount"
+                    class="cart-count"
+                >0</span>
+            </button>
 
-<button class="header-btn" onclick="openAdmin()">
-    ⚙
-</button>
+        </div>
 
-</div>
-</div>
+    </div>
 </header>
 
 <!-- ================= MOBILE MENU ================= -->
 
-<div class="menu-overlay" id="menuOverlay" onclick="closeMobileMenu()"></div>
+<div
+    id="menuOverlay"
+    class="menu-overlay"
+    onclick="closeMobileMenu()"
+></div>
 
-<div class="mobile-menu" id="mobileMenu">
+<div
+    id="mobileMenu"
+    class="mobile-menu"
+>
 
-<button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
+    <button
+        class="mobile-menu-close"
+        onclick="closeMobileMenu()"
+    >
+        ×
+    </button>
 
-<a href="#home" onclick="closeMobileMenu()">خانه</a>
-<a href="#categories" onclick="closeMobileMenu()">اقلیم‌ها</a>
-<a href="#store" onclick="closeMobileMenu()">فروشگاه</a>
-<a href="#about" onclick="closeMobileMenu()">درباره ما</a>
+    <a
+        href="#home"
+        onclick="closeMobileMenu()"
+    >
+        خانه
+    </a>
+
+    <a
+        href="#products"
+        onclick="closeMobileMenu()"
+    >
+        محصولات
+    </a>
+
+    <a
+        href="#climates"
+        onclick="closeMobileMenu()"
+    >
+        چهار اقلیم
+    </a>
+
+    <a
+        href="#about"
+        onclick="closeMobileMenu()"
+    >
+        درباره ما
+    </a>
+
+    <a
+        href="#footer"
+        onclick="closeMobileMenu()"
+    >
+        تماس با ما
+    </a>
 
 </div>
 
 <!-- ================= HERO ================= -->
 
-<section class="hero" id="home">
+<section
+    id="home"
+    class="hero"
+>
 
-<div class="hero-content">
+    <div class="hero-inner">
 
-<div class="hero-text">
+        <div class="hero-content">
 
-<h2>
-برای هر مسیر،
-آماده باش.
-</h2>
+            <div class="hero-kicker">
+                🏕️
+                برای هر مسیر، یک انتخاب مطمئن
+            </div>
 
-<p>
-تجهیزات کمپینگ، طبیعت‌گردی و ماجراجویی
-برای چهار اقلیم متفاوت ایران.
-</p>
+            <h2>
+                طبیعت را
+                <br>
+                حرفه‌ای‌تر تجربه کن
+            </h2>
 
-<a href="#store" class="hero-btn">
-مشاهده محصولات
-</a>
+            <p>
+                مجموعه‌ای از تجهیزات کاربردی کمپینگ،
+                طبیعت‌گردی و ماجراجویی برای کسانی که
+                مسیر را فقط طی نمی‌کنند؛
+                بلکه آن را زندگی می‌کنند.
+            </p>
 
-</div>
-</div>
+            <div class="hero-actions">
+
+                <a
+                    href="#products"
+                    class="btn-primary"
+                    style="text-decoration:none"
+                >
+                    مشاهده محصولات
+                </a>
+
+                <a
+                    href="#climates"
+                    class="btn-secondary"
+                    style="text-decoration:none"
+                >
+                    انتخاب بر اساس اقلیم
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </section>
 
-<!-- ================= CATEGORIES ================= -->
+<!-- ================= CLIMATES ================= -->
 
-<section id="categories">
-
-<div class="section-title">
-
-<h2>چهار اقلیم</h2>
-
-<p>
-تجهیزات مناسب مسیر و طبیعت مورد علاقه‌ات
-</p>
-
-</div>
-
-<div class="categories">
-
-<div class="category-card" onclick="openClimate('کوهستان')">
-
-<img
-src="https://uploadkon.ir/uploads/6ee529_26file-000000007cd0820abf9566001640c595.png"
-alt="کوهستان"
+<section
+    id="climates"
+    class="section"
 >
 
-<div class="category-overlay">
-<h3>کوهستان</h3>
-</div>
+    <div class="section-head">
 
-</div>
+        <div>
 
-<div class="category-card" onclick="openClimate('جنگل')">
+            <h2 class="section-title">
+                چهار اقلیم
+            </h2>
 
-<img
-src="https://uploadkon.ir/uploads/259f29_26file-000000001a0881f4b265165e92ba347e.png"
-alt="جنگل"
->
+            <p class="section-subtitle">
+                تجهیزات مناسب مسیر و محیط موردنظر خود را پیدا کنید.
+            </p>
 
-<div class="category-overlay">
-<h3>جنگل</h3>
-</div>
+        </div>
 
-</div>
+    </div>
 
-<div class="category-card" onclick="openClimate('کویر')">
+    <div class="climate-grid">
 
-<img
-src="https://uploadkon.ir/uploads/b24529_26file-00000000bbb4820a9d88195cac3b22ba.png"
-alt="کویر"
->
+        <div
+            class="climate-card"
+            onclick="filterClimate('کوهستان')"
+        >
+            <img
+                src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=80"
+                alt="کوهستان"
+            >
 
-<div class="category-overlay">
-<h3>کویر</h3>
-</div>
+            <div class="climate-info">
 
-</div>
+                <h3>
+                    کوهستان
+                </h3>
 
-<div class="category-card" onclick="openClimate('دریا')">
+                <span>
+                    برای مسیرهای مرتفع و سرد
+                </span>
 
-<img
-src="https://uploadkon.ir/uploads/b6a529_26file-0000000050288210958d09b7e1206692.png"
-alt="دریا"
->
+            </div>
+        </div>
 
-<div class="category-overlay">
-<h3>دریا</h3>
-</div>
+        <div
+            class="climate-card"
+            onclick="filterClimate('جنگل')"
+        >
+            <img
+                src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=900&q=80"
+                alt="جنگل"
+            >
 
-</div>
+            <div class="climate-info">
 
-</div>
+                <h3>
+                    جنگل
+                </h3>
+
+                <span>
+                    برای طبیعت سرسبز و مرطوب
+                </span>
+
+            </div>
+        </div>
+
+        <div
+            class="climate-card"
+            onclick="filterClimate('کویر')"
+        >
+            <img
+                src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=900&q=80"
+                alt="کویر"
+            >
+
+            <div class="climate-info">
+
+                <h3>
+                    کویر
+                </h3>
+
+                <span>
+                    برای شب‌های کویری و مسیرهای خشک
+                </span>
+
+            </div>
+        </div>
+
+        <div
+            class="climate-card"
+            onclick="filterClimate('دریا')"
+        >
+            <img
+                src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80"
+                alt="دریا"
+            >
+
+            <div class="climate-info">
+
+                <h3>
+                    دریا
+                </h3>
+
+                <span>
+                    برای سفرهای ساحلی و دریایی
+                </span>
+
+            </div>
+        </div>
+
+    </div>
+
 </section>
 
-<!-- ================= STORE ================= -->
+<!-- ================= PRODUCTS ================= -->
 
-<section class="store" id="store">
-
-<div class="store-container">
-
-<div class="section-title">
-
-<h2>فروشگاه</h2>
-
-<p>
-تجهیزاتت را برای مسیر بعدی انتخاب کن
-</p>
-
-</div>
-
-<div class="store-tools">
-
-<div class="search-box">
-
-<input
-type="search"
-id="searchInput"
-placeholder="جستجوی محصول..."
-oninput="filterShop()"
+<section
+    id="products"
+    class="section"
 >
 
-</div>
+    <div class="section-head">
 
-<div class="filter-box">
+        <div>
 
-<div class="climate-filter-wrap" id="climateFilterWrap">
+            <h2
+                id="productsTitle"
+                class="section-title"
+            >
+                محصولات
+            </h2>
 
-<button
-class="climate-filter-trigger"
-id="climateFilterTrigger"
-onclick="toggleClimateFilter(event)"
->
+            <p class="section-subtitle">
+                تجهیزات انتخاب‌شده برای سفر و ماجراجویی.
+            </p>
 
-<span
-class="filter-trigger-icon"
-id="climateFilterIcon"
-></span>
+        </div>
 
-<span class="filter-trigger-text">
+        <a
+            href="javascript:void(0)"
+            onclick="loadProducts()"
+            class="view-all"
+        >
+            نمایش همه
+        </a>
 
-<small>
-نمایش محصولات
-</small>
+    </div>
 
-<strong id="climateFilterLabel">
-عمومی
-</strong>
+    <div
+        id="productsGrid"
+        class="products-grid"
+    >
 
-</span>
+        <div class="empty-state">
+            در حال بارگذاری محصولات...
+        </div>
 
-<span class="filter-arrow">
-⌄
-</span>
+    </div>
 
-</button>
-
-<div
-class="climate-filter-dropdown"
-id="climateFilterDropdown"
->
-
-<div class="climate-filter-head">
-
-<strong>
-نمایش محصولات
-</strong>
-
-<span>
-اقلیم مورد نظر را انتخاب کن
-</span>
-
-</div>
-
-<div class="climate-filter-grid">
-
-<!-- عمومی -->
-
-<button
-class="climate-filter-card climate-general active"
-data-climate="همه"
-onclick="selectClimateFilter('همه',event)"
->
-
-<span class="climate-filter-icon"></span>
-
-<div>
-<strong>عمومی</strong>
-<small>همه محصولات</small>
-</div>
-
-</button>
-
-<!-- کوهستان -->
-
-<button
-class="climate-filter-card climate-mountain"
-data-climate="کوهستان"
-onclick="selectClimateFilter('کوهستان',event)"
->
-
-<span class="climate-filter-icon"></span>
-
-<div>
-<strong>کوهستان</strong>
-<small>تجهیزات مسیرهای کوهستانی</small>
-</div>
-
-</button>
-
-<!-- جنگل -->
-
-<button
-class="climate-filter-card climate-forest"
-data-climate="جنگل"
-onclick="selectClimateFilter('جنگل',event)"
->
-
-<span class="climate-filter-icon"></span>
-
-<div>
-<strong>جنگل</strong>
-<small>برای سفر در طبیعت سبز</small>
-</div>
-
-</button>
-
-<!-- کویر -->
-
-<button
-class="climate-filter-card climate-desert"
-data-climate="کویر"
-onclick="selectClimateFilter('کویر',event)"
->
-
-<span class="climate-filter-icon"></span>
-
-<div>
-<strong>کویر</strong>
-<small>برای مسیرهای گرم و خشک</small>
-</div>
-
-</button>
-
-<!-- دریا -->
-
-<button
-class="climate-filter-card climate-sea"
-data-climate="دریا"
-onclick="selectClimateFilter('دریا',event)"
->
-
-<span class="climate-filter-icon"></span>
-
-<div>
-<strong>دریا</strong>
-<small>برای سفرهای ساحلی و دریایی</small>
-</div>
-
-</button>
-
-</div>
-</div>
-
-<select id="climateFilter">
-
-<option value="همه">
-همه اقلیم‌ها
-</option>
-
-<option value="کوهستان">
-کوهستان
-</option>
-
-<option value="جنگل">
-جنگل
-</option>
-
-<option value="کویر">
-کویر
-</option>
-
-<option value="دریا">
-دریا
-</option>
-
-<option value="عمومی">
-عمومی
-</option>
-
-</select>
-
-</div>
-</div>
-
-</div>
-
-<div class="products-info">
-
-<span id="productsCount">
-در حال بارگذاری...
-</span>
-
-</div>
-
-<div class="products-grid" id="productsGrid"></div>
-
-</div>
 </section>
 
 <!-- ================= FEATURES ================= -->
 
-<section>
+<section class="section">
 
-<div class="section-title">
+    <div class="features">
 
-<h2>چرا چهار اقلیم؟</h2>
+        <div class="feature">
 
-<p>
-برای ماجراجویی آماده‌تر باش
-</p>
+            <div class="feature-icon">
+                🏕️
+            </div>
 
-</div>
+            <h3>
+                تجهیزات کاربردی
+            </h3>
 
-<div class="features">
+            <p>
+                محصولاتی برای کمپینگ،
+                طبیعت‌گردی و سفرهای خارج از شهر.
+            </p>
 
-<div class="feature">
+        </div>
 
-<div class="feature-icon">🏕️</div>
+        <div class="feature">
 
-<h3>برای طبیعت</h3>
+            <div class="feature-icon">
+                🌿
+            </div>
 
-<p>
-تجهیزات کاربردی برای کمپینگ،
-سفر و طبیعت‌گردی.
-</p>
+            <h3>
+                انتخاب بر اساس اقلیم
+            </h3>
 
-</div>
+            <p>
+                تجهیزات مناسب کوهستان،
+                جنگل، کویر و دریا را راحت‌تر پیدا کنید.
+            </p>
 
-<div class="feature">
+        </div>
 
-<div class="feature-icon">🧭</div>
+        <div class="feature">
 
-<h3>چهار اقلیم</h3>
+            <div class="feature-icon">
+                🧭
+            </div>
 
-<p>
-محصولات بر اساس کوهستان،
-جنگل، کویر و دریا.
-</p>
+            <h3>
+                همراه مسیر شما
+            </h3>
 
-</div>
+            <p>
+                برای مسیرهای کوتاه تا ماجراجویی‌های
+                طولانی، انتخاب مناسب اهمیت دارد.
+            </p>
 
-<div class="feature">
+        </div>
 
-<div class="feature-icon">🎒</div>
+    </div>
 
-<h3>ماجراجویی بیشتر</h3>
-
-<p>
-وسایلی برای اینکه با خیال راحت‌تر
-مسیر بعدی را شروع کنی.
-</p>
-
-</div>
-
-</div>
 </section>
 
 <!-- ================= ABOUT ================= -->
 
-<section class="about" id="about">
+<section
+    id="about"
+    class="section"
+>
 
-<div class="about-content">
+    <div class="about-box">
 
-<h2>چهار اقلیم</h2>
+        <div>
 
-<p>
-چهار اقلیم برای علاقه‌مندان به سفر،
-کمپینگ و طبیعت‌گردی ساخته شده است؛
-جایی برای پیدا کردن تجهیزات مورد نیاز
-قبل از شروع ماجراجویی بعدی.
-</p>
+            <h2>
+                چهار اقلیم
+            </h2>
 
-</div>
+            <p>
+                چهار اقلیم با هدف ارائه تجهیزات
+                کمپینگ و طبیعت‌گردی شکل گرفته است؛
+                جایی برای پیدا کردن ابزارهایی که
+                در مسیر واقعاً کاربرد دارند.
+            </p>
+
+        </div>
+
+        <div class="about-list">
+
+            <div class="about-list-item">
+                <span>🏔️</span>
+                <span>
+                    تجهیزات مسیرهای کوهستانی
+                </span>
+            </div>
+
+            <div class="about-list-item">
+                <span>🌲</span>
+                <span>
+                    لوازم کمپ و طبیعت‌گردی
+                </span>
+            </div>
+
+            <div class="about-list-item">
+                <span>🏜️</span>
+                <span>
+                    تجهیزات سفرهای کویری
+                </span>
+            </div>
+
+            <div class="about-list-item">
+                <span>🌊</span>
+                <span>
+                    لوازم سفرهای ساحلی
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+
 </section>
 
 <!-- ================= FOOTER ================= -->
 
-<footer>
+<footer id="footer">
 
-<p>
-© ۱۴۰۵ چهار اقلیم — تجهیزات کمپینگ و طبیعت‌گردی
-</p>
+    <div class="footer-inner">
+
+        <div class="footer-col">
+
+            <h3>
+                چهار اقلیم
+            </h3>
+
+            <p>
+                تجهیزات کمپینگ و طبیعت‌گردی
+                برای تجربه بهتر مسیر.
+            </p>
+
+        </div>
+
+        <div class="footer-col">
+
+            <h3>
+                دسترسی سریع
+            </h3>
+
+            <a href="#home">
+                خانه
+            </a>
+
+            <a href="#products">
+                محصولات
+            </a>
+
+            <a href="#climates">
+                چهار اقلیم
+            </a>
+
+            <a href="#about">
+                درباره ما
+            </a>
+
+        </div>
+
+        <div class="footer-col">
+
+            <h3>
+                ارتباط
+            </h3>
+
+            <p>
+                پشتیبانی آنلاین
+            </p>
+
+            <a
+                href="javascript:void(0)"
+                onclick="openSupport()"
+            >
+                ورود به پشتیبانی
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+
+        © 2026 چهار اقلیم — تمامی حقوق محفوظ است.
+
+    </div>
 
 </footer>
 
-<!-- ================= PRODUCT PAGE ================= -->
-
-<div class="product-page" id="productPage">
-
-<div class="product-page-top">
-
-<button
-class="product-back"
-onclick="closeProductPage()"
->
-← بازگشت
-</button>
-
-<button
-class="product-page-cart"
-onclick="openCartFromProduct()"
->
-🛍 سبد خرید
-<span id="productPageCartCount">۰</span>
-</button>
-
-</div>
-
-<div class="product-page-inner">
-
-<div class="product-page-card">
-
-<div class="product-visual">
-
-<span
-class="visual-climate"
-id="pageClimate"
->
-اقلیم
-</span>
-
-<img
-id="pageImage"
-src=""
-alt=""
->
-
-</div>
-
-<div class="product-info-panel">
-
-<span class="product-small-label">
-تجهیزات چهار اقلیم
-</span>
-
-<h1 id="pageName">
-محصول
-</h1>
-
-<p
-class="product-description-large"
-id="pageDescription"
-></p>
-
-<div class="product-divider"></div>
-
-<div class="product-price-title">
-قیمت محصول
-</div>
+<!-- ================= CART PANEL ================= -->
 
 <div
-class="product-price-large"
-id="pagePrice"
->
-به‌زودی
-</div>
-
-<div class="product-buy-row">
-
-<div class="quantity-box">
-
-<button onclick="changePageQuantity(-1)">
-−
-</button>
-
-<span id="pageQuantity">
-۱
-</span>
-
-<button onclick="changePageQuantity(1)">
-+
-</button>
-
-</div>
-
-<button
-class="product-add-large"
-onclick="addPageProductToCart()"
->
-🛒 افزودن به سبد
-</button>
-
-</div>
-
-<div class="product-note">
-محصول را انتخاب کن، تعداد را مشخص کن و
-آن را به سبد خرید اضافه کن.
-</div>
-
-</div>
-
-</div>
-</div>
-</div>
-
-<!-- ================= CART ================= -->
-
-<div
-class="cart-overlay"
-id="cartOverlay"
-onclick="closeCart()"
+    id="cartOverlay"
+    class="menu-overlay"
+    onclick="closeCart()"
 ></div>
 
-<div class="cart-panel" id="cartPanel">
-
-<div class="cart-header">
-
-<h3>
-سبد خرید
-</h3>
-
-<button
-class="cart-close"
-onclick="closeCart()"
+<aside
+    id="cartPanel"
+    class="cart-panel"
 >
-×
-</button>
 
-</div>
+    <div class="cart-head">
+
+        <h3>
+            سبد خرید
+        </h3>
+
+        <button
+            class="close-btn"
+            onclick="closeCart()"
+        >
+            ×
+        </button>
+
+    </div>
+
+    <div
+        id="cartItems"
+        class="cart-items"
+    ></div>
+
+    <div class="cart-footer">
+
+        <div class="cart-total">
+
+            <span>
+                مجموع
+            </span>
+
+            <span id="cartTotal">
+                ۰ تومان
+            </span>
+
+        </div>
+
+        <button
+            class="checkout-btn"
+            onclick="openCheckout()"
+        >
+            ثبت سفارش
+        </button>
+
+    </div>
+
+</aside>
+
+<!-- ================= CHECKOUT MODAL ================= -->
 
 <div
-class="cart-items"
-id="cartItems"
-></div>
+    id="checkoutModal"
+    class="modal"
+>
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <h3>
+                ثبت سفارش
+            </h3>
+
+            <button
+                class="close-btn"
+                onclick="closeCheckout()"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div class="form-group">
+
+            <label class="form-label">
+                نام و نام خانوادگی
+            </label>
+
+            <input
+                id="customerName"
+                class="form-input"
+                type="text"
+                placeholder="نام شما"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label class="form-label">
+                شماره تماس
+            </label>
+
+            <input
+                id="customerPhone"
+                class="form-input"
+                type="tel"
+                placeholder="مثلاً 09123456789"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label class="form-label">
+                آدرس
+            </label>
+
+            <textarea
+                id="customerAddress"
+                class="form-textarea"
+                placeholder="آدرس کامل برای ارسال سفارش"
+            ></textarea>
+
+        </div>
+
+        <div class="form-actions">
+
+            <button
+                class="btn-secondary"
+                style="background:#eef2ed;color:var(--green);border:0"
+                onclick="closeCheckout()"
+            >
+                انصراف
+            </button>
+
+            <button
+                class="btn-primary"
+                onclick="submitOrder()"
+            >
+                ثبت سفارش
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= ADMIN LOGIN ================= -->
 
 <div
-class="cart-summary"
-id="cartSummary"
+    id="adminLoginOverlay"
+    class="admin-overlay"
 >
 
-<div class="summary-row">
+    <div class="admin-login">
 
-<span>
-تعداد محصولات
-</span>
+        <h2>
+            ورود مدیریت
+        </h2>
 
-<strong id="summaryCount">
-۰
-</strong>
+        <p>
+            برای ورود به پنل مدیریت رمز عبور را وارد کنید.
+        </p>
+
+        <div class="form-group">
+
+            <label class="form-label">
+                رمز عبور
+            </label>
+
+            <input
+                id="adminPassword"
+                class="form-input"
+                type="password"
+                placeholder="رمز مدیریت"
+                onkeydown="if(event.key==='Enter') adminLogin()"
+            >
+
+        </div>
+
+        <button
+            class="checkout-btn"
+            onclick="adminLogin()"
+        >
+            ورود
+        </button>
+
+    </div>
 
 </div>
 
-<div class="summary-row total">
-
-<span>
-جمع کل
-</span>
-
-<strong id="summaryTotal">
-به‌زودی
-</strong>
-
-</div>
-
-<button
-class="clear-cart"
-onclick="clearCart()"
->
-خالی کردن سبد
-</button>
-
-</div>
-</div>
-
-<!-- ================= CLIMATE PANEL ================= -->
+<!-- ================= ADMIN PANEL ================= -->
 
 <div
-class="climate-panel"
-id="climatePanel"
+    id="adminPanel"
+    class="admin-panel"
 >
 
-<div class="climate-header">
+    <div class="admin-header">
 
-<h2 id="climateTitle">
-اقلیم
-</h2>
+        <div class="admin-header-title">
 
-<button onclick="closeClimate()">
-×
-</button>
+            <h2>
+                پنل مدیریت چهار اقلیم
+            </h2>
 
-</div>
+            <span>
+                مدیریت فروشگاه
+            </span>
 
-<div class="climate-content">
+        </div>
 
-<div
-class="products-grid"
-id="climateProducts"
-></div>
+        <div class="admin-header-actions">
 
-</div>
-</div>
+            <button
+                class="admin-btn"
+                onclick="loadAdminProducts()"
+            >
+                بروزرسانی
+            </button>
 
-<!-- ================= ADMIN ================= -->
+            <button
+                class="admin-btn"
+                onclick="adminLogout()"
+            >
+                خروج
+            </button>
 
-<div
-class="admin-panel"
-id="adminPanel"
->
+        </div>
 
-<div
-class="admin-login"
-id="adminLoginBox"
->
+    </div>
 
-<div class="admin-login-box">
+    <main class="admin-main">
 
-<h2>
-ورود مدیریت
-</h2>
+        <div class="admin-grid">
 
-<input
-class="admin-input"
-id="adminEmail"
-type="email"
-placeholder="ایمیل"
->
+            <div class="admin-stat">
 
-<input
-class="admin-input"
-id="adminPassword"
-type="password"
-placeholder="رمز عبور"
->
+                <div class="admin-stat-label">
+                    تعداد محصولات
+                </div>
 
-<button
-class="admin-primary"
-onclick="adminLogin()"
->
-ورود
-</button>
+                <div
+                    id="adminProductCount"
+                    class="admin-stat-value"
+                >
+                    ۰
+                </div>
 
-<button
-class="admin-close"
-onclick="closeAdmin()"
->
-بازگشت به سایت
-</button>
+            </div>
 
-</div>
-</div>
+            <div class="admin-stat">
 
-<div
-class="admin-dashboard"
-id="adminDashboard"
-style="display:none"
->
+                <div class="admin-stat-label">
+                    تعداد سفارش‌ها
+                </div>
 
-<div class="admin-top">
+                <div
+                    id="adminOrderCount"
+                    class="admin-stat-value"
+                >
+                    ۰
+                </div>
 
-<h2>
-مدیریت محصولات
-</h2>
+            </div>
 
-<div class="admin-actions">
+            <div class="admin-stat">
 
-<button
-class="admin-small-btn"
-onclick="openProductForm()"
->
-+ محصول جدید
-</button>
+                <div class="admin-stat-label">
+                    بازدید
+                </div>
 
-<button
-class="admin-small-btn logout"
-onclick="adminLogout()"
->
-خروج
-</button>
+                <div
+                    id="adminViewCount"
+                    class="admin-stat-value"
+                >
+                    ۰
+                </div>
 
-<button
-class="admin-small-btn"
-onclick="closeAdmin()"
->
-بستن
-</button>
+            </div>
 
-</div>
-</div>
+            <div class="admin-stat">
 
-<div
-class="admin-products"
-id="adminProducts"
-></div>
+                <div class="admin-stat-label">
+                    فروش
+                </div>
 
-</div>
+                <div
+                    id="adminSalesCount"
+                    class="admin-stat-value"
+                >
+                    ۰
+                </div>
+
+            </div>
+
+        </div>
+
+        <section class="admin-section">
+
+            <div class="admin-section-head">
+
+                <h3>
+                    مدیریت محصولات
+                </h3>
+
+                <button
+                    class="admin-add-btn"
+                    onclick="openProductForm()"
+                >
+                    + افزودن محصول
+                </button>
+
+            </div>
+
+            <div
+                id="adminProducts"
+                class="admin-products"
+            >
+
+                <div class="empty-state">
+                    در حال بارگذاری...
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="admin-section">
+
+            <div class="admin-section-head">
+
+                <h3>
+                    پشتیبانی آنلاین
+                </h3>
+
+            </div>
+
+            <div class="support-layout">
+
+                <div
+                    id="supportConversations"
+                    class="support-conversations"
+                ></div>
+
+                <div class="support-chat">
+
+                    <div
+                        id="supportChatHead"
+                        class="support-chat-head"
+                    >
+                        یک گفتگو را انتخاب کنید
+                    </div>
+
+                    <div
+                        id="supportMessages"
+                        class="support-messages"
+                    ></div>
+
+                    <div class="support-reply">
+
+                        <input
+                            id="supportReplyInput"
+                            class="form-input"
+                            placeholder="پاسخ..."
+                            onkeydown="if(event.key==='Enter') sendSupportReply()"
+                        >
+
+                        <button
+                            onclick="sendSupportReply()"
+                        >
+                            ارسال
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
 </div>
 
 <!-- ================= PRODUCT FORM ================= -->
 
 <div
-class="product-form-modal"
-id="productFormModal"
+    id="productFormModal"
+    class="modal"
 >
 
-<div class="product-form-box">
+    <div class="modal-box">
 
-<h2 id="formTitle">
-افزودن محصول
-</h2>
+        <div class="modal-head">
 
-<input
-type="hidden"
-id="productId"
->
+            <h3 id="formTitle">
+                افزودن محصول
+            </h3>
 
-<label class="form-label">
-نام محصول
-</label>
+            <button
+                class="close-btn"
+                onclick="closeProductForm()"
+            >
+                ×
+            </button>
 
-<input
-class="form-input"
-id="productName"
-placeholder="مثلاً چراغ قوه جیبی"
->
+        </div>
 
-<label class="form-label">
-اقلیم
-</label>
+        <input
+            id="productId"
+            type="hidden"
+        >
 
-<select
-class="form-select"
-id="productClimate"
->
+        <div class="form-group">
 
-<option value="کوهستان">
-کوهستان
-</option>
+            <label class="form-label">
+                نام محصول
+            </label>
 
-<option value="جنگل">
-جنگل
-</option>
+            <input
+                class="form-input"
+                id="productName"
+                type="text"
+                placeholder="نام محصول"
+            >
 
-<option value="کویر">
-کویر
-</option>
+        </div>
 
-<option value="دریا">
-دریا
-</option>
+        <div class="form-group">
 
-<option value="عمومی">
-عمومی
-</option>
+            <label class="form-label">
+                اقلیم
+            </label>
 
-</select>
+            <select
+                class="form-select"
+                id="productClimate"
+            >
 
-<label class="form-label">
-لینک تصویر
-</label>
+                <option value="کوهستان">
+                    کوهستان
+                </option>
 
-<input
-class="form-input"
-id="productImage"
-placeholder="https://..."
->
+                <option value="جنگل">
+                    جنگل
+                </option>
 
-<label class="form-label">
-توضیحات
-</label>
+                <option value="کویر">
+                    کویر
+                </option>
 
-<textarea
-class="form-textarea"
-id="productDescription"
-placeholder="توضیحات کامل محصول..."
-></textarea>
+                <option value="دریا">
+                    دریا
+                </option>
 
-<label class="form-label">
-قیمت به تومان
-</label>
+                <option value="عمومی">
+                    عمومی
+                </option>
 
-<input
-class="form-input"
-id="productPrice"
-type="number"
-min="0"
-placeholder="150000"
->
+            </select>
 
-<div class="form-buttons">
+        </div>
 
-<button
-class="form-save"
-onclick="saveProduct()"
->
-ذخیره محصول
-</button>
+        <div class="form-group">
 
-<button
-class="form-cancel"
-onclick="closeProductForm()"
->
-انصراف
-</button>
+            <label class="form-label">
+                تصویر محصول
+            </label>
+
+            <input
+                class="form-input"
+                id="productImage"
+                type="text"
+                placeholder="لینک تصویر محصول"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label class="form-label">
+                توضیحات
+            </label>
+
+            <textarea
+                class="form-textarea"
+                id="productDescription"
+                placeholder="توضیحات محصول"
+            ></textarea>
+
+        </div>
+
+        <div class="form-group">
+
+            <label class="form-label">
+                قیمت
+            </label>
+
+            <input
+                class="form-input"
+                id="productPrice"
+                type="number"
+                min="0"
+                placeholder="قیمت به تومان"
+            >
+
+        </div>
+
+        <div class="form-actions">
+
+            <button
+                class="btn-secondary"
+                style="background:#eef2ed;color:var(--green);border:0"
+                onclick="closeProductForm()"
+            >
+                انصراف
+            </button>
+
+            <button
+                class="btn-primary"
+                onclick="saveProduct()"
+            >
+                ذخیره محصول
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
 
-</div>
+<!-- ================= SUPPORT CUSTOMER MODAL ================= -->
+
+<div
+    id="supportModal"
+    class="modal"
+>
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <h3>
+                پشتیبانی آنلاین
+            </h3>
+
+            <button
+                class="close-btn"
+                onclick="closeSupport()"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <p
+            style="font-size:12px;color:var(--gray);line-height:2;margin-bottom:20px"
+        >
+            پیام خود را برای پشتیبانی چهار اقلیم ارسال کنید.
+        </p>
+
+        <div class="form-group">
+
+            <label class="form-label">
+                نام
+            </label>
+
+            <input
+                id="supportCustomerName"
+                class="form-input"
+                type="text"
+                placeholder="نام شما"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label class="form-label">
+                پیام
+            </label>
+
+            <textarea
+                id="supportCustomerMessage"
+                class="form-textarea"
+                placeholder="پیام خود را بنویسید..."
+            ></textarea>
+
+        </div>
+
+        <button
+            class="checkout-btn"
+            onclick="startSupportConversation()"
+        >
+            شروع گفتگو
+        </button>
+
+    </div>
+
 </div>
 
 <!-- ================= TOAST ================= -->
 
 <div
-class="toast"
-id="toast"
+    id="toast"
+    class="toast"
 ></div>
 
 <script>
 
-/* =====================================================
-SUPABASE
-===================================================== */
+/* ================= SUPABASE ================= */
 
 const SUPABASE_URL =
-"https://viridgxzaxswjhwfvcij.supabase.co";
+    "YOUR_SUPABASE_URL";
 
 const SUPABASE_KEY =
-"sb_publishable_6sNq0COlyIB4up8s-_H7Zg_Tz7b91ub";
+    "YOUR_SUPABASE_ANON_KEY";
 
 const supabaseClient =
-supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
+    supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
-/* =====================================================
-VARIABLES
-===================================================== */
+/* ================= STATE ================= */
 
 let products = [];
 
 let cart =
-JSON.parse(
-    localStorage.getItem("fourAghlimCart") || "[]"
-);
+    JSON.parse(
+        localStorage.getItem("charaglim_cart") || "[]"
+    );
 
-let selectedProduct = null;
+let currentSupportConversation = null;
 
-let pageQuantity = 1;
+let supportCustomerConversation = null;
 
-let activeClimateFilter = "همه";
-
-/* =====================================================
-HELPERS
-===================================================== */
-
-function escapeHtml(value){
-
-    if(value === null || value === undefined){
-        return "";
-    }
-
-    return String(value)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-}
+/* ================= HELPERS ================= */
 
 function hasPrice(value){
 
@@ -2928,18 +2495,16 @@ function hasPrice(value){
         value !== null &&
         value !== undefined &&
         value !== "" &&
-        Number.isFinite(Number(value)) &&
-        Number(value) >= 0
+        !Number.isNaN(Number(value))
     );
 }
 
 function formatPrice(value){
 
-    if(!hasPrice(value)){
-        return "به‌زودی";
-    }
+    const number =
+        Number(value || 0);
 
-    return Number(value)
+    return number
         .toLocaleString("fa-IR") +
         " تومان";
 }
@@ -2949,562 +2514,62 @@ function showToast(message){
     const toast =
         document.getElementById("toast");
 
-    toast.textContent = message;
+    toast.textContent =
+        message;
 
     toast.classList.add("show");
 
-    clearTimeout(window.toastTimer);
-
-    window.toastTimer =
-        setTimeout(() => {
-            toast.classList.remove("show");
-        },2500);
-}
-
-/* =====================================================
-CLIMATE FILTER
-===================================================== */
-
-function toggleClimateFilter(event){
-
-    if(event){
-        event.stopPropagation();
-    }
-
-    const wrap =
-        document.getElementById(
-            "climateFilterWrap"
-        );
-
-    wrap.classList.toggle("open");
-}
-
-function closeClimateFilter(){
-
-    const wrap =
-        document.getElementById(
-            "climateFilterWrap"
-        );
-
-    if(wrap){
-        wrap.classList.remove("open");
-    }
-}
-
-function selectClimateFilter(climate,event){
-
-    if(event){
-        event.stopPropagation();
-    }
-
-    activeClimateFilter = climate;
-
-    const select =
-        document.getElementById(
-            "climateFilter"
-        );
-
-    if(select){
-        select.value =
-            climate === "همه"
-                ? "همه"
-                : climate;
-    }
-
-    const label =
-        document.getElementById(
-            "climateFilterLabel"
-        );
-
-    if(label){
-        label.textContent =
-            climate === "همه"
-                ? "عمومی"
-                : climate;
-    }
-
-    document
-        .querySelectorAll(
-            ".climate-filter-card"
-        )
-        .forEach(card => {
-
-            card.classList.toggle(
-                "active",
-                card.dataset.climate === climate
-            );
-
-        });
-
-    filterShop();
-
-    closeClimateFilter();
-}
-
-/* کلیک بیرون از پنل */
-
-document.addEventListener(
-    "click",
-    function(event){
-
-        const wrap =
-            document.getElementById(
-                "climateFilterWrap"
-            );
-
-        if(
-            wrap &&
-            !wrap.contains(event.target)
-        ){
-            wrap.classList.remove("open");
-        }
-
-    }
-);
-
-/* =====================================================
-LOAD PRODUCTS
-===================================================== */
-
-async function loadProducts(){
-
-    const grid =
-        document.getElementById(
-            "productsGrid"
-        );
-
-    grid.innerHTML = `
-        <div class="no-products">
-            در حال بارگذاری محصولات...
-        </div>
-    `;
-
-    const { data,error } =
-        await supabaseClient
-            .from("products")
-            .select("*")
-            .order(
-                "created_at",
-                {ascending:false}
-            );
-
-    if(error){
-
-        console.error(error);
-
-        grid.innerHTML = `
-            <div class="no-products">
-                خطا در دریافت محصولات
-            </div>
-        `;
-
-        showToast(
-            "خطا در دریافت محصولات"
-        );
-
-        return;
-    }
-
-    products = data || [];
-
-    renderProducts(products);
-}
-
-/* =====================================================
-PRODUCT CARD
-===================================================== */
-
-function productCard(product){
-
-    const image =
-        product.image
-        ? escapeHtml(product.image)
-        : "https://uploadkon.ir/uploads/b60929_26file-000000000cc8820ab8e50e624e626707.png";
-
-    const name =
-        escapeHtml(product.name);
-
-    const climate =
-        escapeHtml(
-            product.climate || "عمومی"
-        );
-
-    const description =
-        escapeHtml(
-            product.description ||
-            "توضیحی برای این محصول ثبت نشده است."
-        );
-
-    return `
-
-<article
-class="product-card"
-onclick="openProductPage('${product.id}')"
->
-
-<div class="product-image">
-
-<img
-src="${image}"
-alt="${name}"
-loading="lazy"
-onerror="this.src='https://uploadkon.ir/uploads/b60929_26file-000000000cc8820ab8e50e624e626707.png'"
->
-
-</div>
-
-<div class="product-content">
-
-<span class="product-climate">
-${climate}
-</span>
-
-<h3 class="product-name">
-${name}
-</h3>
-
-<p class="product-description">
-${description}
-</p>
-
-<div class="product-bottom">
-
-<div class="product-price-label">
-قیمت
-</div>
-
-<div class="product-price">
-${formatPrice(product.price)}
-</div>
-
-<button
-class="add-cart-btn"
-onclick="
-event.stopPropagation();
-addToCart('${product.id}')
-"
->
-افزودن به سبد
-</button>
-
-</div>
-
-</div>
-
-</article>
-
-`;
-}
-
-/* =====================================================
-RENDER
-===================================================== */
-
-function renderProducts(list){
-
-    const grid =
-        document.getElementById(
-            "productsGrid"
-        );
-
-    const count =
-        document.getElementById(
-            "productsCount"
-        );
-
-    count.textContent =
-        `${Number(list.length).toLocaleString("fa-IR")} محصول`;
-
-    if(!list.length){
-
-        grid.innerHTML = `
-            <div class="no-products">
-                محصولی پیدا نشد.
-            </div>
-        `;
-
-        return;
-    }
-
-    grid.innerHTML =
-        list.map(productCard).join("");
-}
-
-/* =====================================================
-SEARCH + FILTER
-===================================================== */
-
-function filterShop(){
-
-    const search =
-        document
-            .getElementById("searchInput")
-            .value
-            .trim()
-            .toLowerCase();
-
-    const climate =
-        document
-            .getElementById("climateFilter")
-            .value;
-
-    const filtered =
-        products.filter(product => {
-
-            const name =
-                String(
-                    product.name || ""
-                ).toLowerCase();
-
-            const description =
-                String(
-                    product.description || ""
-                ).toLowerCase();
-
-            const productClimate =
-                String(
-                    product.climate || ""
-                );
-
-            const searchMatch =
-                !search ||
-                name.includes(search) ||
-                description.includes(search);
-
-            const climateMatch =
-                climate === "همه" ||
-                productClimate === climate;
-
-            return (
-                searchMatch &&
-                climateMatch
-            );
-        });
-
-    renderProducts(filtered);
-}
-
-/* =====================================================
-PRODUCT PAGE
-===================================================== */
-
-function openProductPage(id){
-
-    const product =
-        products.find(
-            item =>
-                String(item.id) ===
-                String(id)
-        );
-
-    if(!product){
-
-        showToast(
-            "محصول پیدا نشد"
-        );
-
-        return;
-    }
-
-    selectedProduct = product;
-
-    pageQuantity = 1;
-
-    document.getElementById(
-        "pageQuantity"
-    ).textContent = "۱";
-
-    document.getElementById(
-        "pageImage"
-    ).src =
-        product.image ||
-        "https://uploadkon.ir/uploads/b60929_26file-000000000cc8820ab8e50e624e626707.png";
-
-    document.getElementById(
-        "pageImage"
-    ).alt =
-        product.name || "محصول";
-
-    document.getElementById(
-        "pageName"
-    ).textContent =
-        product.name || "محصول";
-
-    document.getElementById(
-        "pageClimate"
-    ).textContent =
-        product.climate || "عمومی";
-
-    document.getElementById(
-        "pageDescription"
-    ).textContent =
-        product.description ||
-        "توضیحی برای این محصول ثبت نشده است.";
-
-    document.getElementById(
-        "pagePrice"
-    ).textContent =
-        formatPrice(product.price);
-
-    updateProductPageCartCount();
-
-    document.getElementById(
-        "productPage"
-    ).classList.add("active");
-
-    document.body.classList.add("no-scroll");
-
-    window.scrollTo(0,0);
-}
-
-function closeProductPage(){
-
-    document.getElementById(
-        "productPage"
-    ).classList.remove("active");
-
-    document.body.classList.remove("no-scroll");
-
-    selectedProduct = null;
-}
-
-function changePageQuantity(change){
-
-    pageQuantity += change;
-
-    if(pageQuantity < 1){
-        pageQuantity = 1;
-    }
-
-    if(pageQuantity > 99){
-        pageQuantity = 99;
-    }
-
-    document.getElementById(
-        "pageQuantity"
-    ).textContent =
-        pageQuantity.toLocaleString("fa-IR");
-}
-
-function addPageProductToCart(){
-
-    if(!selectedProduct){
-        return;
-    }
-
-    for(let i=0;i<pageQuantity;i++){
-
-        addToCart(
-            selectedProduct.id,
-            false
-        );
-    }
-
-    showToast(
-        `${pageQuantity.toLocaleString("fa-IR")} عدد به سبد اضافه شد`
+    clearTimeout(
+        window.toastTimer
     );
 
-    closeProductPage();
-}
-
-function openCartFromProduct(){
-
-    closeProductPage();
-
-    setTimeout(() => {
-        openCart();
-    },150);
-}
-
-function updateProductPageCartCount(){
-
-    const count =
-        cart.reduce(
-            (sum,item) =>
-                sum +
-                Number(item.quantity || 0),
-            0
+    window.toastTimer =
+        setTimeout(
+            () => {
+                toast.classList.remove("show");
+            },
+            3000
         );
-
-    document.getElementById(
-        "productPageCartCount"
-    ).textContent =
-        count.toLocaleString("fa-IR");
 }
 
-/* =====================================================
-CART
-===================================================== */
+/* ================= MOBILE MENU ================= */
+
+function openMobileMenu(){
+
+    document
+        .getElementById("mobileMenu")
+        .classList.add("active");
+
+    document
+        .getElementById("menuOverlay")
+        .classList.add("active");
+
+    document.body.classList.add("no-scroll");
+}
+
+function closeMobileMenu(){
+
+    document
+        .getElementById("mobileMenu")
+        .classList.remove("active");
+
+    document
+        .getElementById("menuOverlay")
+        .classList.remove("active");
+
+    document.body.classList.remove("no-scroll");
+}
+
+/* ================= CART ================= */
 
 function saveCart(){
 
     localStorage.setItem(
-        "fourAghlimCart",
+        "charaglim_cart",
         JSON.stringify(cart)
     );
-}
-
-function addToCart(id,showMessage=true){
-
-    const product =
-        products.find(
-            item =>
-                String(item.id) ===
-                String(id)
-        );
-
-    if(!product){
-
-        showToast(
-            "محصول پیدا نشد"
-        );
-
-        return;
-    }
-
-    const existing =
-        cart.find(
-            item =>
-                String(item.id) ===
-                String(id)
-        );
-
-    if(existing){
-
-        existing.quantity += 1;
-
-    }else{
-
-        cart.push({
-
-            id:product.id,
-
-            name:product.name,
-
-            image:product.image,
-
-            price:product.price,
-
-            climate:product.climate,
-
-            quantity:1
-        });
-    }
-
-    saveCart();
 
     updateCartCount();
-
-    updateProductPageCartCount();
-
-    renderCart();
-
-    if(showMessage){
-
-        showToast(
-            "محصول به سبد اضافه شد"
-        );
-    }
 }
 
 function updateCartCount(){
@@ -3512,159 +2577,92 @@ function updateCartCount(){
     const count =
         cart.reduce(
             (sum,item) =>
-                sum +
-                Number(item.quantity || 0),
+                sum + Number(item.quantity || 0),
             0
         );
 
-    document.getElementById(
-        "cartCount"
-    ).textContent =
-        count.toLocaleString("fa-IR");
-}
+    const el =
+        document.getElementById("cartCount");
 
-function renderCart(){
-
-    const container =
-        document.getElementById(
-            "cartItems"
-        );
-
-    const summaryCount =
-        document.getElementById(
-            "summaryCount"
-        );
-
-    const summaryTotal =
-        document.getElementById(
-            "summaryTotal"
-        );
-
-    if(!cart.length){
-
-        container.innerHTML = `
-            <div class="cart-empty">
-                سبد خریدت خالی است.
-            </div>
-        `;
-
-        summaryCount.textContent = "۰";
-        summaryTotal.textContent = "۰ تومان";
-
-        return;
+    if(el){
+        el.textContent =
+            count.toLocaleString("fa-IR");
     }
-
-    container.innerHTML =
-        cart.map(item => {
-
-            const image =
-                item.image ||
-                "https://uploadkon.ir/uploads/b60929_26file-000000000cc8820ab8e50e624e626707.png";
-
-            return `
-
-<div class="cart-item">
-
-<div class="cart-item-image">
-
-<img
-src="${escapeHtml(image)}"
-alt="${escapeHtml(item.name)}"
->
-
-</div>
-
-<div>
-
-<div class="cart-item-name">
-${escapeHtml(item.name)}
-</div>
-
-<div class="cart-item-price">
-${formatPrice(item.price)}
-</div>
-
-<div class="cart-controls">
-
-<button
-class="qty-btn"
-onclick="changeQuantity('${item.id}',1)"
->
-+
-</button>
-
-<span class="qty-number">
-${Number(item.quantity).toLocaleString("fa-IR")}
-</span>
-
-<button
-class="qty-btn"
-onclick="changeQuantity('${item.id}',-1)"
->
-−
-</button>
-
-<button
-class="remove-item"
-onclick="removeFromCart('${item.id}')"
->
-حذف
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-`;
-        }).join("");
-
-    const totalQuantity =
-        cart.reduce(
-            (sum,item) =>
-                sum +
-                Number(item.quantity || 0),
-            0
-        );
-
-    summaryCount.textContent =
-        totalQuantity.toLocaleString("fa-IR");
-
-    const allPriced =
-        cart.every(
-            item =>
-                hasPrice(item.price)
-        );
-
-    const total =
-        cart.reduce(
-            (sum,item) => {
-
-                if(!hasPrice(item.price)){
-                    return sum;
-                }
-
-                return sum +
-                    Number(item.price) *
-                    Number(item.quantity || 0);
-
-            },
-            0
-        );
-
-    summaryTotal.textContent =
-        allPriced
-        ? formatPrice(total)
-        : "به‌زودی";
 }
 
-function changeQuantity(id,change){
+function openCart(){
 
-    const item =
+    document
+        .getElementById("cartPanel")
+        .classList.add("active");
+
+    document
+        .getElementById("cartOverlay")
+        .classList.add("active");
+
+    renderCart();
+
+}
+
+function closeCart(){
+
+    document
+        .getElementById("cartPanel")
+        .classList.remove("active");
+
+    document
+        .getElementById("cartOverlay")
+        .classList.remove("active");
+
+}
+
+function addToCart(product){
+
+    const existing =
         cart.find(
             item =>
                 String(item.id) ===
+                String(product.id)
+        );
+
+    if(existing){
+
+        existing.quantity =
+            Number(existing.quantity || 0) + 1;
+
+    }else{
+
+        cart.push({
+
+            id: product.id,
+
+            name: product.name,
+
+            image: product.image,
+
+            price: Number(product.price || 0),
+
+            quantity: 1
+
+        });
+
+    }
+
+    saveCart();
+
+    renderCart();
+
+    showToast(
+        "محصول به سبد خرید اضافه شد"
+    );
+}
+
+function changeCartQuantity(id,delta){
+
+    const item =
+        cart.find(
+            product =>
+                String(product.id) ===
                 String(id)
         );
 
@@ -3672,23 +2670,21 @@ function changeQuantity(id,change){
         return;
     }
 
-    item.quantity += change;
+    item.quantity =
+        Number(item.quantity || 0) + delta;
 
     if(item.quantity <= 0){
 
         cart =
             cart.filter(
-                item =>
-                    String(item.id) !==
+                product =>
+                    String(product.id) !==
                     String(id)
             );
+
     }
 
     saveCart();
-
-    updateCartCount();
-
-    updateProductPageCartCount();
 
     renderCart();
 }
@@ -3704,320 +2700,541 @@ function removeFromCart(id){
 
     saveCart();
 
-    updateCartCount();
-
-    updateProductPageCartCount();
-
     renderCart();
 }
 
-function clearCart(){
+function renderCart(){
+
+    const container =
+        document.getElementById("cartItems");
+
+    const totalElement =
+        document.getElementById("cartTotal");
+
+    if(!container){
+        return;
+    }
 
     if(!cart.length){
+
+        container.innerHTML = `
+            <div class="empty-state">
+                سبد خرید شما خالی است.
+            </div>
+        `;
+
+        if(totalElement){
+            totalElement.textContent =
+                "۰ تومان";
+        }
+
         return;
+    }
+
+    let total = 0;
+
+    container.innerHTML =
+        cart.map(item => {
+
+            const itemTotal =
+                Number(item.price || 0) *
+                Number(item.quantity || 0);
+
+            total += itemTotal;
+
+            return `
+                <div class="cart-item">
+
+                    <img
+                        src="${item.image || ''}"
+                        alt="${item.name || ''}"
+                    >
+
+                    <div>
+
+                        <div class="cart-item-title">
+                            ${item.name || "محصول"}
+                        </div>
+
+                        <div class="cart-item-price">
+                            ${formatPrice(item.price)}
+                        </div>
+
+                        <div class="cart-item-controls">
+
+                            <button
+                                class="qty-btn"
+                                onclick="changeCartQuantity('${item.id}',-1)"
+                            >
+                                −
+                            </button>
+
+                            <span>
+                                ${Number(item.quantity || 0).toLocaleString("fa-IR")}
+                            </span>
+
+                            <button
+                                class="qty-btn"
+                                onclick="changeCartQuantity('${item.id}',1)"
+                            >
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="cart-item-remove"
+                        onclick="removeFromCart('${item.id}')"
+                    >
+                        حذف
+                    </button>
+
+                </div>
+            `;
+
+        }).join("");
+
+    if(totalElement){
+
+        totalElement.textContent =
+            formatPrice(total);
+
+    }
+}
+
+/* ================= PRODUCTS ================= */
+
+async function loadProducts(){
+
+    const grid =
+        document.getElementById("productsGrid");
+
+    if(!grid){
+        return;
+    }
+
+    grid.innerHTML = `
+        <div class="empty-state">
+            در حال بارگذاری محصولات...
+        </div>
+    `;
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from("products")
+            .select("*")
+            .order(
+                "created_at",
+                {
+                    ascending:false
+                }
+            );
+
+    if(error){
+
+        console.error(error);
+
+        grid.innerHTML = `
+            <div class="empty-state">
+                خطا در دریافت محصولات
+            </div>
+        `;
+
+        return;
+    }
+
+    products =
+        data || [];
+
+    renderProducts(
+        products
+    );
+}
+
+function renderProducts(list){
+
+    const grid =
+        document.getElementById("productsGrid");
+
+    if(!grid){
+        return;
+    }
+
+    if(!list.length){
+
+        grid.innerHTML = `
+            <div class="empty-state">
+                محصولی برای نمایش وجود ندارد.
+            </div>
+        `;
+
+        return;
+    }
+
+    grid.innerHTML =
+        list
+            .map(productCard)
+            .join("");
+
+}
+
+function productCard(product){
+
+    const price =
+        Number(product.price || 0);
+
+    return `
+        <article class="product-card">
+
+            <div class="product-image">
+
+                <img
+                    src="${product.image || ''}"
+                    alt="${product.name || ''}"
+                    loading="lazy"
+                >
+
+            </div>
+
+            <div class="product-info">
+
+                <span class="product-climate">
+                    ${product.climate || "عمومی"}
+                </span>
+
+                <h3 class="product-title">
+                    ${product.name || "محصول"}
+                </h3>
+
+                <p class="product-description">
+                    ${product.description || "بدون توضیحات"}
+                </p>
+
+                <div class="product-bottom">
+
+                    <span class="product-price">
+                        ${formatPrice(price)}
+                    </span>
+
+                    <button
+                        class="add-cart-btn"
+                        onclick='addToCart(${JSON.stringify(product).replace(/'/g,"&#39;")})'
+                        aria-label="افزودن به سبد"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+    `;
+}
+
+function filterClimate(climate){
+
+    const title =
+        document.getElementById(
+            "productsTitle"
+        );
+
+    const filtered =
+        products.filter(
+            product =>
+                product.climate === climate
+        );
+
+    if(title){
+
+        title.textContent =
+            "محصولات " + climate;
+
+    }
+
+    renderProducts(
+        filtered
+    );
+
+    document
+        .getElementById("products")
+        ?.scrollIntoView({
+            behavior:"smooth"
+        });
+}
+
+/* ================= CHECKOUT ================= */
+
+function openCheckout(){
+
+    if(!cart.length){
+
+        showToast(
+            "سبد خرید شما خالی است"
+        );
+
+        return;
+    }
+
+    document
+        .getElementById("checkoutModal")
+        .classList.add("active");
+
+}
+
+function closeCheckout(){
+
+    document
+        .getElementById("checkoutModal")
+        .classList.remove("active");
+
+}
+
+async function submitOrder(){
+
+    if(!cart.length){
+
+        showToast(
+            "سبد خرید شما خالی است"
+        );
+
+        return;
+    }
+
+    const customerName =
+        document
+            .getElementById("customerName")
+            .value
+            .trim();
+
+    const customerPhone =
+        document
+            .getElementById("customerPhone")
+            .value
+            .trim();
+
+    const customerAddress =
+        document
+            .getElementById("customerAddress")
+            .value
+            .trim();
+
+    if(!customerName){
+
+        showToast(
+            "نام را وارد کنید"
+        );
+
+        return;
+    }
+
+    if(!customerPhone){
+
+        showToast(
+            "شماره تماس را وارد کنید"
+        );
+
+        return;
+    }
+
+    if(!customerAddress){
+
+        showToast(
+            "آدرس را وارد کنید"
+        );
+
+        return;
+    }
+
+    const total =
+        cart.reduce(
+            (sum,item) =>
+                sum +
+                Number(item.price || 0) *
+                Number(item.quantity || 0),
+            0
+        );
+
+    const orderId =
+        Date.now();
+
+    const orderData = {
+
+        id: orderId,
+
+        customer_name:
+            customerName,
+
+        customer_phone:
+            customerPhone,
+
+        customer_address:
+            customerAddress,
+
+        items:
+            cart,
+
+        total_price:
+            total,
+
+        status:
+            "ثبت شده",
+
+        created_at:
+            new Date().toISOString()
+
+    };
+
+    const {
+        error
+    } =
+        await supabaseClient
+            .from("orders")
+            .insert(orderData);
+
+    if(error){
+
+        console.error(error);
+
+        showToast(
+            "خطا در ثبت سفارش: " +
+            error.message
+        );
+
+        return;
+    }
+
+    const orderItems =
+        cart.map(item => ({
+
+            order_id:
+                orderId,
+
+            product_id:
+                String(item.id),
+
+            quantity:
+                Number(item.quantity || 1),
+
+            unit_price:
+                Number(item.price || 0)
+
+        }));
+
+    const {
+        error:itemError
+    } =
+        await supabaseClient
+            .from("order_items")
+            .insert(orderItems);
+
+    if(itemError){
+
+        console.error(itemError);
+
+        showToast(
+            "سفارش ثبت شد ولی جزئیات سفارش ذخیره نشد."
+        );
+
     }
 
     cart = [];
 
     saveCart();
 
-    updateCartCount();
-
-    updateProductPageCartCount();
-
     renderCart();
 
+    closeCheckout();
+
+    document
+        .getElementById("customerName")
+        .value = "";
+
+    document
+        .getElementById("customerPhone")
+        .value = "";
+
+    document
+        .getElementById("customerAddress")
+        .value = "";
+
     showToast(
-        "سبد خرید خالی شد"
+        "سفارش شما با موفقیت ثبت شد"
     );
 }
 
-function openCart(){
+/* ================= ADMIN LOGIN ================= */
 
-    renderCart();
+function openAdminLogin(){
 
-    document.getElementById(
-        "cartPanel"
-    ).classList.add("active");
+    document
+        .getElementById("adminLoginOverlay")
+        .classList.add("active");
 
-    document.getElementById(
-        "cartOverlay"
-    ).classList.add("active");
-}
-
-function closeCart(){
-
-    document.getElementById(
-        "cartPanel"
-    ).classList.remove("active");
-
-    document.getElementById(
-        "cartOverlay"
-    ).classList.remove("active");
-}
-
-/* =====================================================
-CLIMATE
-===================================================== */
-
-function openClimate(climate){
-
-    const panel =
-        document.getElementById(
-            "climatePanel"
-        );
-
-    const title =
-        document.getElementById(
-            "climateTitle"
-        );
-
-    const grid =
-        document.getElementById(
-            "climateProducts"
-        );
-
-    title.textContent =
-        climate;
-
-    const list =
-        products.filter(
-            product =>
-                product.climate === climate
-        );
-
-    if(!list.length){
-
-        grid.innerHTML = `
-            <div class="no-products">
-                هنوز محصولی برای
-                ${escapeHtml(climate)}
-                ثبت نشده است.
-            </div>
-        `;
-
-    }else{
-
-        grid.innerHTML =
-            list.map(productCard).join("");
-    }
-
-    panel.classList.add("active");
-
-    document.body.classList.add("no-scroll");
-}
-
-function closeClimate(){
-
-    document.getElementById(
-        "climatePanel"
-    ).classList.remove("active");
-
-    document.body.classList.remove("no-scroll");
-}
-
-/* =====================================================
-MOBILE MENU
-===================================================== */
-
-function openMobileMenu(){
-
-    document.getElementById(
-        "mobileMenu"
-    ).classList.add("active");
-
-    document.getElementById(
-        "menuOverlay"
-    ).classList.add("active");
-}
-
-function closeMobileMenu(){
-
-    document.getElementById(
-        "mobileMenu"
-    ).classList.remove("active");
-
-    document.getElementById(
-        "menuOverlay"
-    ).classList.remove("active");
-}
-
-/* =====================================================
-SCROLL
-===================================================== */
-
-function scrollToStore(){
-
-    document.getElementById(
-        "store"
-    ).scrollIntoView({
-        behavior:"smooth"
-    });
-}
-
-/* =====================================================
-ADMIN AUTH
-===================================================== */
-
-async function getSession(){
-
-    const { data } =
-        await supabaseClient.auth.getSession();
-
-    return data.session;
-}
-
-async function checkAdmin(user){
-
-    if(!user){
-        return false;
-    }
-
-    const { data,error } =
-        await supabaseClient
-            .from("admin_users")
-            .select("user_id")
-            .eq("user_id",user.id)
-            .maybeSingle();
-
-    if(error){
-
-        console.error(error);
-
-        return false;
-    }
-
-    return !!data;
-}
-
-async function openAdmin(){
-
-    document.getElementById(
-        "adminPanel"
-    ).classList.add("active");
-
-    const session =
-        await getSession();
-
-    if(!session){
-
-        showAdminLogin();
-
-        return;
-    }
-
-    const isAdmin =
-        await checkAdmin(session.user);
-
-    if(!isAdmin){
-
-        await supabaseClient.auth.signOut();
-
-        showAdminLogin();
-
-        showToast(
-            "دسترسی مدیر ندارید"
-        );
-
-        return;
-    }
-
-    showAdminDashboard();
-}
-
-function closeAdmin(){
-
-    document.getElementById(
-        "adminPanel"
-    ).classList.remove("active");
-}
-
-function showAdminLogin(){
-
-    document.getElementById(
-        "adminLoginBox"
-    ).style.display = "flex";
-
-    document.getElementById(
-        "adminDashboard"
-    ).style.display = "none";
-}
-
-function showAdminDashboard(){
-
-    document.getElementById(
-        "adminLoginBox"
-    ).style.display = "none";
-
-    document.getElementById(
-        "adminDashboard"
-    ).style.display = "block";
-
-    loadAdminProducts();
 }
 
 async function adminLogin(){
 
-    const email =
-        document.getElementById(
-            "adminEmail"
-        ).value.trim();
-
     const password =
-        document.getElementById(
-            "adminPassword"
-        ).value;
+        document
+            .getElementById("adminPassword")
+            .value;
 
-    if(!email || !password){
+    if(!password){
 
         showToast(
-            "ایمیل و رمز عبور را وارد کنید"
+            "رمز عبور را وارد کنید"
         );
 
         return;
     }
 
-    const { data,error } =
-        await supabaseClient.auth
-            .signInWithPassword({
+    /*
+       رمز مدیریت در نسخه فعلی
+       از تنظیمات موجود سایت استفاده می‌شود.
+    */
 
-                email,
-                password
-            });
-
-    if(error){
-
-        console.error(error);
-
-        showToast(
-            "ایمیل یا رمز عبور اشتباه است"
+    const storedPassword =
+        localStorage.getItem(
+            "charaglim_admin_password"
         );
+
+    if(
+        storedPassword &&
+        password === storedPassword
+    ){
+
+        document
+            .getElementById("adminLoginOverlay")
+            .classList.remove("active");
+
+        document
+            .getElementById("adminPanel")
+            .classList.add("active");
+
+        await loadAdminProducts();
 
         return;
     }
-
-    const isAdmin =
-        await checkAdmin(data.user);
-
-    if(!isAdmin){
-
-        await supabaseClient.auth.signOut();
-
-        showToast(
-            "این حساب دسترسی مدیریت ندارد"
-        );
-
-        return;
-    }
-
-    showAdminDashboard();
 
     showToast(
-        "ورود موفق بود"
+        "رمز عبور اشتباه است"
     );
+    
 }
 
-async function adminLogout(){
+function adminLogout(){
+
+    document
+        .getElementById("adminPanel")
+        .classList.remove("active");
+
+}async function adminLogout(){
 
     await supabaseClient.auth.signOut();
 
@@ -4181,6 +3398,16 @@ function openProductForm(product=null){
             ? product.price
             : "";
 
+        document.getElementById(
+            "productDiscount"
+        ).value =
+            product.discount_percent ?? 0;
+
+        document.getElementById(
+            "productStock"
+        ).value =
+            product.stock_quantity ?? 0;
+
     }else{
 
         document.getElementById(
@@ -4212,6 +3439,14 @@ function openProductForm(product=null){
         document.getElementById(
             "productPrice"
         ).value = "";
+
+        document.getElementById(
+            "productDiscount"
+        ).value = 0;
+
+        document.getElementById(
+            "productStock"
+        ).value = 0;
     }
 }
 
@@ -4281,6 +3516,16 @@ async function saveProduct(){
             "productPrice"
         ).value.trim();
 
+    const discountValue =
+        document.getElementById(
+            "productDiscount"
+        ).value;
+
+    const stockValue =
+        document.getElementById(
+            "productStock"
+        ).value;
+
     if(!name){
 
         showToast(
@@ -4305,7 +3550,24 @@ async function saveProduct(){
         price:
             priceValue === ""
             ? null
-            : Number(priceValue)
+            : Number(priceValue),
+
+        discount_percent:
+            Math.min(
+                100,
+                Math.max(
+                    0,
+                    Number(discountValue) || 0
+                )
+            ),
+
+        stock_quantity:
+            Math.max(
+                0,
+                Math.floor(
+                    Number(stockValue) || 0
+                )
+            )
     };
 
     let error;
@@ -4411,6 +3673,782 @@ async function deleteProduct(id){
     );
 }
 
+
+/* =====================================================
+ONLINE SUPPORT
+===================================================== */
+
+let supportUser = null;
+let supportConversation = null;
+let supportChannel = null;
+
+let adminSupportConversation = null;
+let adminSupportChannel = null;
+
+function supportVisitorName(){
+
+    return localStorage.getItem(
+        "fourAghlimSupportName"
+    ) || "مشتری سایت";
+}
+
+async function ensureSupportAuth(){
+
+    try{
+
+        const {data} =
+            await supabaseClient.auth.getSession();
+
+        if(
+            data &&
+            data.session
+        ){
+
+            supportUser =
+                data.session.user;
+
+            return supportUser;
+        }
+
+        const result =
+            await supabaseClient.auth.signInAnonymously();
+
+        if(result.error)
+            throw result.error;
+
+        supportUser =
+            result.data.user;
+
+        return supportUser;
+
+    }catch(error){
+
+        console.error(
+            "Support auth error:",
+            error
+        );
+
+        return null;
+    }
+}
+
+async function toggleSupport(){
+
+    const win =
+        document.getElementById(
+            "supportWindow"
+        );
+
+    if(!win)
+        return;
+
+    const opening =
+        !win.classList.contains("active");
+
+    win.classList.toggle(
+        "active"
+    );
+
+    if(opening){
+
+        document.getElementById(
+            "supportBadge"
+        ).style.display =
+            "none";
+
+        await initSupport();
+
+        setTimeout(
+            () =>
+                document
+                    .getElementById("supportInput")
+                    ?.focus(),
+            150
+        );
+    }
+}
+
+async function initSupport(){
+
+    const status =
+        document.getElementById(
+            "supportStatus"
+        );
+
+    const offline =
+        document.getElementById(
+            "supportOfflineNote"
+        );
+
+    const user =
+        await ensureSupportAuth();
+
+    if(!user){
+
+        status.textContent =
+            "اتصال برقرار نشد";
+
+        offline.style.display =
+            "block";
+
+        return;
+    }
+
+    try{
+
+        let {data,error} =
+            await supabaseClient
+                .from(
+                    "support_conversations"
+                )
+                .select("*")
+                .eq(
+                    "user_id",
+                    user.id
+                )
+                .eq(
+                    "status",
+                    "open"
+                )
+                .order(
+                    "created_at",
+                    {
+                        ascending:false
+                    }
+                )
+                .limit(1);
+
+        if(error)
+            throw error;
+
+        if(
+            data &&
+            data.length
+        ){
+
+            supportConversation =
+                data[0];
+
+        }else{
+
+            const created =
+                await supabaseClient
+                    .from(
+                        "support_conversations"
+                    )
+                    .insert({
+
+                        user_id:
+                            user.id,
+
+                        visitor_name:
+                            supportVisitorName(),
+
+                        status:
+                            "open"
+
+                    })
+                    .select()
+                    .single();
+
+            if(created.error)
+                throw created.error;
+
+            supportConversation =
+                created.data;
+        }
+
+        status.textContent =
+            "پشتیبانی آنلاین";
+
+        offline.style.display =
+            "none";
+
+        await loadSupportMessages();
+
+        subscribeSupportRealtime();
+
+    }catch(error){
+
+        console.error(
+            "Support init error:",
+            error
+        );
+
+        status.textContent =
+            "پشتیبانی موقتاً در دسترس نیست";
+
+        offline.style.display =
+            "block";
+    }
+}
+
+async function loadSupportMessages(){
+
+    if(!supportConversation)
+        return;
+
+    const {data,error} =
+        await supabaseClient
+            .from(
+                "support_messages"
+            )
+            .select("*")
+            .eq(
+                "conversation_id",
+                supportConversation.id
+            )
+            .order(
+                "created_at",
+                {
+                    ascending:true
+                }
+            );
+
+    if(error){
+
+        console.error(error);
+
+        return;
+    }
+
+    renderSupportMessages(
+        data || [],
+        "supportMessages"
+    );
+}
+
+function renderSupportMessages(
+    messages,
+    containerId
+){
+
+    const container =
+        document.getElementById(
+            containerId
+        );
+
+    if(!container)
+        return;
+
+    if(!messages.length){
+
+        container.innerHTML = `
+            <div class="support-empty">
+                پیام‌ها اینجا نمایش داده می‌شوند.
+                <br>
+                چطور می‌توانیم کمکتان کنیم؟
+            </div>
+        `;
+
+        return;
+    }
+
+    container.innerHTML =
+        messages
+            .map(message => {
+
+                const side =
+                    message.sender_type ===
+                    "admin"
+                    ? "admin"
+                    : "customer";
+
+                const time =
+                    message.created_at
+                    ? new Date(
+                        message.created_at
+                    ).toLocaleTimeString(
+                        "fa-IR",
+                        {
+                            hour:"2-digit",
+                            minute:"2-digit"
+                        }
+                    )
+                    : "";
+
+                return `
+                    <div
+                        class="support-message ${side}"
+                    >
+                        ${escapeHtml(
+                            message.message
+                        )}
+
+                        <span
+                            class="support-message-time"
+                        >
+                            ${time}
+                        </span>
+                    </div>
+                `;
+
+            })
+            .join("");
+
+    container.scrollTop =
+        container.scrollHeight;
+}
+
+function subscribeSupportRealtime(){
+
+    if(!supportConversation)
+        return;
+
+    if(supportChannel){
+
+        supabaseClient.removeChannel(
+            supportChannel
+        );
+    }
+
+    supportChannel =
+        supabaseClient
+            .channel(
+                "support-user-" +
+                supportConversation.id
+            )
+            .on(
+                "postgres_changes",
+                {
+                    event:"INSERT",
+                    schema:"public",
+                    table:"support_messages",
+                    filter:
+                        "conversation_id=eq." +
+                        supportConversation.id
+                },
+                payload => {
+
+                    loadSupportMessages();
+
+                    if(
+                        payload.new.sender_type ===
+                        "admin"
+                    ){
+
+                        document
+                            .getElementById(
+                                "supportBadge"
+                            )
+                            .style.display =
+                            "block";
+                    }
+                }
+            )
+            .subscribe();
+}
+
+async function sendSupportMessage(){
+
+    const input =
+        document.getElementById(
+            "supportInput"
+        );
+
+    const message =
+        input.value.trim();
+
+    if(!message)
+        return;
+
+    if(
+        !supportUser ||
+        !supportConversation
+    ){
+
+        await initSupport();
+    }
+
+    if(
+        !supportUser ||
+        !supportConversation
+    ){
+
+        showToast(
+            "اتصال پشتیبانی برقرار نشد"
+        );
+
+        return;
+    }
+
+    input.value = "";
+
+    const {error} =
+        await supabaseClient
+            .from(
+                "support_messages"
+            )
+            .insert({
+
+                conversation_id:
+                    supportConversation.id,
+
+                user_id:
+                    supportUser.id,
+
+                sender_type:
+                    "customer",
+
+                message
+
+            });
+
+    if(error){
+
+        console.error(error);
+
+        input.value =
+            message;
+
+        showToast(
+            "پیام ارسال نشد"
+        );
+
+        return;
+    }
+
+    await supabaseClient
+        .from(
+            "support_conversations"
+        )
+        .update({
+
+            updated_at:
+                new Date().toISOString(),
+
+            last_message:
+                message
+
+        })
+        .eq(
+            "id",
+            supportConversation.id
+        )
+        .eq(
+            "user_id",
+            supportUser.id
+        );
+
+    await loadSupportMessages();
+}
+
+function supportInputKeydown(event){
+
+    if(
+        event.key === "Enter" &&
+        !event.shiftKey
+    ){
+
+        event.preventDefault();
+
+        sendSupportMessage();
+    }
+}
+
+/* ================= ADMIN SUPPORT ================= */
+
+async function loadAdminConversations(){
+
+    const container =
+        document.getElementById(
+            "adminConversations"
+        );
+
+    if(!container)
+        return;
+
+    container.innerHTML = `
+        <div class="no-products">
+            در حال دریافت گفتگوها...
+        </div>
+    `;
+
+    const {data,error} =
+        await supabaseClient
+            .from(
+                "support_conversations"
+            )
+            .select("*")
+            .order(
+                "updated_at",
+                {
+                    ascending:false
+                }
+            );
+
+    if(error){
+
+        console.error(error);
+
+        container.innerHTML = `
+            <div class="no-products">
+                خطا در دریافت گفتگوها
+            </div>
+        `;
+
+        return;
+    }
+
+    if(
+        !data ||
+        !data.length
+    ){
+
+        container.innerHTML = `
+            <div class="no-products">
+                هنوز گفتگویی وجود ندارد.
+            </div>
+        `;
+
+        return;
+    }
+
+    container.innerHTML =
+        data
+            .map(conversation => {
+
+                const active =
+                    adminSupportConversation &&
+                    adminSupportConversation.id ===
+                    conversation.id
+                    ? "active"
+                    : "";
+
+                const last =
+                    conversation.last_message ||
+                    "بدون پیام";
+
+                return `
+                    <button
+                        class="admin-conversation ${active}"
+                        onclick="selectAdminConversation('${conversation.id}')"
+                    >
+
+                        <strong>
+                            ${escapeHtml(
+                                conversation.visitor_name ||
+                                "مشتری"
+                            )}
+                        </strong>
+
+                        <span>
+                            ${escapeHtml(last)}
+                        </span>
+
+                    </button>
+                `;
+
+            })
+            .join("");
+}
+
+async function selectAdminConversation(id){
+
+    const {data,error} =
+        await supabaseClient
+            .from(
+                "support_conversations"
+            )
+            .select("*")
+            .eq(
+                "id",
+                id
+            )
+            .single();
+
+    if(error){
+
+        console.error(error);
+
+        return;
+    }
+
+    adminSupportConversation =
+        data;
+
+    document.getElementById(
+        "adminChatTitle"
+    ).textContent =
+        data.visitor_name ||
+        "مشتری";
+
+    await loadAdminConversationMessages();
+
+    await loadAdminConversations();
+
+    subscribeAdminSupportRealtime();
+}
+
+async function loadAdminConversationMessages(){
+
+    if(!adminSupportConversation)
+        return;
+
+    const {data,error} =
+        await supabaseClient
+            .from(
+                "support_messages"
+            )
+            .select("*")
+            .eq(
+                "conversation_id",
+                adminSupportConversation.id
+            )
+            .order(
+                "created_at",
+                {
+                    ascending:true
+                }
+            );
+
+    if(error){
+
+        console.error(error);
+
+        return;
+    }
+
+    renderSupportMessages(
+        data || [],
+        "adminChatMessages"
+    );
+}
+
+function subscribeAdminSupportRealtime(){
+
+    if(!adminSupportConversation)
+        return;
+
+    if(adminSupportChannel){
+
+        supabaseClient.removeChannel(
+            adminSupportChannel
+        );
+    }
+
+    adminSupportChannel =
+        supabaseClient
+            .channel(
+                "support-admin-" +
+                adminSupportConversation.id
+            )
+            .on(
+                "postgres_changes",
+                {
+                    event:"INSERT",
+                    schema:"public",
+                    table:"support_messages",
+                    filter:
+                        "conversation_id=eq." +
+                        adminSupportConversation.id
+                },
+                () =>
+                    loadAdminConversationMessages()
+            )
+            .subscribe();
+}
+
+async function sendAdminSupportMessage(){
+
+    const input =
+        document.getElementById(
+            "adminSupportInput"
+        );
+
+    const message =
+        input.value.trim();
+
+    if(
+        !message ||
+        !adminSupportConversation
+    )
+        return;
+
+    const session =
+        await getSession();
+
+    if(!session){
+
+        showToast(
+            "ابتدا وارد مدیریت شوید"
+        );
+
+        return;
+    }
+
+    input.value = "";
+
+    const {error} =
+        await supabaseClient
+            .from(
+                "support_messages"
+            )
+            .insert({
+
+                conversation_id:
+                    adminSupportConversation.id,
+
+                user_id:
+                    session.user.id,
+
+                sender_type:
+                    "admin",
+
+                message
+
+            });
+
+    if(error){
+
+        console.error(error);
+
+        input.value =
+            message;
+
+        showToast(
+            "پاسخ ارسال نشد"
+        );
+
+        return;
+    }
+
+    await supabaseClient
+        .from(
+            "support_conversations"
+        )
+        .update({
+
+            updated_at:
+                new Date().toISOString(),
+
+            last_message:
+                message
+
+        })
+        .eq(
+            "id",
+            adminSupportConversation.id
+        );
+
+    await loadAdminConversationMessages();
+
+    await loadAdminConversations();
+}
+
+function adminSupportInputKeydown(event){
+
+    if(
+        event.key === "Enter" &&
+        !event.shiftKey
+    ){
+
+        event.preventDefault();
+
+        sendAdminSupportMessage();
+    }
+}
+
 /* =====================================================
 KEYBOARD
 ===================================================== */
@@ -4419,14 +4457,22 @@ document.addEventListener(
     "keydown",
     function(event){
 
-        if(event.key === "Escape"){
+        if(
+            event.key === "Escape"
+        ){
 
             closeProductPage();
+
             closeCart();
+
             closeClimate();
+
             closeMobileMenu();
+
             closeClimateFilter();
+
         }
+
     }
 );
 
@@ -4452,4 +4498,4 @@ document.addEventListener(
 </script>
 
 </body>
-  </html>
+</html>
