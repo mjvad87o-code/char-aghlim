@@ -841,6 +841,31 @@ section{
 
 /* ================= PRODUCT CARD ================= */
 
+.discount-badge{
+    position:absolute;
+    top:12px;
+    right:12px;
+    z-index:3;
+    background:#d32f2f;
+    color:#fff;
+    padding:6px 10px;
+    border-radius:999px;
+    font-size:11px;
+    font-weight:800;
+}
+
+.product-old-price{
+    color:#888;
+    text-decoration:line-through;
+    font-size:11px;
+    margin-left:6px;
+}
+
+.product-new-price{
+    color:var(--green2);
+    font-weight:800;
+}
+
 .product-card{
     background:white;
     border-radius:18px;
@@ -1993,6 +2018,227 @@ footer p{
         height:285px;
     }
 }
+
+
+/* ================= ONLINE SUPPORT ================= */
+
+.support-fab{
+    position:fixed;
+    left:22px;
+    bottom:22px;
+    width:58px;
+    height:58px;
+    border:0;
+    border-radius:50%;
+    background:var(--green);
+    color:white;
+    box-shadow:0 12px 30px rgba(16,60,43,.28);
+    z-index:6200;
+    font-size:24px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.2s;
+}
+
+.support-fab:hover{ transform:translateY(-2px); }
+
+.support-badge{
+    position:absolute;
+    top:-2px;
+    right:-2px;
+    width:17px;
+    height:17px;
+    border-radius:50%;
+    background:#d65b5b;
+    border:2px solid white;
+    display:none;
+}
+
+.support-window{
+    position:fixed;
+    left:22px;
+    bottom:92px;
+    width:min(380px,calc(100vw - 28px));
+    height:min(590px,calc(100vh - 125px));
+    background:white;
+    border-radius:24px;
+    box-shadow:0 25px 70px rgba(0,0,0,.20);
+    overflow:hidden;
+    z-index:6100;
+    display:none;
+    flex-direction:column;
+    border:1px solid #e4e9e4;
+}
+
+.support-window.active{ display:flex; }
+
+.support-head{
+    background:var(--green);
+    color:white;
+    padding:16px 17px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.support-head-info{ display:flex; align-items:center; gap:10px; }
+.support-avatar{
+    width:42px;height:42px;border-radius:50%;
+    background:rgba(255,255,255,.13);
+    display:flex;align-items:center;justify-content:center;font-size:20px;
+}
+.support-head strong{ display:block; font-size:14px; }
+.support-status{ font-size:11px; opacity:.75; margin-top:3px; }
+.support-close{ border:0;background:transparent;color:white;font-size:25px;width:35px;height:35px; }
+
+.support-messages{
+    flex:1;
+    overflow-y:auto;
+    padding:16px;
+    background:#f6f8f5;
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+}
+
+.support-empty{
+    margin:auto;
+    text-align:center;
+    color:var(--gray);
+    font-size:13px;
+    line-height:1.9;
+}
+
+.support-message{
+    max-width:84%;
+    padding:10px 12px;
+    border-radius:15px;
+    font-size:13px;
+    line-height:1.8;
+    word-break:break-word;
+}
+.support-message.customer{
+    align-self:flex-end;
+    background:var(--green);
+    color:white;
+    border-bottom-right-radius:5px;
+}
+.support-message.admin{
+    align-self:flex-start;
+    background:white;
+    color:var(--text);
+    border:1px solid #e5eae5;
+    border-bottom-left-radius:5px;
+}
+.support-message-time{
+    display:block;
+    font-size:9px;
+    opacity:.6;
+    margin-top:3px;
+}
+
+.support-compose{
+    padding:10px;
+    background:white;
+    border-top:1px solid #e5e9e5;
+    display:flex;
+    gap:8px;
+}
+.support-compose textarea{
+    flex:1;
+    resize:none;
+    min-height:44px;
+    max-height:100px;
+    border:1px solid #dce3dc;
+    border-radius:13px;
+    padding:10px 12px;
+    outline:none;
+    font-size:13px;
+}
+.support-send{
+    width:46px;
+    border:0;
+    border-radius:13px;
+    background:var(--green);
+    color:white;
+    font-size:18px;
+}
+
+/* ================= ADMIN SUPPORT ================= */
+
+.admin-support{
+    margin-top:25px;
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    box-shadow:0 5px 18px rgba(0,0,0,.05);
+}
+.admin-support h3{ margin-bottom:15px; }
+.admin-support-layout{
+    display:grid;
+    grid-template-columns:280px 1fr;
+    gap:15px;
+    min-height:430px;
+}
+.admin-conversations{
+    border:1px solid #e3e8e3;
+    border-radius:15px;
+    overflow-y:auto;
+    background:#fafcf9;
+}
+.admin-conversation{
+    padding:13px;
+    border:0;
+    border-bottom:1px solid #e8ece8;
+    width:100%;
+    background:transparent;
+    text-align:right;
+    cursor:pointer;
+}
+.admin-conversation.active{ background:#e6efe7; }
+.admin-conversation strong{ display:block;font-size:13px;margin-bottom:4px; }
+.admin-conversation span{ display:block;color:var(--gray);font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+.admin-chat{
+    border:1px solid #e3e8e3;
+    border-radius:15px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    min-width:0;
+}
+.admin-chat-head{
+    padding:13px 15px;
+    border-bottom:1px solid #e3e8e3;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.admin-chat-head strong{font-size:13px;}
+.admin-chat-messages{
+    flex:1;
+    min-height:300px;
+    max-height:390px;
+    overflow-y:auto;
+    padding:14px;
+    background:#f7f9f6;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+.admin-chat-compose{ display:flex;gap:8px;padding:10px;border-top:1px solid #e3e8e3; }
+.admin-chat-compose textarea{flex:1;resize:none;border:1px solid #dce3dc;border-radius:11px;padding:9px;min-height:42px;}
+.admin-chat-compose button{border:0;border-radius:11px;background:var(--green);color:white;padding:0 16px;}
+.support-offline-note{font-size:11px;color:var(--gray);padding:8px 12px;text-align:center;background:#f7f8f6;}
+
+@media(max-width:700px){
+    .support-fab{left:15px;bottom:15px;width:54px;height:54px;}
+    .support-window{left:14px;bottom:80px;width:calc(100vw - 28px);height:min(570px,calc(100vh - 100px));}
+    .admin-support-layout{grid-template-columns:1fr;}
+    .admin-conversations{max-height:170px;}
+    .admin-chat-messages{max-height:none;}
+}
+
 </style>
 </head>
 
@@ -2747,6 +2993,29 @@ class="admin-products"
 id="adminProducts"
 ></div>
 
+<div class="admin-support" id="adminSupportSection">
+    <h3>پشتیبانی آنلاین</h3>
+    <div class="admin-support-layout">
+        <div class="admin-conversations" id="adminConversations">
+            <div class="no-products">در حال دریافت گفتگوها...</div>
+        </div>
+        <div class="admin-chat">
+            <div class="admin-chat-head">
+                <strong id="adminChatTitle">یک گفتگو را انتخاب کنید</strong>
+                <button class="admin-small-btn" style="padding:8px 11px" onclick="loadAdminConversations()">↻</button>
+            </div>
+            <div class="admin-chat-messages" id="adminChatMessages">
+                <div class="support-empty">برای پاسخ‌دادن، یک گفتگو را انتخاب کنید.</div>
+            </div>
+            <div class="admin-chat-compose">
+                <textarea id="adminSupportInput" rows="1" placeholder="پاسخ به مشتری..." onkeydown="adminSupportInputKeydown(event)"></textarea>
+                <button onclick="sendAdminSupportMessage()">ارسال</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 </div>
 </div>
 
@@ -2841,6 +3110,20 @@ min="0"
 placeholder="150000"
 >
 
+<label class="form-label">
+درصد تخفیف
+</label>
+
+<input
+class="form-input"
+id="productDiscount"
+type="number"
+min="0"
+max="100"
+value="0"
+placeholder="مثلاً 20"
+>
+
 <div class="form-buttons">
 
 <button
@@ -2860,6 +3143,41 @@ onclick="closeProductForm()"
 </div>
 
 </div>
+</div>
+
+
+
+<!-- ================= ONLINE SUPPORT ================= -->
+
+<button class="support-fab" id="supportFab" onclick="toggleSupport()" aria-label="پشتیبانی آنلاین">
+    💬
+    <span class="support-badge" id="supportBadge"></span>
+</button>
+
+<div class="support-window" id="supportWindow">
+    <div class="support-head">
+        <div class="support-head-info">
+            <div class="support-avatar">🎧</div>
+            <div>
+                <strong>پشتیبانی چهار اقلیم</strong>
+                <div class="support-status" id="supportStatus">در حال اتصال...</div>
+            </div>
+        </div>
+        <button class="support-close" onclick="toggleSupport()">×</button>
+    </div>
+
+    <div class="support-messages" id="supportMessages">
+        <div class="support-empty">برای ارتباط با پشتیبانی،<br>پیام خود را بنویسید.</div>
+    </div>
+
+    <div class="support-offline-note" id="supportOfflineNote" style="display:none">
+        برای ارسال پیام، اتصال اینترنت و سرویس پشتیبانی باید فعال باشد.
+    </div>
+
+    <div class="support-compose">
+        <textarea id="supportInput" rows="1" placeholder="پیام خود را بنویسید..." onkeydown="supportInputKeydown(event)"></textarea>
+        <button class="support-send" onclick="sendSupportMessage()" aria-label="ارسال">➤</button>
+    </div>
 </div>
 
 <!-- ================= TOAST ================= -->
@@ -3142,6 +3460,12 @@ class="product-card"
 onclick="openProductPage('${product.id}')"
 >
 
+${Number(product.discount_percent || 0) > 0 ? `
+<div class="discount-badge">
+${Number(product.discount_percent)}٪ تخفیف
+</div>
+` : ""}
+
 <div class="product-image">
 
 <img
@@ -3174,7 +3498,12 @@ ${description}
 </div>
 
 <div class="product-price">
-${formatPrice(product.price)}
+${Number(product.discount_percent || 0) > 0 && hasPrice(product.price)
+    ? `
+        <span class="product-old-price">${formatPrice(product.price)}</span>
+        <span class="product-new-price">${formatPrice(Math.round(Number(product.price) * (1 - Number(product.discount_percent) / 100)) )}</span>
+      `
+    : formatPrice(product.price)}
 </div>
 
 <button
@@ -3341,10 +3670,15 @@ function openProductPage(id){
         product.description ||
         "توضیحی برای این محصول ثبت نشده است.";
 
+    const pageFinalPrice =
+        Number(product.discount_percent || 0) > 0 && hasPrice(product.price)
+        ? Math.round(Number(product.price) * (1 - Number(product.discount_percent) / 100))
+        : product.price;
+
     document.getElementById(
         "pagePrice"
     ).textContent =
-        formatPrice(product.price);
+        formatPrice(pageFinalPrice);
 
     updateProductPageCartCount();
 
@@ -3954,6 +4288,7 @@ function showAdminDashboard(){
     ).style.display = "block";
 
     loadAdminProducts();
+    loadAdminConversations();
 }
 
 async function adminLogin(){
@@ -4181,6 +4516,11 @@ function openProductForm(product=null){
             ? product.price
             : "";
 
+        document.getElementById(
+            "productDiscount"
+        ).value =
+            product.discount_percent ?? 0;
+
     }else{
 
         document.getElementById(
@@ -4212,6 +4552,10 @@ function openProductForm(product=null){
         document.getElementById(
             "productPrice"
         ).value = "";
+
+        document.getElementById(
+            "productDiscount"
+        ).value = 0;
     }
 }
 
@@ -4281,6 +4625,11 @@ async function saveProduct(){
             "productPrice"
         ).value.trim();
 
+    const discountValue =
+        document.getElementById(
+            "productDiscount"
+        ).value.trim();
+
     if(!name){
 
         showToast(
@@ -4305,7 +4654,10 @@ async function saveProduct(){
         price:
             priceValue === ""
             ? null
-            : Number(priceValue)
+            : Number(priceValue),
+
+        discount_percent:
+            Math.min(100, Math.max(0, Number(discountValue) || 0))
     };
 
     let error;
@@ -4409,6 +4761,347 @@ async function deleteProduct(id){
     showToast(
         "محصول حذف شد"
     );
+}
+
+
+
+/* =====================================================
+ONLINE SUPPORT
+===================================================== */
+
+let supportUser = null;
+let supportConversation = null;
+let supportChannel = null;
+let adminSupportConversation = null;
+let adminSupportChannel = null;
+
+function supportVisitorName(){
+    return localStorage.getItem("fourAghlimSupportName") || "مشتری سایت";
+}
+
+async function ensureSupportAuth(){
+    try{
+        const {data} = await supabaseClient.auth.getSession();
+        if(data && data.session){
+            supportUser = data.session.user;
+            return supportUser;
+        }
+
+        const result = await supabaseClient.auth.signInAnonymously();
+        if(result.error) throw result.error;
+
+        supportUser = result.data.user;
+        return supportUser;
+    }catch(error){
+        console.error("Support auth error:",error);
+        return null;
+    }
+}
+
+async function toggleSupport(){
+    const win = document.getElementById("supportWindow");
+    if(!win) return;
+
+    const opening = !win.classList.contains("active");
+    win.classList.toggle("active");
+
+    if(opening){
+        document.getElementById("supportBadge").style.display="none";
+        await initSupport();
+        setTimeout(()=>document.getElementById("supportInput")?.focus(),150);
+    }
+}
+
+async function initSupport(){
+    const status = document.getElementById("supportStatus");
+    const offline = document.getElementById("supportOfflineNote");
+
+    const user = await ensureSupportAuth();
+    if(!user){
+        status.textContent = "اتصال برقرار نشد";
+        offline.style.display = "block";
+        return;
+    }
+
+    try{
+        let {data,error} = await supabaseClient
+            .from("support_conversations")
+            .select("*")
+            .eq("user_id",user.id)
+            .eq("status","open")
+            .order("created_at",{ascending:false})
+            .limit(1);
+
+        if(error) throw error;
+
+        if(data && data.length){
+            supportConversation = data[0];
+        }else{
+            const created = await supabaseClient
+                .from("support_conversations")
+                .insert({
+                    user_id:user.id,
+                    visitor_name:supportVisitorName(),
+                    status:"open"
+                })
+                .select()
+                .single();
+            if(created.error) throw created.error;
+            supportConversation = created.data;
+        }
+
+        status.textContent = "پشتیبانی آنلاین";
+        offline.style.display = "none";
+        await loadSupportMessages();
+        subscribeSupportRealtime();
+    }catch(error){
+        console.error("Support init error:",error);
+        status.textContent = "پشتیبانی موقتاً در دسترس نیست";
+        offline.style.display = "block";
+    }
+}
+
+async function loadSupportMessages(){
+    if(!supportConversation) return;
+
+    const {data,error} = await supabaseClient
+        .from("support_messages")
+        .select("*")
+        .eq("conversation_id",supportConversation.id)
+        .order("created_at",{ascending:true});
+
+    if(error){
+        console.error(error);
+        return;
+    }
+
+    renderSupportMessages(data || [],"supportMessages");
+}
+
+function renderSupportMessages(messages,containerId){
+    const container=document.getElementById(containerId);
+    if(!container) return;
+
+    if(!messages.length){
+        container.innerHTML=`<div class="support-empty">پیام‌ها اینجا نمایش داده می‌شوند.<br>چطور می‌توانیم کمکتان کنیم؟</div>`;
+        return;
+    }
+
+    container.innerHTML=messages.map(message=>{
+        const side=message.sender_type === "admin" ? "admin" : "customer";
+        const time=message.created_at
+            ? new Date(message.created_at).toLocaleTimeString("fa-IR",{hour:"2-digit",minute:"2-digit"})
+            : "";
+        return `<div class="support-message ${side}">
+            ${escapeHtml(message.message)}
+            <span class="support-message-time">${time}</span>
+        </div>`;
+    }).join("");
+
+    container.scrollTop=container.scrollHeight;
+}
+
+function subscribeSupportRealtime(){
+    if(!supportConversation) return;
+
+    if(supportChannel){
+        supabaseClient.removeChannel(supportChannel);
+    }
+
+    supportChannel=supabaseClient
+        .channel("support-user-"+supportConversation.id)
+        .on("postgres_changes",{
+            event:"INSERT",
+            schema:"public",
+            table:"support_messages",
+            filter:"conversation_id=eq."+supportConversation.id
+        },payload=>{
+            loadSupportMessages();
+            if(payload.new.sender_type === "admin"){
+                document.getElementById("supportBadge").style.display="block";
+            }
+        })
+        .subscribe();
+}
+
+async function sendSupportMessage(){
+    const input=document.getElementById("supportInput");
+    const message=input.value.trim();
+    if(!message) return;
+
+    if(!supportUser || !supportConversation){
+        await initSupport();
+    }
+    if(!supportUser || !supportConversation){
+        showToast("اتصال پشتیبانی برقرار نشد");
+        return;
+    }
+
+    input.value="";
+
+    const {error}=await supabaseClient
+        .from("support_messages")
+        .insert({
+            conversation_id:supportConversation.id,
+            user_id:supportUser.id,
+            sender_type:"customer",
+            message
+        });
+
+    if(error){
+        console.error(error);
+        input.value=message;
+        showToast("پیام ارسال نشد");
+        return;
+    }
+
+    await supabaseClient
+        .from("support_conversations")
+        .update({updated_at:new Date().toISOString(),last_message:message})
+        .eq("id",supportConversation.id)
+        .eq("user_id",supportUser.id);
+
+    await loadSupportMessages();
+}
+
+function supportInputKeydown(event){
+    if(event.key === "Enter" && !event.shiftKey){
+        event.preventDefault();
+        sendSupportMessage();
+    }
+}
+
+/* ================= ADMIN SUPPORT ================= */
+
+async function loadAdminConversations(){
+    const container=document.getElementById("adminConversations");
+    if(!container) return;
+
+    container.innerHTML=`<div class="no-products">در حال دریافت گفتگوها...</div>`;
+
+    const {data,error}=await supabaseClient
+        .from("support_conversations")
+        .select("*")
+        .order("updated_at",{ascending:false});
+
+    if(error){
+        console.error(error);
+        container.innerHTML=`<div class="no-products">خطا در دریافت گفتگوها</div>`;
+        return;
+    }
+
+    if(!data || !data.length){
+        container.innerHTML=`<div class="no-products">هنوز گفتگویی وجود ندارد.</div>`;
+        return;
+    }
+
+    container.innerHTML=data.map(conversation=>{
+        const active=adminSupportConversation && adminSupportConversation.id===conversation.id ? "active" : "";
+        const last=conversation.last_message || "بدون پیام";
+        return `<button class="admin-conversation ${active}" onclick="selectAdminConversation('${conversation.id}')">
+            <strong>${escapeHtml(conversation.visitor_name || "مشتری")}</strong>
+            <span>${escapeHtml(last)}</span>
+        </button>`;
+    }).join("");
+}
+
+async function selectAdminConversation(id){
+    const {data,error}=await supabaseClient
+        .from("support_conversations")
+        .select("*")
+        .eq("id",id)
+        .single();
+
+    if(error){
+        console.error(error);
+        return;
+    }
+
+    adminSupportConversation=data;
+    document.getElementById("adminChatTitle").textContent=data.visitor_name || "مشتری";
+    await loadAdminConversationMessages();
+    await loadAdminConversations();
+    subscribeAdminSupportRealtime();
+}
+
+async function loadAdminConversationMessages(){
+    if(!adminSupportConversation) return;
+
+    const {data,error}=await supabaseClient
+        .from("support_messages")
+        .select("*")
+        .eq("conversation_id",adminSupportConversation.id)
+        .order("created_at",{ascending:true});
+
+    if(error){
+        console.error(error);
+        return;
+    }
+
+    renderSupportMessages(data || [],"adminChatMessages");
+}
+
+function subscribeAdminSupportRealtime(){
+    if(!adminSupportConversation) return;
+
+    if(adminSupportChannel){
+        supabaseClient.removeChannel(adminSupportChannel);
+    }
+
+    adminSupportChannel=supabaseClient
+        .channel("support-admin-"+adminSupportConversation.id)
+        .on("postgres_changes",{
+            event:"INSERT",
+            schema:"public",
+            table:"support_messages",
+            filter:"conversation_id=eq."+adminSupportConversation.id
+        },()=>loadAdminConversationMessages())
+        .subscribe();
+}
+
+async function sendAdminSupportMessage(){
+    const input=document.getElementById("adminSupportInput");
+    const message=input.value.trim();
+    if(!message || !adminSupportConversation) return;
+
+    const session=await getSession();
+    if(!session){
+        showToast("ابتدا وارد مدیریت شوید");
+        return;
+    }
+
+    input.value="";
+
+    const {error}=await supabaseClient
+        .from("support_messages")
+        .insert({
+            conversation_id:adminSupportConversation.id,
+            user_id:session.user.id,
+            sender_type:"admin",
+            message
+        });
+
+    if(error){
+        console.error(error);
+        input.value=message;
+        showToast("پاسخ ارسال نشد");
+        return;
+    }
+
+    await supabaseClient
+        .from("support_conversations")
+        .update({updated_at:new Date().toISOString(),last_message:message})
+        .eq("id",adminSupportConversation.id);
+
+    await loadAdminConversationMessages();
+    await loadAdminConversations();
+}
+
+function adminSupportInputKeydown(event){
+    if(event.key === "Enter" && !event.shiftKey){
+        event.preventDefault();
+        sendAdminSupportMessage();
+    }
 }
 
 /* =====================================================
