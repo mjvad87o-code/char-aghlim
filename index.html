@@ -841,31 +841,6 @@ section{
 
 /* ================= PRODUCT CARD ================= */
 
-.discount-badge{
-    position:absolute;
-    top:12px;
-    right:12px;
-    z-index:3;
-    background:#d32f2f;
-    color:#fff;
-    padding:6px 10px;
-    border-radius:999px;
-    font-size:11px;
-    font-weight:800;
-}
-
-.product-old-price{
-    color:#888;
-    text-decoration:line-through;
-    font-size:11px;
-    margin-left:6px;
-}
-
-.product-new-price{
-    color:var(--green2);
-    font-weight:800;
-}
-
 .product-card{
     background:white;
     border-radius:18px;
@@ -2239,6 +2214,87 @@ footer p{
     .admin-chat-messages{max-height:none;}
 }
 
+
+/* ================= FOUR AGHLIM ADMIN ADDITIONS ================= */
+.discount-badge{
+    position:absolute;
+    top:12px;
+    right:12px;
+    background:#d84b4b;
+    color:#fff;
+    padding:5px 9px;
+    border-radius:18px;
+    font-size:12px;
+    font-weight:700;
+    z-index:3;
+}
+.product-image{position:relative;}
+.product-old-price{
+    color:#888;
+    text-decoration:line-through;
+    font-size:12px;
+    margin-left:6px;
+}
+.product-sale-price{font-weight:700;}
+.admin-extra-panel{
+    margin-top:18px;
+    padding:18px;
+    border-radius:16px;
+    background:rgba(16,60,43,.04);
+    border:1px solid rgba(16,60,43,.12);
+}
+.admin-extra-panel h3{margin:0 0 14px;}
+.admin-stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:10px;
+}
+.admin-stat-card{
+    padding:14px;
+    border-radius:14px;
+    background:#fff;
+    border:1px solid rgba(0,0,0,.08);
+}
+.admin-stat-card strong{display:block;font-size:20px;margin-top:5px;}
+.admin-orders-list{display:grid;gap:10px;}
+.admin-order{
+    background:#fff;
+    border:1px solid rgba(0,0,0,.08);
+    border-radius:14px;
+    padding:14px;
+}
+.admin-order-head{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    align-items:center;
+    flex-wrap:wrap;
+}
+.admin-order-items{margin-top:10px;font-size:13px;line-height:1.9;}
+.admin-order-actions{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap;}
+.admin-order-actions select{padding:7px;border-radius:8px;border:1px solid #ddd;}
+.checkout-modal{
+    position:fixed;inset:0;background:rgba(0,0,0,.45);
+    display:none;align-items:center;justify-content:center;
+    z-index:7000;padding:18px;
+}
+.checkout-modal.active{display:flex;}
+.checkout-box{
+    width:min(520px,100%);background:#fff;border-radius:18px;
+    padding:20px;max-height:90vh;overflow:auto;
+}
+.checkout-box h3{margin-top:0;}
+.checkout-box input,.checkout-box textarea{
+    width:100%;box-sizing:border-box;padding:11px;margin:6px 0 12px;
+    border:1px solid #ddd;border-radius:10px;font-family:inherit;
+}
+.checkout-actions{display:flex;gap:8px;}
+.checkout-actions button{flex:1;padding:11px;border:0;border-radius:10px;cursor:pointer;}
+.checkout-submit{background:var(--green);color:#fff;}
+.checkout-cancel{background:#eee;}
+@media(max-width:800px){
+    .admin-stats-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
 </style>
 </head>
 
@@ -2864,6 +2920,13 @@ id="cartSummary"
 
 <button
 class="clear-cart"
+onclick="openCheckout()"
+>
+ثبت سفارش
+</button>
+
+<button
+class="clear-cart"
 onclick="clearCart()"
 >
 خالی کردن سبد
@@ -3016,6 +3079,23 @@ id="adminProducts"
 </div>
 
 
+
+<div class="admin-extra-panel" id="adminStatsSection">
+    <h3>آمار فروش و بازدید</h3>
+    <div class="admin-stats-grid">
+        <div class="admin-stat-card">بازدید محصولات<strong id="adminViewsCount">۰</strong></div>
+        <div class="admin-stat-card">سفارش‌ها<strong id="adminOrdersCount">۰</strong></div>
+        <div class="admin-stat-card">فروش ثبت‌شده<strong id="adminSalesCount">۰</strong></div>
+        <div class="admin-stat-card">مبلغ فروش<strong id="adminRevenue">۰ تومان</strong></div>
+    </div>
+</div>
+
+<div class="admin-extra-panel" id="adminOrdersSection">
+    <h3>مدیریت سفارش‌های مشتریان</h3>
+    <div class="admin-orders-list" id="adminOrdersList">
+        <div class="no-products">در حال دریافت سفارش‌ها...</div>
+    </div>
+</div>
 </div>
 </div>
 
@@ -3109,7 +3189,6 @@ type="number"
 min="0"
 placeholder="150000"
 >
-
 <label class="form-label">
 درصد تخفیف
 </label>
@@ -3122,6 +3201,20 @@ min="0"
 max="100"
 value="0"
 placeholder="مثلاً 20"
+>
+
+<label class="form-label">
+موجودی محصول
+</label>
+
+<input
+class="form-input"
+id="productStock"
+type="number"
+min="0"
+step="1"
+value="0"
+placeholder="مثلاً 15"
 >
 
 <div class="form-buttons">
@@ -3177,6 +3270,29 @@ onclick="closeProductForm()"
     <div class="support-compose">
         <textarea id="supportInput" rows="1" placeholder="پیام خود را بنویسید..." onkeydown="supportInputKeydown(event)"></textarea>
         <button class="support-send" onclick="sendSupportMessage()" aria-label="ارسال">➤</button>
+    </div>
+</div>
+
+
+<!-- ================= CHECKOUT ================= -->
+<div class="checkout-modal" id="checkoutModal">
+    <div class="checkout-box">
+        <h3>ثبت سفارش</h3>
+        <p id="checkoutTotalText">مبلغ سفارش: —</p>
+
+        <label class="form-label">نام و نام خانوادگی</label>
+        <input id="checkoutName" type="text" placeholder="نام شما">
+
+        <label class="form-label">شماره تماس</label>
+        <input id="checkoutPhone" type="tel" placeholder="شماره تماس">
+
+        <label class="form-label">آدرس تحویل</label>
+        <textarea id="checkoutAddress" rows="4" placeholder="آدرس کامل"></textarea>
+
+        <div class="checkout-actions">
+            <button class="checkout-cancel" onclick="closeCheckout()">انصراف</button>
+            <button class="checkout-submit" onclick="submitOrder()">ثبت سفارش</button>
+        </div>
     </div>
 </div>
 
@@ -3260,6 +3376,16 @@ function formatPrice(value){
     return Number(value)
         .toLocaleString("fa-IR") +
         " تومان";
+}
+
+
+function getDiscountPercent(product){
+    return Math.min(100, Math.max(0, Number(product?.discount_percent || 0)));
+}
+
+function getDiscountedPrice(product){
+    if(!hasPrice(product?.price)) return null;
+    return Math.round(Number(product.price) * (1 - getDiscountPercent(product)/100));
 }
 
 function showToast(message){
@@ -3460,13 +3586,10 @@ class="product-card"
 onclick="openProductPage('${product.id}')"
 >
 
-${Number(product.discount_percent || 0) > 0 ? `
-<div class="discount-badge">
-${Number(product.discount_percent)}٪ تخفیف
-</div>
-` : ""}
-
 <div class="product-image">
+${Number(product.discount_percent || 0) > 0 ? `
+<span class="discount-badge">${Number(product.discount_percent)}٪ تخفیف</span>
+` : ""}
 
 <img
 src="${image}"
@@ -3498,12 +3621,12 @@ ${description}
 </div>
 
 <div class="product-price">
-${Number(product.discount_percent || 0) > 0 && hasPrice(product.price)
-    ? `
-        <span class="product-old-price">${formatPrice(product.price)}</span>
-        <span class="product-new-price">${formatPrice(Math.round(Number(product.price) * (1 - Number(product.discount_percent) / 100)) )}</span>
-      `
-    : formatPrice(product.price)}
+${
+    Number(product.discount_percent || 0) > 0 && hasPrice(product.price)
+    ? `<span class="product-old-price">${formatPrice(product.price)}</span>
+       <span class="product-sale-price">${formatPrice(getDiscountedPrice(product))}</span>`
+    : formatPrice(product.price)
+}
 </div>
 
 <button
@@ -3637,6 +3760,8 @@ function openProductPage(id){
 
     selectedProduct = product;
 
+    recordProductView(product);
+
     pageQuantity = 1;
 
     document.getElementById(
@@ -3670,15 +3795,13 @@ function openProductPage(id){
         product.description ||
         "توضیحی برای این محصول ثبت نشده است.";
 
-    const pageFinalPrice =
-        Number(product.discount_percent || 0) > 0 && hasPrice(product.price)
-        ? Math.round(Number(product.price) * (1 - Number(product.discount_percent) / 100))
-        : product.price;
-
     document.getElementById(
         "pagePrice"
-    ).textContent =
-        formatPrice(pageFinalPrice);
+    ).innerHTML =
+        getDiscountPercent(product) > 0 && hasPrice(product.price)
+        ? `<span class="product-old-price">${formatPrice(product.price)}</span>
+           <span class="product-sale-price">${formatPrice(getDiscountedPrice(product))}</span>`
+        : formatPrice(product.price);
 
     updateProductPageCartCount();
 
@@ -3817,9 +3940,10 @@ function addToCart(id,showMessage=true){
 
             image:product.image,
 
-            price:product.price,
+            price:getDiscountedPrice(product) ?? product.price,
 
             climate:product.climate,
+            discount_percent:getDiscountPercent(product),
 
             quantity:1
         });
@@ -4289,6 +4413,8 @@ function showAdminDashboard(){
 
     loadAdminProducts();
     loadAdminConversations();
+    loadAdminStats();
+    loadAdminOrders();
 }
 
 async function adminLogin(){
@@ -4438,7 +4564,9 @@ ${escapeHtml(product.name)}
 <span>
 ${escapeHtml(product.climate || "عمومی")}
 ·
-${formatPrice(product.price)}
+${formatPrice(getDiscountedPrice(product) ?? product.price)}
+·
+موجودی: ${Number(product.stock_quantity || 0).toLocaleString("fa-IR")}
 </span>
 
 </div>
@@ -4516,10 +4644,11 @@ function openProductForm(product=null){
             ? product.price
             : "";
 
-        document.getElementById(
-            "productDiscount"
-        ).value =
+        document.getElementById("productDiscount").value =
             product.discount_percent ?? 0;
+
+        document.getElementById("productStock").value =
+            product.stock_quantity ?? 0;
 
     }else{
 
@@ -4553,9 +4682,8 @@ function openProductForm(product=null){
             "productPrice"
         ).value = "";
 
-        document.getElementById(
-            "productDiscount"
-        ).value = 0;
+        document.getElementById("productDiscount").value = 0;
+        document.getElementById("productStock").value = 0;
     }
 }
 
@@ -4626,9 +4754,10 @@ async function saveProduct(){
         ).value.trim();
 
     const discountValue =
-        document.getElementById(
-            "productDiscount"
-        ).value.trim();
+        document.getElementById("productDiscount")?.value || "0";
+
+    const stockValue =
+        document.getElementById("productStock")?.value || "0";
 
     if(!name){
 
@@ -4657,7 +4786,10 @@ async function saveProduct(){
             : Number(priceValue),
 
         discount_percent:
-            Math.min(100, Math.max(0, Number(discountValue) || 0))
+            Math.min(100, Math.max(0, Number(discountValue) || 0)),
+
+        stock_quantity:
+            Math.max(0, Math.floor(Number(stockValue) || 0))
     };
 
     let error;
@@ -5101,6 +5233,234 @@ function adminSupportInputKeydown(event){
     if(event.key === "Enter" && !event.shiftKey){
         event.preventDefault();
         sendAdminSupportMessage();
+    }
+}
+
+
+/* =====================================================
+SALES / VIEWS / ORDERS
+===================================================== */
+
+async function recordProductView(product){
+    if(!product?.id) return;
+    try{
+        await supabaseClient.from("product_views").insert({
+            product_id: product.id
+        });
+    }catch(error){
+        console.warn("Product view was not recorded:", error);
+    }
+}
+
+async function loadAdminStats(){
+    const ids = ["adminViewsCount","adminOrdersCount","adminSalesCount","adminRevenue"];
+    if(!document.getElementById(ids[0])) return;
+
+    const [views, orders, sales] = await Promise.all([
+        supabaseClient.from("product_views").select("*", {count:"exact", head:true}),
+        supabaseClient.from("orders").select("*", {count:"exact", head:true}),
+        supabaseClient.from("sales").select("*")
+    ]);
+
+    const viewCount = views.count || 0;
+    const orderCount = orders.count || 0;
+    const salesRows = sales.data || [];
+
+    let salesCount = 0;
+    let revenue = 0;
+
+    salesRows.forEach(row=>{
+        salesCount += Number(row.quantity || 0);
+        revenue += Number(row.total_amount ?? row.amount ?? row.price ?? 0);
+    });
+
+    document.getElementById("adminViewsCount").textContent = viewCount.toLocaleString("fa-IR");
+    document.getElementById("adminOrdersCount").textContent = orderCount.toLocaleString("fa-IR");
+    document.getElementById("adminSalesCount").textContent = salesCount.toLocaleString("fa-IR");
+    document.getElementById("adminRevenue").textContent = revenue.toLocaleString("fa-IR") + " تومان";
+}
+
+async function loadAdminOrders(){
+    const container=document.getElementById("adminOrdersList");
+    if(!container) return;
+
+    container.innerHTML='<div class="no-products">در حال دریافت سفارش‌ها...</div>';
+
+    const {data,error}=await supabaseClient
+        .from("orders")
+        .select("*")
+        .order("created_at",{ascending:false});
+
+    if(error){
+        console.error(error);
+        container.innerHTML='<div class="no-products">خطا در دریافت سفارش‌ها. ستون‌های جدول orders را بررسی کنید.</div>';
+        return;
+    }
+
+    if(!data?.length){
+        container.innerHTML='<div class="no-products">هنوز سفارشی ثبت نشده است.</div>';
+        return;
+    }
+
+    const orderIds=data.map(x=>x.id);
+    let itemRows=[];
+    if(orderIds.length){
+        const result=await supabaseClient
+            .from("order_items")
+            .select("*")
+            .in("order_id",orderIds);
+        if(!result.error) itemRows=result.data || [];
+    }
+
+    container.innerHTML=data.map(order=>{
+        const items=itemRows.filter(i=>String(i.order_id)===String(order.id));
+        const status=order.status || "pending";
+        const total=Number(order.total_amount ?? order.total ?? 0);
+        return `<div class="admin-order">
+            <div class="admin-order-head">
+                <strong>سفارش #${escapeHtml(String(order.id).slice(0,8))}</strong>
+                <span>${order.created_at ? new Date(order.created_at).toLocaleString("fa-IR") : ""}</span>
+            </div>
+            <div>مشتری: ${escapeHtml(order.customer_name || order.name || "—")}</div>
+            <div>تماس: ${escapeHtml(order.phone || "—")}</div>
+            <div>مبلغ: ${total.toLocaleString("fa-IR")} تومان</div>
+            <div class="admin-order-items">
+                ${items.length ? items.map(i=>`${escapeHtml(i.product_name || i.name || "محصول")} × ${Number(i.quantity || 0).toLocaleString("fa-IR")}`).join("<br>") : "اقلام سفارش ثبت نشده است."}
+            </div>
+            <div class="admin-order-actions">
+                <select onchange="updateOrderStatus('${escapeHtml(String(order.id))}',this.value)">
+                    ${["pending","confirmed","processing","shipped","delivered","cancelled"].map(st=>`<option value="${st}" ${st===status?"selected":""}>${orderStatusFa(st)}</option>`).join("")}
+                </select>
+                <button class="admin-small-btn" onclick="viewOrderAddress('${escapeHtml(String(order.id))}')">جزئیات تحویل</button>
+            </div>
+        </div>`;
+    }).join("");
+}
+
+function orderStatusFa(status){
+    return ({
+        pending:"در انتظار بررسی",
+        confirmed:"تأیید شده",
+        processing:"در حال آماده‌سازی",
+        shipped:"ارسال شده",
+        delivered:"تحویل شده",
+        cancelled:"لغو شده"
+    })[status] || status;
+}
+
+async function updateOrderStatus(id,status){
+    const {error}=await supabaseClient.from("orders").update({status}).eq("id",id);
+    if(error){
+        console.error(error);
+        showToast("تغییر وضعیت سفارش انجام نشد");
+        return;
+    }
+    showToast("وضعیت سفارش تغییر کرد");
+    await loadAdminOrders();
+}
+
+async function viewOrderAddress(id){
+    const {data,error}=await supabaseClient.from("orders").select("*").eq("id",id).single();
+    if(error || !data){
+        showToast("جزئیات سفارش دریافت نشد");
+        return;
+    }
+    alert(
+        "نام: "+(data.customer_name || data.name || "—")+
+        "\nشماره تماس: "+(data.phone || "—")+
+        "\nآدرس: "+(data.address || "—")
+    );
+}
+
+function openCheckout(){
+    if(!cart.length){
+        showToast("سبد خرید خالی است");
+        return;
+    }
+    const total=cart.reduce((sum,item)=>sum+Number(item.price||0)*Number(item.quantity||0),0);
+    document.getElementById("checkoutTotalText").textContent =
+        "مبلغ سفارش: "+total.toLocaleString("fa-IR")+" تومان";
+    document.getElementById("checkoutModal").classList.add("active");
+}
+
+function closeCheckout(){
+    document.getElementById("checkoutModal").classList.remove("active");
+}
+
+async function submitOrder(){
+    if(!cart.length) return;
+
+    const customer_name=document.getElementById("checkoutName").value.trim();
+    const phone=document.getElementById("checkoutPhone").value.trim();
+    const address=document.getElementById("checkoutAddress").value.trim();
+
+    if(!customer_name || !phone || !address){
+        showToast("نام، شماره تماس و آدرس را کامل کنید");
+        return;
+    }
+
+    const total=cart.reduce((sum,item)=>sum+Number(item.price||0)*Number(item.quantity||0),0);
+
+    const orderResult=await supabaseClient.from("orders").insert({
+        customer_name,
+        phone,
+        address,
+        total_amount:total,
+        status:"pending"
+    }).select().single();
+
+    if(orderResult.error){
+        console.error(orderResult.error);
+        showToast("ثبت سفارش انجام نشد: "+orderResult.error.message);
+        return;
+    }
+
+    const orderItems=cart.map(item=>({
+        order_id:orderResult.data.id,
+        product_id:item.id,
+        product_name:item.name,
+        quantity:Number(item.quantity||1),
+        price:Number(item.price||0)
+    }));
+
+    const itemsResult=await supabaseClient.from("order_items").insert(orderItems);
+
+    if(itemsResult.error){
+        console.error(itemsResult.error);
+        showToast("سفارش ثبت شد ولی اقلام آن ثبت نشدند");
+        return;
+    }
+
+    for(const item of cart){
+        const {data:product}=await supabaseClient.from("products").select("stock_quantity").eq("id",item.id).single();
+        if(product && product.stock_quantity !== null && product.stock_quantity !== undefined){
+            const newStock=Math.max(0,Number(product.stock_quantity)-Number(item.quantity||0));
+            await supabaseClient.from("products").update({stock_quantity:newStock}).eq("id",item.id);
+        }
+        await supabaseClient.from("sales").insert({
+            order_id:orderResult.data.id,
+            product_id:item.id,
+            quantity:Number(item.quantity||1),
+            total_amount:Number(item.price||0)*Number(item.quantity||1)
+        });
+    }
+
+    cart=[];
+    saveCart();
+    updateCartCount();
+    updateProductPageCartCount();
+    renderCart();
+    closeCheckout();
+    document.getElementById("checkoutName").value="";
+    document.getElementById("checkoutPhone").value="";
+    document.getElementById("checkoutAddress").value="";
+    closeCart();
+
+    await loadProducts();
+    showToast("سفارش با موفقیت ثبت شد");
+    if(document.getElementById("adminDashboard")?.style.display !== "none"){
+        await loadAdminOrders();
+        await loadAdminStats();
     }
 }
 
