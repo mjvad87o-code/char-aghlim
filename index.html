@@ -4946,6 +4946,36 @@ async function ensureSupportAuth(){
     }
 }
 
+async function ensureCustomerSession(){
+    if(!supabaseClient){
+        console.error("Supabase is unavailable.");
+        return null;
+    }
+
+    try{
+        const {data,error} = await supabaseClient.auth.getSession();
+
+        if(error) throw error;
+
+        if(data && data.session && data.session.user){
+            return data.session.user;
+        }
+
+        const result = await supabaseClient.auth.signInAnonymously();
+
+        if(result.error) throw result.error;
+
+        if(!result.data || !result.data.user){
+            throw new Error("Anonymous user was not returned by Supabase.");
+        }
+
+        return result.data.user;
+    }catch(error){
+        console.error("Customer anonymous auth error:",error);
+        return null;
+    }
+}
+
 async function toggleSupport(){
     const win = document.getElementById("supportWindow");
     if(!win) return;
@@ -4975,7 +5005,7 @@ async function initSupport(){
         let {data,error} = await supabaseClient
             .from("support_conversations")
             .select("*")
-            .eq("user_id",user.id)
+            .eq("customer_id",user.id)
             .eq("status","open")
             .order("created_at",{ascending:false})
             .limit(1);
@@ -4988,7 +5018,7 @@ async function initSupport(){
             const created = await supabaseClient
                 .from("support_conversations")
                 .insert({
-                    user_id:user.id,
+                    customer_id:user.id,
                     visitor_name:supportVisitorName(),
                     status:"open"
                 })
@@ -5107,7 +5137,7 @@ async function sendSupportMessage(){
         .from("support_conversations")
         .update({updated_at:new Date().toISOString(),last_message:message})
         .eq("id",supportConversation.id)
-        .eq("user_id",supportUser.id);
+        .eq("customer_id",supportUser.id);
 
     await loadSupportMessages();
 }
@@ -5259,10 +5289,20 @@ SALES / VIEWS / ORDERS
 
 async function recordProductView(product){
     if(!product?.id || !supabaseClient) return;
+
     try{
-        await supabaseClient.from("product_views").insert({
-            product_id: product.id
-        });
+        const user = await ensureCustomerSession();
+        if(!user) return;
+
+        const {error} = await supabaseClient
+            .from("product_views")
+            .insert({
+                product_id: product.id
+            });
+
+        if(error){
+            console.warn("Product view was not recorded:", error);
+        }
     }catch(error){
         console.warn("Product view was not recorded:", error);
     }
@@ -5420,6 +5460,13 @@ async function submitOrder(){
     }
 
     const total=cart.reduce((sum,item)=>sum+Number(item.price||0)*Number(item.quantity||0),0);
+
+    const customer = await ensureCustomerSession();
+
+    if(!customer){
+        showToast("اتصال مشتری به فروشگاه برقرار نشد؛ دوباره تلاش کنید");
+        return;
+    }
 
     const orderResult=await supabaseClient.from("orders").insert({
         customer_name,
