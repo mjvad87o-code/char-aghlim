@@ -2295,6 +2295,8 @@ footer p{
 @media(max-width:800px){
     .admin-stats-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
 }
+
+.checkout-submit:disabled{opacity:.65;cursor:not-allowed;transform:none;}
 </style>
 </head>
 
@@ -3081,7 +3083,7 @@ id="adminProducts"
 
 
 <div class="admin-extra-panel" id="adminStatsSection">
-    <h3>آمار فروش و بازدید</h3>
+    <h3>آمار فروش و بازدید <button class="admin-small-btn" style="float:left;padding:7px 10px" onclick="loadAdminStats()">↻ بروزرسانی</button></h3>
     <div class="admin-stats-grid">
         <div class="admin-stat-card">بازدید محصولات<strong id="adminViewsCount">۰</strong></div>
         <div class="admin-stat-card">سفارش‌ها<strong id="adminOrdersCount">۰</strong></div>
@@ -4388,6 +4390,7 @@ function closeAdmin(){
     document.getElementById(
         "adminPanel"
     ).classList.remove("active");
+    stopAdminSupportPolling();
 }
 
 function showAdminLogin(){
@@ -4906,6 +4909,8 @@ let supportConversation = null;
 let supportChannel = null;
 let adminSupportConversation = null;
 let adminSupportChannel = null;
+let supportPollTimer = null;
+let adminSupportPollTimer = null;
 
 function supportVisitorName(){
     return localStorage.getItem("fourAghlimSupportName") || "مشتری سایت";
@@ -4931,16 +4936,35 @@ async function ensureSupportAuth(){
 }
 
 async function toggleSupport(){
-    const win = document.getElementById("supportWindow");
+    const win=document.getElementById("supportWindow");
     if(!win) return;
 
-    const opening = !win.classList.contains("active");
+    const opening=!win.classList.contains("active");
     win.classList.toggle("active");
 
     if(opening){
         document.getElementById("supportBadge").style.display="none";
         await initSupport();
+        startSupportPolling();
         setTimeout(()=>document.getElementById("supportInput")?.focus(),150);
+    }else{
+        stopSupportPolling();
+    }
+}
+
+function startSupportPolling(){
+    stopSupportPolling();
+    supportPollTimer=setInterval(async()=>{
+        if(document.getElementById("supportWindow")?.classList.contains("active") && supportConversation){
+            await loadSupportMessages();
+        }
+    },8000);
+}
+
+function stopSupportPolling(){
+    if(supportPollTimer){
+        clearInterval(supportPollTimer);
+        supportPollTimer=null;
     }
 }
 
@@ -5154,6 +5178,7 @@ async function selectAdminConversation(id){
     await loadAdminConversationMessages();
     await loadAdminConversations();
     subscribeAdminSupportRealtime();
+    startAdminSupportPolling();
 }
 
 async function loadAdminConversationMessages(){
@@ -5189,6 +5214,23 @@ function subscribeAdminSupportRealtime(){
             filter:"conversation_id=eq."+adminSupportConversation.id
         },()=>loadAdminConversationMessages())
         .subscribe();
+}
+
+function startAdminSupportPolling(){
+    if(adminSupportPollTimer) clearInterval(adminSupportPollTimer);
+    adminSupportPollTimer=setInterval(async()=>{
+        if(adminSupportConversation && document.getElementById("adminPanel")?.classList.contains("active")){
+            await loadAdminConversationMessages();
+            await loadAdminConversations();
+        }
+    },8000);
+}
+
+function stopAdminSupportPolling(){
+    if(adminSupportPollTimer){
+        clearInterval(adminSupportPollTimer);
+        adminSupportPollTimer=null;
+    }
 }
 
 async function sendAdminSupportMessage(){
@@ -5242,42 +5284,82 @@ SALES / VIEWS / ORDERS
 ===================================================== */
 
 async function recordProductView(product){
-    if(!product?.id) return;
+    if(!product?.id) return false;
+
     try{
-        await supabaseClient.from("product_views").insert({
-            product_id: product.id
-        });
+        const {error}=await supabaseClient
+            .from("product_views")
+            .insert({product_id:product.id});
+
+        if(error) throw error;
+        return true;
     }catch(error){
-        console.warn("Product view was not recorded:", error);
+        console.warn("Product view was not recorded:",error);
+        return false;
     }
 }
 
+/*
+ * آمار فروش از خود سفارش‌ها و order_items محاسبه می‌شود.
+ * بنابراین داشبورد به جدول اختیاری sales وابسته نیست و هر سفارشی که
+ * در سایت ثبت شود، واقعاً در آمار قابل مشاهده خواهد بود.
+ */
 async function loadAdminStats(){
-    const ids = ["adminViewsCount","adminOrdersCount","adminSalesCount","adminRevenue"];
+    const ids=["adminViewsCount","adminOrdersCount","adminSalesCount","adminRevenue"];
     if(!document.getElementById(ids[0])) return;
 
-    const [views, orders, sales] = await Promise.all([
-        supabaseClient.from("product_views").select("*", {count:"exact", head:true}),
-        supabaseClient.from("orders").select("*", {count:"exact", head:true}),
-        supabaseClient.from("sales").select("*")
+    const [viewsResult,ordersResult]=await Promise.all([
+        supabaseClient
+            .from("product_views")
+            .select("id",{count:"exact",head:true}),
+        supabaseClient
+            .from("orders")
+            .select("id,total_amount,status")
+            .order("created_at",{ascending:false})
     ]);
 
-    const viewCount = views.count || 0;
-    const orderCount = orders.count || 0;
-    const salesRows = sales.data || [];
+    if(viewsResult.error){
+        console.error("Stats views error:",viewsResult.error);
+    }
+    if(ordersResult.error){
+        console.error("Stats orders error:",ordersResult.error);
+    }
 
-    let salesCount = 0;
-    let revenue = 0;
+    const viewCount=Number(viewsResult.count||0);
+    const ordersRows=ordersResult.data||[];
+    const validOrders=ordersRows.filter(order=>String(order.status||"pending").toLowerCase()!=="cancelled");
+    const orderIds=validOrders.map(order=>order.id);
 
-    salesRows.forEach(row=>{
-        salesCount += Number(row.quantity || 0);
-        revenue += Number(row.total_amount ?? row.amount ?? row.price ?? 0);
-    });
+    let itemRows=[];
+    if(orderIds.length){
+        const itemsResult=await supabaseClient
+            .from("order_items")
+            .select("order_id,quantity,price")
+            .in("order_id",orderIds);
 
-    document.getElementById("adminViewsCount").textContent = viewCount.toLocaleString("fa-IR");
-    document.getElementById("adminOrdersCount").textContent = orderCount.toLocaleString("fa-IR");
-    document.getElementById("adminSalesCount").textContent = salesCount.toLocaleString("fa-IR");
-    document.getElementById("adminRevenue").textContent = revenue.toLocaleString("fa-IR") + " تومان";
+        if(itemsResult.error){
+            console.error("Stats order_items error:",itemsResult.error);
+        }else{
+            itemRows=itemsResult.data||[];
+        }
+    }
+
+    const salesCount=itemRows.reduce((sum,row)=>sum+Number(row.quantity||0),0);
+    let revenue=itemRows.reduce((sum,row)=>{
+        const quantity=Number(row.quantity||0);
+        const price=Number(row.price||0);
+        return sum+(price*quantity);
+    },0);
+
+    // اگر اقلام سفارش موجود نبودند، مبلغ ثبت‌شده خود سفارش را برای درآمد نگه می‌داریم.
+    if(!itemRows.length){
+        revenue=validOrders.reduce((sum,order)=>sum+Number(order.total_amount||0),0);
+    }
+
+    document.getElementById("adminViewsCount").textContent=viewCount.toLocaleString("fa-IR");
+    document.getElementById("adminOrdersCount").textContent=ordersRows.length.toLocaleString("fa-IR");
+    document.getElementById("adminSalesCount").textContent=salesCount.toLocaleString("fa-IR");
+    document.getElementById("adminRevenue").textContent=revenue.toLocaleString("fa-IR")+" تومان";
 }
 
 async function loadAdminOrders(){
@@ -5357,6 +5439,7 @@ async function updateOrderStatus(id,status){
     }
     showToast("وضعیت سفارش تغییر کرد");
     await loadAdminOrders();
+    await loadAdminStats();
 }
 
 async function viewOrderAddress(id){
@@ -5377,9 +5460,10 @@ function openCheckout(){
         showToast("سبد خرید خالی است");
         return;
     }
+
     const total=cart.reduce((sum,item)=>sum+Number(item.price||0)*Number(item.quantity||0),0);
-    document.getElementById("checkoutTotalText").textContent =
-        "مبلغ سفارش: "+total.toLocaleString("fa-IR")+" تومان";
+    document.getElementById("checkoutTotalText").textContent=
+        "مبلغ تقریبی سفارش: "+total.toLocaleString("fa-IR")+" تومان";
     document.getElementById("checkoutModal").classList.add("active");
 }
 
@@ -5388,7 +5472,13 @@ function closeCheckout(){
 }
 
 async function submitOrder(){
-    if(!cart.length) return;
+    if(!cart.length){
+        showToast("سبد خرید خالی است");
+        return;
+    }
+
+    const submitButton=document.querySelector("#checkoutModal .checkout-submit");
+    if(submitButton?.disabled) return;
 
     const customer_name=document.getElementById("checkoutName").value.trim();
     const phone=document.getElementById("checkoutPhone").value.trim();
@@ -5399,68 +5489,135 @@ async function submitOrder(){
         return;
     }
 
-    const total=cart.reduce((sum,item)=>sum+Number(item.price||0)*Number(item.quantity||0),0);
-
-    const orderResult=await supabaseClient.from("orders").insert({
-        customer_name,
-        phone,
-        address,
-        total_amount:total,
-        status:"pending"
-    }).select().single();
-
-    if(orderResult.error){
-        console.error(orderResult.error);
-        showToast("ثبت سفارش انجام نشد: "+orderResult.error.message);
-        return;
+    if(submitButton){
+        submitButton.disabled=true;
+        submitButton.textContent="در حال ثبت...";
     }
 
-    const orderItems=cart.map(item=>({
-        order_id:orderResult.data.id,
-        product_id:item.id,
-        product_name:item.name,
-        quantity:Number(item.quantity||1),
-        price:Number(item.price||0)
-    }));
+    let createdOrderId=null;
 
-    const itemsResult=await supabaseClient.from("order_items").insert(orderItems);
+    try{
+        // قیمت و موجودی همیشه از Supabase خوانده می‌شود؛ قیمت localStorage قابل اعتماد نیست.
+        const cartIds=[...new Set(cart.map(item=>item.id).filter(Boolean))];
+        const {data:dbProducts,error:productsError}=await supabaseClient
+            .from("products")
+            .select("id,name,image,price,discount_percent,stock_quantity")
+            .in("id",cartIds);
 
-    if(itemsResult.error){
-        console.error(itemsResult.error);
-        showToast("سفارش ثبت شد ولی اقلام آن ثبت نشدند");
-        return;
-    }
+        if(productsError) throw productsError;
 
-    for(const item of cart){
-        const {data:product}=await supabaseClient.from("products").select("stock_quantity").eq("id",item.id).single();
-        if(product && product.stock_quantity !== null && product.stock_quantity !== undefined){
-            const newStock=Math.max(0,Number(product.stock_quantity)-Number(item.quantity||0));
-            await supabaseClient.from("products").update({stock_quantity:newStock}).eq("id",item.id);
+        const productMap=new Map((dbProducts||[]).map(product=>[String(product.id),product]));
+        if(productMap.size!==cartIds.length){
+            throw new Error("یکی از محصولات سبد دیگر در فروشگاه موجود نیست.");
         }
-        await supabaseClient.from("sales").insert({
-            order_id:orderResult.data.id,
-            product_id:item.id,
-            quantity:Number(item.quantity||1),
-            total_amount:Number(item.price||0)*Number(item.quantity||1)
-        });
-    }
 
-    cart=[];
-    saveCart();
-    updateCartCount();
-    updateProductPageCartCount();
-    renderCart();
-    closeCheckout();
-    document.getElementById("checkoutName").value="";
-    document.getElementById("checkoutPhone").value="";
-    document.getElementById("checkoutAddress").value="";
-    closeCart();
+        const authoritativeItems=[];
+        let total=0;
 
-    await loadProducts();
-    showToast("سفارش با موفقیت ثبت شد");
-    if(document.getElementById("adminDashboard")?.style.display !== "none"){
-        await loadAdminOrders();
+        for(const cartItem of cart){
+            const product=productMap.get(String(cartItem.id));
+            const quantity=Math.max(1,Math.floor(Number(cartItem.quantity||1)));
+
+            if(!product){
+                throw new Error("یکی از محصولات سبد پیدا نشد.");
+            }
+
+            if(product.stock_quantity!==null && product.stock_quantity!==undefined && Number(product.stock_quantity)>=0){
+                const stock=Number(product.stock_quantity);
+                if(stock<quantity){
+                    throw new Error(`موجودی «${product.name||"محصول"}» کافی نیست. موجودی فعلی: ${stock.toLocaleString("fa-IR")}`);
+                }
+            }
+
+            const unitPrice=getDiscountedPrice(product);
+            if(!hasPrice(unitPrice)){
+                throw new Error(`قیمت «${product.name||"محصول"}» هنوز ثبت نشده است.`);
+            }
+
+            total+=unitPrice*quantity;
+            authoritativeItems.push({
+                product_id:product.id,
+                product_name:product.name,
+                quantity,
+                price:unitPrice
+            });
+        }
+
+        const orderResult=await supabaseClient
+            .from("orders")
+            .insert({
+                customer_name,
+                phone,
+                address,
+                total_amount:total,
+                status:"pending"
+            })
+            .select("*")
+            .single();
+
+        if(orderResult.error) throw orderResult.error;
+        createdOrderId=orderResult.data.id;
+
+        const orderItems=authoritativeItems.map(item=>({
+            order_id:createdOrderId,
+            product_id:item.product_id,
+            product_name:item.product_name,
+            quantity:item.quantity,
+            price:item.price
+        }));
+
+        const itemsResult=await supabaseClient
+            .from("order_items")
+            .insert(orderItems);
+
+        if(itemsResult.error){
+            // جلوگیری از سفارش ناقص در صورت شکست ثبت اقلام.
+            await supabaseClient.from("orders").delete().eq("id",createdOrderId);
+            createdOrderId=null;
+            throw itemsResult.error;
+        }
+
+        // کاهش موجودی فقط بعد از ثبت کامل سفارش انجام می‌شود.
+        for(const item of authoritativeItems){
+            const product=productMap.get(String(item.product_id));
+            if(product.stock_quantity!==null && product.stock_quantity!==undefined){
+                const newStock=Math.max(0,Number(product.stock_quantity)-item.quantity);
+                const stockResult=await supabaseClient
+                    .from("products")
+                    .update({stock_quantity:newStock})
+                    .eq("id",item.product_id);
+                if(stockResult.error){
+                    console.warn("Stock update failed:",stockResult.error);
+                }
+            }
+        }
+
+        cart=[];
+        saveCart();
+        updateCartCount();
+        updateProductPageCartCount();
+        renderCart();
+        closeCheckout();
+        document.getElementById("checkoutName").value="";
+        document.getElementById("checkoutPhone").value="";
+        document.getElementById("checkoutAddress").value="";
+        closeCart();
+
+        await loadProducts();
         await loadAdminStats();
+        showToast("سفارش با موفقیت ثبت شد");
+
+        if(document.getElementById("adminDashboard")?.style.display!=="none"){
+            await loadAdminOrders();
+        }
+    }catch(error){
+        console.error("Order submission error:",error);
+        showToast("ثبت سفارش انجام نشد: "+(error?.message||"خطای نامشخص"));
+    }finally{
+        if(submitButton){
+            submitButton.disabled=false;
+            submitButton.textContent="ثبت سفارش";
+        }
     }
 }
 
