@@ -24,6 +24,11 @@
   --red:#b84b4b;
   --border:#e4e9e4;
   --shadow:0 15px 45px rgba(16,60,43,.11);
+
+  --mountain:#596b6d;
+  --forest:#39734b;
+  --desert:#c99a55;
+  --sea:#3187a5;
 }
 
 *{
@@ -292,48 +297,124 @@ section{
   color:var(--gray);
 }
 
-/* ================= CATEGORIES ================= */
+/* ================= CLIMATE CARDS ================= */
 
 .categories{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:20px;
-  max-width:1250px;
+  max-width:1180px;
   margin:auto;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:18px;
 }
 
 .category-card{
   position:relative;
-  height:270px;
-  overflow:hidden;
+  height:190px;
+  border:0;
   border-radius:25px;
+  overflow:hidden;
   cursor:pointer;
-  box-shadow:var(--shadow);
+  color:white;
+  box-shadow:0 12px 35px rgba(16,60,43,.12);
+  transition:.3s;
+  isolation:isolate;
 }
 
-.category-card img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:.5s;
+.category-card:hover{
+  transform:translateY(-7px);
+  box-shadow:0 20px 45px rgba(16,60,43,.18);
 }
 
-.category-card:hover img{
-  transform:scale(1.07);
-}
-
-.category-overlay{
+.category-card::before{
+  content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(transparent 30%,rgba(0,0,0,.75));
-  display:flex;
-  align-items:flex-end;
-  padding:25px;
-  color:white;
+  z-index:-2;
+  background:
+    linear-gradient(
+      145deg,
+      var(--card-color),
+      color-mix(in srgb,var(--card-color),#000 25%)
+    );
 }
 
-.category-overlay h3{
-  font-size:23px;
+.category-card::after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  left:-55px;
+  bottom:-75px;
+  background:rgba(255,255,255,.10);
+  z-index:-1;
+}
+
+.category-icon{
+  width:78px;
+  height:78px;
+  margin:28px auto 15px;
+  border-radius:24px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:39px;
+  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.2);
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  backdrop-filter:blur(8px);
+}
+
+.category-card h3{
+  text-align:center;
+  font-size:20px;
+  font-weight:800;
+}
+
+.category-card.mountain{
+  --card-color:var(--mountain);
+}
+
+.category-card.forest{
+  --card-color:var(--forest);
+}
+
+.category-card.desert{
+  --card-color:var(--desert);
+}
+
+.category-card.sea{
+  --card-color:var(--sea);
+}
+
+/* عمومی = ترکیب چهار رنگ */
+
+.category-card.general{
+  background:
+    conic-gradient(
+      from 210deg,
+      var(--mountain),
+      var(--forest),
+      var(--desert),
+      var(--sea),
+      var(--mountain)
+    );
+}
+
+.category-card.general::before{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.06),
+      rgba(0,0,0,.18)
+    );
+}
+
+.category-card.general::after{
+  width:230px;
+  height:230px;
+  left:-70px;
+  bottom:-110px;
 }
 
 /* ================= STORE ================= */
@@ -504,9 +585,7 @@ section{
   color:var(--gray);
 }
 
-/* =====================================================
-   NEW PRODUCT PAGE
-===================================================== */
+/* ================= PRODUCT PAGE ================= */
 
 .product-page{
   position:fixed;
@@ -523,12 +602,8 @@ section{
 }
 
 @keyframes pageFade{
-  from{
-    opacity:0;
-  }
-  to{
-    opacity:1;
-  }
+  from{opacity:0}
+  to{opacity:1}
 }
 
 .product-page-top{
@@ -536,7 +611,7 @@ section{
   position:sticky;
   top:0;
   z-index:10;
-  background:rgba(241,244,239,.9);
+  background:rgba(241,244,239,.92);
   backdrop-filter:blur(16px);
   border-bottom:1px solid rgba(16,60,43,.08);
   display:flex;
@@ -584,8 +659,6 @@ section{
   grid-template-columns:1.08fr .92fr;
   min-height:650px;
 }
-
-/* تصویر */
 
 .product-visual{
   position:relative;
@@ -649,8 +722,6 @@ section{
   font-size:13px;
   box-shadow:0 7px 20px rgba(0,0,0,.1);
 }
-
-/* اطلاعات */
 
 .product-info-panel{
   padding:65px 55px;
@@ -1321,16 +1392,16 @@ footer p{
   transform:translateX(50%) translateY(0);
 }
 
-/* ================= RESPONSIVE ================= */
+/* ================= TABLET ================= */
 
-@media(max-width:1000px){
+@media(max-width:1100px){
 
   .products-grid{
     grid-template-columns:repeat(3,1fr);
   }
 
   .categories{
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:repeat(3,1fr);
   }
 
   .desktop-nav{
@@ -1351,89 +1422,182 @@ footer p{
 
 }
 
+/* ================= MOBILE ================= */
+
 @media(max-width:700px){
 
   header{
-    height:76px;
-    padding:0 18px;
+    height:68px;
+    padding:0 14px;
   }
 
   .logo h1{
-    font-size:23px;
+    font-size:20px;
   }
 
   .logo span{
-    font-size:9px;
+    font-size:8px;
+    margin-top:5px;
   }
 
   .header-inner{
     flex-direction:row-reverse;
+    gap:8px;
+  }
+
+  .header-actions{
+    gap:6px;
+  }
+
+  .header-btn{
+    width:40px;
+    height:40px;
+    border-radius:12px;
+    font-size:18px;
+  }
+
+  .cart-count{
+    top:-4px;
+    left:-4px;
+    min-width:18px;
+    height:18px;
+    font-size:9px;
   }
 
   .hero{
-    min-height:560px;
+    min-height:520px;
+  }
+
+  .hero-content{
+    width:88%;
   }
 
   .hero h2{
-    font-size:42px;
+    font-size:38px;
   }
 
   .hero p{
-    font-size:15px;
+    font-size:14px;
+    line-height:1.9;
   }
 
   section{
-    padding:55px 18px;
+    padding:48px 15px;
   }
 
+  .section-title{
+    margin-bottom:28px;
+  }
+
+  .section-title h2{
+    font-size:27px;
+  }
+
+  .section-title p{
+    font-size:13px;
+  }
+
+  /* اقلیم‌ها */
+
   .categories{
-    grid-template-columns:1fr 1fr;
-    gap:12px;
+    grid-template-columns:repeat(2,1fr);
+    gap:11px;
   }
 
   .category-card{
-    height:190px;
-    border-radius:19px;
+    height:142px;
+    border-radius:18px;
   }
 
-  .category-overlay{
-    padding:15px;
+  .category-icon{
+    width:53px;
+    height:53px;
+    margin:18px auto 10px;
+    border-radius:17px;
+    font-size:27px;
   }
 
-  .category-overlay h3{
-    font-size:17px;
+  .category-card h3{
+    font-size:15px;
   }
+
+  .category-card.general{
+    grid-column:1/-1;
+    height:115px;
+  }
+
+  .category-card.general .category-icon{
+    margin:12px auto 7px;
+    width:45px;
+    height:45px;
+    font-size:24px;
+  }
+
+  /* فروشگاه */
 
   .store-tools{
     grid-template-columns:1fr;
+    gap:10px;
+    margin-bottom:25px;
+  }
+
+  .search-box input,
+  .filter-box select{
+    height:52px;
+    border-radius:15px;
+    font-size:13px;
   }
 
   .products-grid{
     grid-template-columns:1fr;
-    gap:18px;
+    gap:16px;
+  }
+
+  .product-card{
+    border-radius:20px;
   }
 
   .product-image{
-    height:270px;
+    height:215px;
+    padding:14px;
   }
 
   .product-content{
-    padding:18px;
+    padding:16px;
   }
 
   .product-name{
-    font-size:20px;
+    font-size:18px;
+  }
+
+  .product-description{
+    font-size:12px;
+    min-height:45px;
   }
 
   /* صفحه محصول موبایل */
 
   .product-page-top{
-    height:68px;
-    padding:0 15px;
+    height:60px;
+    padding:0 12px;
+  }
+
+  .product-back{
+    height:39px;
+    padding:0 13px;
+    border-radius:12px;
+    font-size:12px;
+  }
+
+  .product-page-cart{
+    height:39px;
+    padding:0 12px;
+    border-radius:12px;
+    font-size:12px;
   }
 
   .product-page-inner{
-    padding:0 0 30px;
+    padding:0 0 20px;
   }
 
   .product-page-card{
@@ -1444,73 +1608,181 @@ footer p{
   }
 
   .product-visual{
-    height:390px;
-    min-height:390px;
-    padding:35px;
+    height:300px;
+    min-height:300px;
+    padding:25px;
   }
 
   .product-visual img{
-    height:330px;
+    height:245px;
+    max-width:90%;
   }
 
   .product-visual::before{
+    width:205px;
+    height:205px;
+  }
+
+  .product-visual::after{
     width:260px;
     height:260px;
   }
 
-  .product-visual::after{
-    width:330px;
-    height:330px;
-  }
-
   .visual-climate{
-    top:18px;
-    right:18px;
+    top:13px;
+    right:13px;
+    padding:7px 12px;
+    font-size:11px;
   }
 
   .product-info-panel{
-    padding:30px 22px 35px;
+    padding:24px 18px 30px;
+  }
+
+  .product-small-label{
+    font-size:10px;
+    margin-bottom:8px;
   }
 
   .product-info-panel h1{
-    font-size:30px;
+    font-size:25px;
+    line-height:1.4;
+    margin-bottom:14px;
   }
 
   .product-description-large{
-    font-size:14px;
-    line-height:2.1;
+    font-size:13px;
+    line-height:2;
+    margin-bottom:22px;
+  }
+
+  .product-divider{
+    margin-bottom:18px;
+  }
+
+  .product-price-title{
+    font-size:10px;
   }
 
   .product-price-large{
-    font-size:27px;
+    font-size:24px;
+    margin-bottom:18px;
   }
 
   .product-buy-row{
     flex-direction:column;
     align-items:stretch;
+    gap:9px;
   }
 
   .quantity-box{
-    justify-content:center;
+    height:48px;
     width:100%;
+    justify-content:center;
+  }
+
+  .quantity-box button{
+    width:36px;
+    height:36px;
   }
 
   .product-add-large{
     width:100%;
+    height:50px;
+    border-radius:14px;
+    font-size:13px;
   }
+
+  .product-note{
+    font-size:11px;
+    margin-top:13px;
+    padding:10px 12px;
+  }
+
+  /* امکانات */
 
   .features{
     grid-template-columns:1fr;
+    gap:14px;
+  }
+
+  .feature{
+    padding:23px;
+    border-radius:18px;
+  }
+
+  .feature-icon{
+    font-size:29px;
+  }
+
+  .feature p{
+    font-size:13px;
+  }
+
+  /* پنل اقلیم */
+
+  .climate-header{
+    height:65px;
+    padding:0 15px;
+  }
+
+  .climate-header h2{
+    font-size:20px;
+  }
+
+  .climate-header button{
+    width:38px;
+    height:38px;
+    font-size:20px;
+  }
+
+  .climate-content{
+    padding:25px 15px;
+  }
+
+  .climate-content .products-grid{
+    grid-template-columns:1fr;
+  }
+
+  /* سبد */
+
+  .cart-panel{
+    width:94vw;
+  }
+
+  /* مدیریت */
+
+  .admin-dashboard{
+    padding:22px 15px;
   }
 
   .admin-top{
     align-items:flex-start;
-    gap:15px;
+    gap:13px;
     flex-direction:column;
+  }
+
+  .admin-top h2{
+    font-size:23px;
+  }
+
+  .admin-actions{
+    width:100%;
+    flex-wrap:wrap;
+  }
+
+  .admin-small-btn{
+    flex:1;
   }
 
   .admin-product{
     align-items:flex-start;
+    padding:13px;
+  }
+
+  .admin-product img{
+    width:55px;
+    height:55px;
   }
 
   .admin-product-buttons{
@@ -1519,32 +1791,54 @@ footer p{
 
 }
 
+/* ================= SMALL PHONES ================= */
+
 @media(max-width:390px){
 
   .header-btn{
-    width:43px;
-    height:43px;
+    width:37px;
+    height:37px;
+    font-size:16px;
+  }
+
+  .logo h1{
+    font-size:18px;
   }
 
   .categories{
-    grid-template-columns:1fr;
+    gap:9px;
   }
 
   .category-card{
-    height:170px;
+    height:130px;
+  }
+
+  .category-icon{
+    width:47px;
+    height:47px;
+    font-size:24px;
+    margin:15px auto 8px;
+  }
+
+  .category-card h3{
+    font-size:14px;
+  }
+
+  .category-card.general{
+    height:105px;
   }
 
   .hero h2{
-    font-size:36px;
+    font-size:34px;
   }
 
   .product-visual{
-    height:340px;
-    min-height:340px;
+    height:280px;
+    min-height:280px;
   }
 
   .product-visual img{
-    height:285px;
+    height:225px;
   }
 
 }
@@ -1556,7 +1850,6 @@ footer p{
 <!-- ================= HEADER ================= -->
 
 <header>
-
   <div class="header-inner">
 
     <div class="logo" onclick="scrollToStore()">
@@ -1573,23 +1866,18 @@ footer p{
 
     <div class="header-actions">
 
-      <button class="header-btn" onclick="openMobileMenu()">
-        ☰
-      </button>
+      <button class="header-btn" onclick="openMobileMenu()">☰</button>
 
       <button class="header-btn cart-btn" onclick="openCart()">
         🛍
         <span class="cart-count" id="cartCount">0</span>
       </button>
 
-      <button class="header-btn" onclick="openAdmin()">
-        ⚙
-      </button>
+      <button class="header-btn" onclick="openAdmin()">⚙</button>
 
     </div>
 
   </div>
-
 </header>
 
 <!-- ================= MOBILE MENU ================= -->
@@ -1644,52 +1932,52 @@ footer p{
     <h2>چهار اقلیم</h2>
 
     <p>
-      تجهیزات مناسب مسیر و طبیعت مورد علاقه‌ات
+      اقلیم مورد نظرت را انتخاب کن
     </p>
 
   </div>
 
   <div class="categories">
 
-    <div class="category-card" onclick="openClimate('کوهستان')">
-      <img
-        src="https://uploadkon.ir/uploads/6ee529_26file-000000007cd0820abf9566001640c595.png"
-        alt="کوهستان"
-      >
-      <div class="category-overlay">
-        <h3>کوهستان</h3>
-      </div>
-    </div>
+    <button
+      class="category-card mountain"
+      onclick="openClimate('کوهستان')"
+    >
+      <div class="category-icon">🏔️</div>
+      <h3>کوهستان</h3>
+    </button>
 
-    <div class="category-card" onclick="openClimate('جنگل')">
-      <img
-        src="https://uploadkon.ir/uploads/259f29_26file-000000001a0881f4b265165e92ba347e.png"
-        alt="جنگل"
-      >
-      <div class="category-overlay">
-        <h3>جنگل</h3>
-      </div>
-    </div>
+    <button
+      class="category-card forest"
+      onclick="openClimate('جنگل')"
+    >
+      <div class="category-icon">🌲</div>
+      <h3>جنگل</h3>
+    </button>
 
-    <div class="category-card" onclick="openClimate('کویر')">
-      <img
-        src="https://uploadkon.ir/uploads/b24529_26file-00000000bbb4820a9d88195cac3b22ba.png"
-        alt="کویر"
-      >
-      <div class="category-overlay">
-        <h3>کویر</h3>
-      </div>
-    </div>
+    <button
+      class="category-card desert"
+      onclick="openClimate('کویر')"
+    >
+      <div class="category-icon">🏜️</div>
+      <h3>کویر</h3>
+    </button>
 
-    <div class="category-card" onclick="openClimate('دریا')">
-      <img
-        src="https://uploadkon.ir/uploads/b6a529_26file-0000000050288210958d09b7e1206692.png"
-        alt="دریا"
-      >
-      <div class="category-overlay">
-        <h3>دریا</h3>
-      </div>
-    </div>
+    <button
+      class="category-card sea"
+      onclick="openClimate('دریا')"
+    >
+      <div class="category-icon">🌊</div>
+      <h3>دریا</h3>
+    </button>
+
+    <button
+      class="category-card general"
+      onclick="openClimate('عمومی')"
+    >
+      <div class="category-icon">🌈</div>
+      <h3>عمومی</h3>
+    </button>
 
   </div>
 
@@ -1728,29 +2016,12 @@ footer p{
 
         <select id="climateFilter" onchange="filterShop()">
 
-          <option value="همه">
-            همه اقلیم‌ها
-          </option>
-
-          <option value="کوهستان">
-            کوهستان
-          </option>
-
-          <option value="جنگل">
-            جنگل
-          </option>
-
-          <option value="کویر">
-            کویر
-          </option>
-
-          <option value="دریا">
-            دریا
-          </option>
-
-          <option value="عمومی">
-            عمومی
-          </option>
+          <option value="همه">همه اقلیم‌ها</option>
+          <option value="کوهستان">کوهستان</option>
+          <option value="جنگل">جنگل</option>
+          <option value="کویر">کویر</option>
+          <option value="دریا">دریا</option>
+          <option value="عمومی">عمومی</option>
 
         </select>
 
@@ -1852,9 +2123,7 @@ footer p{
 
 </footer>
 
-<!-- =================================================
-     PRODUCT PAGE
-================================================= -->
+<!-- ================= PRODUCT PAGE ================= -->
 
 <div class="product-page" id="productPage">
 
@@ -1885,6 +2154,7 @@ footer p{
           id="pageImage"
           src=""
           alt=""
+          onerror="productImageFallback(this)"
         >
 
       </div>
@@ -1910,10 +2180,7 @@ footer p{
           قیمت محصول
         </div>
 
-        <div
-          class="product-price-large"
-          id="pagePrice"
-        >
+        <div class="product-price-large" id="pagePrice">
           به‌زودی
         </div>
 
@@ -1969,9 +2236,7 @@ footer p{
 
   <div class="cart-header">
 
-    <h3>
-      سبد خرید
-    </h3>
+    <h3>سبد خرید</h3>
 
     <button
       class="cart-close"
@@ -1982,37 +2247,23 @@ footer p{
 
   </div>
 
-  <div
-    class="cart-items"
-    id="cartItems"
-  ></div>
+  <div class="cart-items" id="cartItems"></div>
 
-  <div
-    class="cart-summary"
-    id="cartSummary"
-  >
+  <div class="cart-summary" id="cartSummary">
 
     <div class="summary-row">
 
-      <span>
-        تعداد محصولات
-      </span>
+      <span>تعداد محصولات</span>
 
-      <strong id="summaryCount">
-        ۰
-      </strong>
+      <strong id="summaryCount">۰</strong>
 
     </div>
 
     <div class="summary-row total">
 
-      <span>
-        جمع کل
-      </span>
+      <span>جمع کل</span>
 
-      <strong id="summaryTotal">
-        به‌زودی
-      </strong>
+      <strong id="summaryTotal">به‌زودی</strong>
 
     </div>
 
@@ -2071,9 +2322,7 @@ footer p{
 
     <div class="admin-login-box">
 
-      <h2>
-        ورود مدیریت
-      </h2>
+      <h2>ورود مدیریت</h2>
 
       <input
         class="admin-input"
@@ -2115,9 +2364,7 @@ footer p{
 
     <div class="admin-top">
 
-      <h2>
-        مدیریت محصولات
-      </h2>
+      <h2>مدیریت محصولات</h2>
 
       <div class="admin-actions">
 
@@ -2192,25 +2439,11 @@ footer p{
       id="productClimate"
     >
 
-      <option value="کوهستان">
-        کوهستان
-      </option>
-
-      <option value="جنگل">
-        جنگل
-      </option>
-
-      <option value="کویر">
-        کویر
-      </option>
-
-      <option value="دریا">
-        دریا
-      </option>
-
-      <option value="عمومی">
-        عمومی
-      </option>
+      <option value="کوهستان">کوهستان</option>
+      <option value="جنگل">جنگل</option>
+      <option value="کویر">کویر</option>
+      <option value="دریا">دریا</option>
+      <option value="عمومی">عمومی</option>
 
     </select>
 
@@ -2270,10 +2503,7 @@ footer p{
 
 <!-- ================= TOAST ================= -->
 
-<div
-  class="toast"
-  id="toast"
-></div>
+<div class="toast" id="toast"></div>
 
 <script>
 
@@ -2377,6 +2607,16 @@ function showToast(message){
 }
 
 
+function productImageFallback(img){
+
+  img.onerror = null;
+
+  img.src =
+    "https://uploadkon.ir/uploads/b60929_26file-000000000cc8820ab8e50e624e626707.png";
+
+}
+
+
 /* =====================================================
    LOAD PRODUCTS
 ===================================================== */
@@ -2463,7 +2703,7 @@ function productCard(product){
           src="${image}"
           alt="${name}"
           loading="lazy"
-          onerror="this.src='https://uploadkon.ir/uploads/b60929_26file-000000000cc8820ab8e50e624e626707.png'"
+          onerror="productImageFallback(this)"
         >
 
       </div>
@@ -2514,7 +2754,7 @@ function productCard(product){
 
 
 /* =====================================================
-   RENDER
+   RENDER PRODUCTS
 ===================================================== */
 
 function renderProducts(list){
@@ -2631,14 +2871,20 @@ function openProductPage(id){
   document.getElementById("pageQuantity")
     .textContent = "۱";
 
-  document.getElementById("pageImage")
-    .src =
-      product.image ||
-      "https://uploadkon.ir/uploads/b60929_26file-000000000cc8820ab8e50e624e626707.png";
+  const image =
+    document.getElementById("pageImage");
 
-  document.getElementById("pageImage")
-    .alt =
-      product.name || "محصول";
+  image.onerror =
+    function(){
+      productImageFallback(this);
+    };
+
+  image.src =
+    product.image ||
+    "https://uploadkon.ir/uploads/b60929_26file-000000000cc8820ab8e50e624e626707.png";
+
+  image.alt =
+    product.name || "محصول";
 
   document.getElementById("pageName")
     .textContent =
@@ -2802,15 +3048,10 @@ function addToCart(id,showMessage=true){
     cart.push({
 
       id:product.id,
-
       name:product.name,
-
       image:product.image,
-
       price:product.price,
-
       climate:product.climate,
-
       quantity:1
 
     });
@@ -2895,6 +3136,7 @@ function renderCart(){
             <img
               src="${escapeHtml(image)}"
               alt="${escapeHtml(item.name)}"
+              onerror="productImageFallback(this)"
             >
 
           </div>
@@ -3105,19 +3347,13 @@ function closeCart(){
 function openClimate(climate){
 
   const panel =
-    document.getElementById(
-      "climatePanel"
-    );
+    document.getElementById("climatePanel");
 
   const title =
-    document.getElementById(
-      "climateTitle"
-    );
+    document.getElementById("climateTitle");
 
   const grid =
-    document.getElementById(
-      "climateProducts"
-    );
+    document.getElementById("climateProducts");
 
   title.textContent =
     climate;
@@ -3125,7 +3361,8 @@ function openClimate(climate){
   const list =
     products.filter(
       product =>
-        product.climate === climate
+        String(product.climate || "عمومی") ===
+        climate
     );
 
   if(!list.length){
@@ -3469,6 +3706,7 @@ async function loadAdminProducts(){
           <img
             src="${escapeHtml(image)}"
             alt="${escapeHtml(product.name)}"
+            onerror="productImageFallback(this)"
           >
 
           <div class="admin-product-info">
@@ -3832,6 +4070,8 @@ document.addEventListener(
 
       closeMobileMenu();
 
+      closeProductForm();
+
     }
 
   }
@@ -3860,4 +4100,4 @@ document.addEventListener(
 </script>
 
 </body>
-    </html>
+  </html>
