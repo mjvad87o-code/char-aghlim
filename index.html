@@ -15,6 +15,7 @@
 :root{
   --green:#103c2b;
   --green2:#174f38;
+  --green3:#28694d;
   --light-green:#88a967;
   --cream:#f5f7f2;
   --white:#fff;
@@ -22,7 +23,7 @@
   --gray:#6d7b72;
   --red:#b84b4b;
   --border:#e4e9e4;
-  --shadow:0 12px 35px rgba(16,60,43,.10);
+  --shadow:0 15px 45px rgba(16,60,43,.11);
 }
 
 *{
@@ -40,6 +41,10 @@ body{
   background:var(--cream);
   color:var(--text);
   overflow-x:hidden;
+}
+
+body.no-scroll{
+  overflow:hidden;
 }
 
 button,
@@ -115,7 +120,7 @@ header{
   border-radius:15px;
   background:rgba(255,255,255,.06);
   color:white;
-  font-size:22px;
+  font-size:21px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -349,11 +354,6 @@ section{
   margin-bottom:40px;
 }
 
-.search-box,
-.filter-box{
-  position:relative;
-}
-
 .search-box input,
 .filter-box select{
   width:100%;
@@ -373,8 +373,6 @@ section{
   border-color:var(--light-green);
 }
 
-/* ================= PRODUCTS ================= */
-
 .products-info{
   display:flex;
   justify-content:space-between;
@@ -389,6 +387,8 @@ section{
   gap:22px;
 }
 
+/* ================= PRODUCT CARD ================= */
+
 .product-card{
   background:white;
   border-radius:25px;
@@ -402,18 +402,19 @@ section{
 
 .product-card:hover{
   transform:translateY(-7px);
-  box-shadow:0 18px 40px rgba(16,60,43,.15);
+  box-shadow:0 20px 45px rgba(16,60,43,.16);
 }
 
 .product-image{
   width:100%;
   height:245px;
-  background:#f4f6f2;
+  background:
+    radial-gradient(circle at center,#ffffff 0%,#f0f4ef 100%);
   display:flex;
   align-items:center;
   justify-content:center;
   overflow:hidden;
-  padding:12px;
+  padding:16px;
 }
 
 .product-image img{
@@ -424,7 +425,7 @@ section{
 }
 
 .product-card:hover .product-image img{
-  transform:scale(1.04);
+  transform:scale(1.05);
 }
 
 .product-content{
@@ -503,139 +504,263 @@ section{
   color:var(--gray);
 }
 
-/* ================= PRODUCT DETAILS ================= */
+/* =====================================================
+   NEW PRODUCT PAGE
+===================================================== */
 
-.product-modal{
+.product-page{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.62);
-  backdrop-filter:blur(5px);
-  z-index:3000;
+  z-index:4000;
+  background:#f1f4ef;
   display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
+  overflow-y:auto;
 }
 
-.product-modal.active{
-  display:flex;
+.product-page.active{
+  display:block;
+  animation:pageFade .25s ease;
 }
 
-.product-modal-box{
-  width:100%;
-  max-width:900px;
-  max-height:92vh;
-  overflow:auto;
-  background:white;
-  border-radius:30px;
-  position:relative;
-  box-shadow:0 25px 70px rgba(0,0,0,.3);
-  animation:modalIn .25s ease;
-}
-
-@keyframes modalIn{
+@keyframes pageFade{
   from{
     opacity:0;
-    transform:translateY(20px) scale(.98);
   }
   to{
     opacity:1;
-    transform:none;
   }
 }
 
-.product-modal-close{
-  position:absolute;
-  top:17px;
-  left:17px;
-  z-index:2;
-  width:43px;
-  height:43px;
-  border:0;
-  border-radius:50%;
-  background:white;
-  box-shadow:0 4px 15px rgba(0,0,0,.12);
-  color:var(--green);
-  font-size:25px;
-}
-
-.product-detail{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-}
-
-.product-detail-image{
-  min-height:500px;
-  background:#f4f6f2;
+.product-page-top{
+  height:76px;
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:rgba(241,244,239,.9);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(16,60,43,.08);
   display:flex;
   align-items:center;
-  justify-content:center;
-  padding:30px;
+  justify-content:space-between;
+  padding:0 5%;
 }
 
-.product-detail-image img{
-  width:100%;
-  height:450px;
-  object-fit:contain;
-}
-
-.product-detail-content{
-  padding:50px 40px;
+.product-back{
+  border:0;
+  background:white;
+  color:var(--green);
+  height:45px;
+  padding:0 18px;
+  border-radius:14px;
   display:flex;
-  flex-direction:column;
-  justify-content:center;
+  align-items:center;
+  gap:8px;
+  font-weight:700;
+  box-shadow:0 5px 18px rgba(0,0,0,.06);
 }
 
-.detail-climate{
-  display:inline-flex;
-  width:max-content;
-  background:#edf3e9;
-  color:#507443;
-  padding:8px 15px;
-  border-radius:50px;
-  font-size:13px;
-  margin-bottom:18px;
-}
-
-.product-detail-content h2{
-  font-size:32px;
-  margin-bottom:18px;
-}
-
-.detail-description{
-  color:var(--gray);
-  line-height:2.1;
-  font-size:15px;
-  margin-bottom:25px;
-  white-space:pre-line;
-}
-
-.detail-price-label{
-  color:#89938d;
-  font-size:13px;
-}
-
-.detail-price{
-  font-size:25px;
-  color:var(--green2);
-  font-weight:800;
-  margin-top:5px;
-  margin-bottom:25px;
-}
-
-.detail-add{
-  width:100%;
-  height:55px;
+.product-page-cart{
+  border:0;
   background:var(--green);
   color:white;
-  border:0;
-  border-radius:16px;
-  font-size:16px;
+  height:45px;
+  padding:0 17px;
+  border-radius:14px;
   font-weight:700;
 }
 
-.detail-add:hover{
+.product-page-inner{
+  max-width:1180px;
+  margin:auto;
+  padding:35px 25px 70px;
+}
+
+.product-page-card{
+  background:white;
+  border-radius:35px;
+  overflow:hidden;
+  box-shadow:0 20px 60px rgba(16,60,43,.11);
+  display:grid;
+  grid-template-columns:1.08fr .92fr;
+  min-height:650px;
+}
+
+/* تصویر */
+
+.product-visual{
+  position:relative;
+  min-height:650px;
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      #ffffff 0%,
+      #f5f7f3 45%,
+      #e8eee7 100%
+    );
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:50px;
+  overflow:hidden;
+}
+
+.product-visual::before{
+  content:"";
+  position:absolute;
+  width:390px;
+  height:390px;
+  border-radius:50%;
+  border:1px solid rgba(16,60,43,.08);
+}
+
+.product-visual::after{
+  content:"";
+  position:absolute;
+  width:470px;
+  height:470px;
+  border-radius:50%;
+  border:1px solid rgba(16,60,43,.045);
+}
+
+.product-visual img{
+  position:relative;
+  z-index:2;
+  width:100%;
+  max-width:520px;
+  height:520px;
+  object-fit:contain;
+  filter:drop-shadow(0 22px 25px rgba(0,0,0,.13));
+  transition:.4s;
+}
+
+.product-visual img:hover{
+  transform:scale(1.035);
+}
+
+.visual-climate{
+  position:absolute;
+  top:25px;
+  right:25px;
+  z-index:3;
+  background:rgba(16,60,43,.92);
+  color:white;
+  padding:10px 17px;
+  border-radius:50px;
+  font-size:13px;
+  box-shadow:0 7px 20px rgba(0,0,0,.1);
+}
+
+/* اطلاعات */
+
+.product-info-panel{
+  padding:65px 55px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  background:white;
+}
+
+.product-small-label{
+  color:#78917f;
+  font-size:12px;
+  margin-bottom:12px;
+}
+
+.product-info-panel h1{
+  font-size:42px;
+  line-height:1.35;
+  font-weight:800;
+  color:var(--text);
+  margin-bottom:22px;
+}
+
+.product-description-large{
+  color:#64736b;
+  line-height:2.2;
+  font-size:15px;
+  white-space:pre-line;
+  margin-bottom:32px;
+}
+
+.product-divider{
+  width:100%;
+  height:1px;
+  background:#e9ede9;
+  margin-bottom:25px;
+}
+
+.product-price-title{
+  color:#87938c;
+  font-size:12px;
+  margin-bottom:5px;
+}
+
+.product-price-large{
+  color:var(--green2);
+  font-size:31px;
+  font-weight:800;
+  margin-bottom:25px;
+}
+
+.product-buy-row{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.quantity-box{
+  height:57px;
+  border:1px solid #dfe6df;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  padding:0 7px;
+  background:#fafcf9;
+}
+
+.quantity-box button{
+  width:43px;
+  height:43px;
+  border:0;
+  background:white;
+  border-radius:12px;
+  color:var(--green);
+  font-size:21px;
+  font-weight:700;
+}
+
+.quantity-box span{
+  min-width:42px;
+  text-align:center;
+  font-weight:700;
+}
+
+.product-add-large{
+  flex:1;
+  height:57px;
+  border:0;
+  border-radius:16px;
+  background:var(--green);
+  color:white;
+  font-size:15px;
+  font-weight:800;
+  transition:.25s;
+  box-shadow:0 9px 22px rgba(16,60,43,.2);
+}
+
+.product-add-large:hover{
   background:var(--green2);
+  transform:translateY(-2px);
+}
+
+.product-note{
+  margin-top:18px;
+  padding:13px 15px;
+  border-radius:13px;
+  background:#f2f6f1;
+  color:#6e7d74;
+  font-size:12px;
+  line-height:1.8;
 }
 
 /* ================= CART ================= */
@@ -647,7 +772,7 @@ section{
   width:min(430px,94vw);
   height:100vh;
   background:white;
-  z-index:2500;
+  z-index:5000;
   box-shadow:10px 0 40px rgba(0,0,0,.2);
   transition:.35s;
   display:flex;
@@ -801,13 +926,11 @@ section{
   margin-top:12px;
 }
 
-/* ================= CART OVERLAY ================= */
-
 .cart-overlay{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.45);
-  z-index:2400;
+  z-index:4900;
   display:none;
 }
 
@@ -891,7 +1014,7 @@ footer p{
   position:fixed;
   inset:0;
   background:var(--cream);
-  z-index:2200;
+  z-index:4500;
   display:none;
   overflow-y:auto;
 }
@@ -937,7 +1060,7 @@ footer p{
   position:fixed;
   inset:0;
   background:#f4f6f2;
-  z-index:5000;
+  z-index:7000;
   display:none;
   overflow-y:auto;
 }
@@ -1097,7 +1220,7 @@ footer p{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.55);
-  z-index:6000;
+  z-index:8000;
   display:none;
   align-items:center;
   justify-content:center;
@@ -1201,6 +1324,7 @@ footer p{
 /* ================= RESPONSIVE ================= */
 
 @media(max-width:1000px){
+
   .products-grid{
     grid-template-columns:repeat(3,1fr);
   }
@@ -1212,6 +1336,19 @@ footer p{
   .desktop-nav{
     display:none;
   }
+
+  .product-page-card{
+    grid-template-columns:1fr;
+  }
+
+  .product-visual{
+    min-height:500px;
+  }
+
+  .product-info-panel{
+    padding:45px;
+  }
+
 }
 
 @media(max-width:700px){
@@ -1227,10 +1364,6 @@ footer p{
 
   .logo span{
     font-size:9px;
-  }
-
-  .header-actions{
-    order:2;
   }
 
   .header-inner{
@@ -1280,13 +1413,8 @@ footer p{
     gap:18px;
   }
 
-  .product-card{
-    border-radius:23px;
-  }
-
   .product-image{
     height:270px;
-    padding:15px;
   }
 
   .product-content{
@@ -1297,29 +1425,78 @@ footer p{
     font-size:20px;
   }
 
-  .product-description{
-    min-height:auto;
+  /* صفحه محصول موبایل */
+
+  .product-page-top{
+    height:68px;
+    padding:0 15px;
   }
 
-  .product-detail{
-    grid-template-columns:1fr;
+  .product-page-inner{
+    padding:0 0 30px;
   }
 
-  .product-detail-image{
-    min-height:300px;
-    padding:20px;
+  .product-page-card{
+    border-radius:0;
+    display:block;
+    min-height:0;
+    box-shadow:none;
   }
 
-  .product-detail-image img{
-    height:300px;
+  .product-visual{
+    height:390px;
+    min-height:390px;
+    padding:35px;
   }
 
-  .product-detail-content{
-    padding:28px 23px 30px;
+  .product-visual img{
+    height:330px;
   }
 
-  .product-detail-content h2{
-    font-size:26px;
+  .product-visual::before{
+    width:260px;
+    height:260px;
+  }
+
+  .product-visual::after{
+    width:330px;
+    height:330px;
+  }
+
+  .visual-climate{
+    top:18px;
+    right:18px;
+  }
+
+  .product-info-panel{
+    padding:30px 22px 35px;
+  }
+
+  .product-info-panel h1{
+    font-size:30px;
+  }
+
+  .product-description-large{
+    font-size:14px;
+    line-height:2.1;
+  }
+
+  .product-price-large{
+    font-size:27px;
+  }
+
+  .product-buy-row{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .quantity-box{
+    justify-content:center;
+    width:100%;
+  }
+
+  .product-add-large{
+    width:100%;
   }
 
   .features{
@@ -1340,14 +1517,10 @@ footer p{
     flex-direction:column;
   }
 
-  .admin-product img{
-    width:55px;
-    height:55px;
-  }
 }
 
-/* برای موبایل‌های خیلی کوچک */
 @media(max-width:390px){
+
   .header-btn{
     width:43px;
     height:43px;
@@ -1364,6 +1537,16 @@ footer p{
   .hero h2{
     font-size:36px;
   }
+
+  .product-visual{
+    height:340px;
+    min-height:340px;
+  }
+
+  .product-visual img{
+    height:285px;
+  }
+
 }
 </style>
 </head>
@@ -1373,6 +1556,7 @@ footer p{
 <!-- ================= HEADER ================= -->
 
 <header>
+
   <div class="header-inner">
 
     <div class="logo" onclick="scrollToStore()">
@@ -1389,22 +1573,23 @@ footer p{
 
     <div class="header-actions">
 
-      <button class="header-btn" onclick="openMobileMenu()" aria-label="منو">
+      <button class="header-btn" onclick="openMobileMenu()">
         ☰
       </button>
 
-      <button class="header-btn cart-btn" onclick="openCart()" aria-label="سبد خرید">
+      <button class="header-btn cart-btn" onclick="openCart()">
         🛍
         <span class="cart-count" id="cartCount">0</span>
       </button>
 
-      <button class="header-btn" onclick="openAdmin()" aria-label="مدیریت">
+      <button class="header-btn" onclick="openAdmin()">
         ⚙
       </button>
 
     </div>
 
   </div>
+
 </header>
 
 <!-- ================= MOBILE MENU ================= -->
@@ -1455,35 +1640,52 @@ footer p{
 <section id="categories">
 
   <div class="section-title">
+
     <h2>چهار اقلیم</h2>
-    <p>تجهیزات مناسب مسیر و طبیعت مورد علاقه‌ات</p>
+
+    <p>
+      تجهیزات مناسب مسیر و طبیعت مورد علاقه‌ات
+    </p>
+
   </div>
 
   <div class="categories">
 
     <div class="category-card" onclick="openClimate('کوهستان')">
-      <img src="https://uploadkon.ir/uploads/6ee529_26file-000000007cd0820abf9566001640c595.png" alt="کوهستان">
+      <img
+        src="https://uploadkon.ir/uploads/6ee529_26file-000000007cd0820abf9566001640c595.png"
+        alt="کوهستان"
+      >
       <div class="category-overlay">
         <h3>کوهستان</h3>
       </div>
     </div>
 
     <div class="category-card" onclick="openClimate('جنگل')">
-      <img src="https://uploadkon.ir/uploads/259f29_26file-000000001a0881f4b265165e92ba347e.png" alt="جنگل">
+      <img
+        src="https://uploadkon.ir/uploads/259f29_26file-000000001a0881f4b265165e92ba347e.png"
+        alt="جنگل"
+      >
       <div class="category-overlay">
         <h3>جنگل</h3>
       </div>
     </div>
 
     <div class="category-card" onclick="openClimate('کویر')">
-      <img src="https://uploadkon.ir/uploads/b24529_26file-00000000bbb4820a9d88195cac3b22ba.png" alt="کویر">
+      <img
+        src="https://uploadkon.ir/uploads/b24529_26file-00000000bbb4820a9d88195cac3b22ba.png"
+        alt="کویر"
+      >
       <div class="category-overlay">
         <h3>کویر</h3>
       </div>
     </div>
 
     <div class="category-card" onclick="openClimate('دریا')">
-      <img src="https://uploadkon.ir/uploads/b6a529_26file-0000000050288210958d09b7e1206692.png" alt="دریا">
+      <img
+        src="https://uploadkon.ir/uploads/b6a529_26file-0000000050288210958d09b7e1206692.png"
+        alt="دریا"
+      >
       <div class="category-overlay">
         <h3>دریا</h3>
       </div>
@@ -1500,36 +1702,66 @@ footer p{
   <div class="store-container">
 
     <div class="section-title">
+
       <h2>فروشگاه</h2>
-      <p>تجهیزاتت را برای مسیر بعدی انتخاب کن</p>
+
+      <p>
+        تجهیزاتت را برای مسیر بعدی انتخاب کن
+      </p>
+
     </div>
 
     <div class="store-tools">
 
       <div class="search-box">
+
         <input
           type="search"
           id="searchInput"
           placeholder="جستجوی محصول..."
           oninput="filterShop()"
         >
+
       </div>
 
       <div class="filter-box">
+
         <select id="climateFilter" onchange="filterShop()">
-          <option value="همه">همه اقلیم‌ها</option>
-          <option value="کوهستان">کوهستان</option>
-          <option value="جنگل">جنگل</option>
-          <option value="کویر">کویر</option>
-          <option value="دریا">دریا</option>
-          <option value="عمومی">عمومی</option>
+
+          <option value="همه">
+            همه اقلیم‌ها
+          </option>
+
+          <option value="کوهستان">
+            کوهستان
+          </option>
+
+          <option value="جنگل">
+            جنگل
+          </option>
+
+          <option value="کویر">
+            کویر
+          </option>
+
+          <option value="دریا">
+            دریا
+          </option>
+
+          <option value="عمومی">
+            عمومی
+          </option>
+
         </select>
+
       </div>
 
     </div>
 
     <div class="products-info">
-      <span id="productsCount">در حال بارگذاری...</span>
+      <span id="productsCount">
+        در حال بارگذاری...
+      </span>
     </div>
 
     <div class="products-grid" id="productsGrid"></div>
@@ -1543,15 +1775,22 @@ footer p{
 <section>
 
   <div class="section-title">
+
     <h2>چرا چهار اقلیم؟</h2>
-    <p>برای ماجراجویی آماده‌تر باش</p>
+
+    <p>
+      برای ماجراجویی آماده‌تر باش
+    </p>
+
   </div>
 
   <div class="features">
 
     <div class="feature">
       <div class="feature-icon">🏕️</div>
+
       <h3>برای طبیعت</h3>
+
       <p>
         تجهیزات کاربردی برای کمپینگ،
         سفر و طبیعت‌گردی.
@@ -1560,7 +1799,9 @@ footer p{
 
     <div class="feature">
       <div class="feature-icon">🧭</div>
+
       <h3>چهار اقلیم</h3>
+
       <p>
         محصولات بر اساس کوهستان،
         جنگل، کویر و دریا.
@@ -1569,7 +1810,9 @@ footer p{
 
     <div class="feature">
       <div class="feature-icon">🎒</div>
+
       <h3>ماجراجویی بیشتر</h3>
+
       <p>
         وسایلی برای اینکه با خیال راحت‌تر
         مسیر بعدی را شروع کنی.
@@ -1609,46 +1852,102 @@ footer p{
 
 </footer>
 
-<!-- ================= PRODUCT DETAILS ================= -->
+<!-- =================================================
+     PRODUCT PAGE
+================================================= -->
 
-<div class="product-modal" id="productModal">
+<div class="product-page" id="productPage">
 
-  <div class="product-modal-box">
+  <div class="product-page-top">
 
-    <button class="product-modal-close" onclick="closeProductModal()">
-      ×
+    <button class="product-back" onclick="closeProductPage()">
+      ← بازگشت
     </button>
 
-    <div class="product-detail">
+    <button class="product-page-cart" onclick="openCartFromProduct()">
+      🛍 سبد خرید
+      <span id="productPageCartCount">۰</span>
+    </button>
 
-      <div class="product-detail-image">
-        <img id="detailImage" src="" alt="">
-      </div>
+  </div>
 
-      <div class="product-detail-content">
+  <div class="product-page-inner">
 
-        <span class="detail-climate" id="detailClimate">
+    <div class="product-page-card">
+
+      <div class="product-visual">
+
+        <span class="visual-climate" id="pageClimate">
           اقلیم
         </span>
 
-        <h2 id="detailName">
-          محصول
-        </h2>
+        <img
+          id="pageImage"
+          src=""
+          alt=""
+        >
 
-        <p class="detail-description" id="detailDescription">
-        </p>
+      </div>
 
-        <span class="detail-price-label">
-          قیمت
+      <div class="product-info-panel">
+
+        <span class="product-small-label">
+          تجهیزات چهار اقلیم
         </span>
 
-        <div class="detail-price" id="detailPrice">
+        <h1 id="pageName">
+          محصول
+        </h1>
+
+        <p
+          class="product-description-large"
+          id="pageDescription"
+        ></p>
+
+        <div class="product-divider"></div>
+
+        <div class="product-price-title">
+          قیمت محصول
+        </div>
+
+        <div
+          class="product-price-large"
+          id="pagePrice"
+        >
           به‌زودی
         </div>
 
-        <button class="detail-add" id="detailAddButton">
-          افزودن به سبد
-        </button>
+        <div class="product-buy-row">
+
+          <div class="quantity-box">
+
+            <button onclick="changePageQuantity(-1)">
+              −
+            </button>
+
+            <span id="pageQuantity">
+              ۱
+            </span>
+
+            <button onclick="changePageQuantity(1)">
+              +
+            </button>
+
+          </div>
+
+          <button
+            class="product-add-large"
+            onclick="addPageProductToCart()"
+          >
+            🛒 افزودن به سبد
+          </button>
+
+        </div>
+
+        <div class="product-note">
+          محصول را انتخاب کن، تعداد را مشخص کن و
+          آن را به سبد خرید اضافه کن.
+        </div>
 
       </div>
 
@@ -1660,36 +1959,67 @@ footer p{
 
 <!-- ================= CART ================= -->
 
-<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div
+  class="cart-overlay"
+  id="cartOverlay"
+  onclick="closeCart()"
+></div>
 
 <div class="cart-panel" id="cartPanel">
 
   <div class="cart-header">
 
-    <h3>سبد خرید</h3>
+    <h3>
+      سبد خرید
+    </h3>
 
-    <button class="cart-close" onclick="closeCart()">
+    <button
+      class="cart-close"
+      onclick="closeCart()"
+    >
       ×
     </button>
 
   </div>
 
-  <div class="cart-items" id="cartItems">
-  </div>
+  <div
+    class="cart-items"
+    id="cartItems"
+  ></div>
 
-  <div class="cart-summary" id="cartSummary">
+  <div
+    class="cart-summary"
+    id="cartSummary"
+  >
 
     <div class="summary-row">
-      <span>تعداد محصولات</span>
-      <strong id="summaryCount">۰</strong>
+
+      <span>
+        تعداد محصولات
+      </span>
+
+      <strong id="summaryCount">
+        ۰
+      </strong>
+
     </div>
 
     <div class="summary-row total">
-      <span>جمع کل</span>
-      <strong id="summaryTotal">به‌زودی</strong>
+
+      <span>
+        جمع کل
+      </span>
+
+      <strong id="summaryTotal">
+        به‌زودی
+      </strong>
+
     </div>
 
-    <button class="clear-cart" onclick="clearCart()">
+    <button
+      class="clear-cart"
+      onclick="clearCart()"
+    >
       خالی کردن سبد
     </button>
 
@@ -1699,7 +2029,10 @@ footer p{
 
 <!-- ================= CLIMATE PANEL ================= -->
 
-<div class="climate-panel" id="climatePanel">
+<div
+  class="climate-panel"
+  id="climatePanel"
+>
 
   <div class="climate-header">
 
@@ -1715,22 +2048,32 @@ footer p{
 
   <div class="climate-content">
 
-    <div class="products-grid" id="climateProducts">
-    </div>
+    <div
+      class="products-grid"
+      id="climateProducts"
+    ></div>
 
   </div>
 
 </div>
 
-<!-- ================= ADMIN PANEL ================= -->
+<!-- ================= ADMIN ================= -->
 
-<div class="admin-panel" id="adminPanel">
+<div
+  class="admin-panel"
+  id="adminPanel"
+>
 
-  <div class="admin-login" id="adminLoginBox">
+  <div
+    class="admin-login"
+    id="adminLoginBox"
+  >
 
     <div class="admin-login-box">
 
-      <h2>ورود مدیریت</h2>
+      <h2>
+        ورود مدیریت
+      </h2>
 
       <input
         class="admin-input"
@@ -1746,11 +2089,17 @@ footer p{
         placeholder="رمز عبور"
       >
 
-      <button class="admin-primary" onclick="adminLogin()">
+      <button
+        class="admin-primary"
+        onclick="adminLogin()"
+      >
         ورود
       </button>
 
-      <button class="admin-close" onclick="closeAdmin()">
+      <button
+        class="admin-close"
+        onclick="closeAdmin()"
+      >
         بازگشت به سایت
       </button>
 
@@ -1758,23 +2107,38 @@ footer p{
 
   </div>
 
-  <div class="admin-dashboard" id="adminDashboard" style="display:none">
+  <div
+    class="admin-dashboard"
+    id="adminDashboard"
+    style="display:none"
+  >
 
     <div class="admin-top">
 
-      <h2>مدیریت محصولات</h2>
+      <h2>
+        مدیریت محصولات
+      </h2>
 
       <div class="admin-actions">
 
-        <button class="admin-small-btn" onclick="openProductForm()">
+        <button
+          class="admin-small-btn"
+          onclick="openProductForm()"
+        >
           + محصول جدید
         </button>
 
-        <button class="admin-small-btn logout" onclick="adminLogout()">
+        <button
+          class="admin-small-btn logout"
+          onclick="adminLogout()"
+        >
           خروج
         </button>
 
-        <button class="admin-small-btn" onclick="closeAdmin()">
+        <button
+          class="admin-small-btn"
+          onclick="closeAdmin()"
+        >
           بستن
         </button>
 
@@ -1782,8 +2146,10 @@ footer p{
 
     </div>
 
-    <div class="admin-products" id="adminProducts">
-    </div>
+    <div
+      class="admin-products"
+      id="adminProducts"
+    ></div>
 
   </div>
 
@@ -1791,7 +2157,10 @@ footer p{
 
 <!-- ================= PRODUCT FORM ================= -->
 
-<div class="product-form-modal" id="productFormModal">
+<div
+  class="product-form-modal"
+  id="productFormModal"
+>
 
   <div class="product-form-box">
 
@@ -1799,32 +2168,76 @@ footer p{
       افزودن محصول
     </h2>
 
-    <input type="hidden" id="productId">
+    <input
+      type="hidden"
+      id="productId"
+    >
 
-    <label class="form-label">نام محصول</label>
-    <input class="form-input" id="productName" placeholder="مثلاً چراغ قوه جیبی">
+    <label class="form-label">
+      نام محصول
+    </label>
 
-    <label class="form-label">اقلیم</label>
+    <input
+      class="form-input"
+      id="productName"
+      placeholder="مثلاً چراغ قوه جیبی"
+    >
 
-    <select class="form-select" id="productClimate">
-      <option value="کوهستان">کوهستان</option>
-      <option value="جنگل">جنگل</option>
-      <option value="کویر">کویر</option>
-      <option value="دریا">دریا</option>
-      <option value="عمومی">عمومی</option>
+    <label class="form-label">
+      اقلیم
+    </label>
+
+    <select
+      class="form-select"
+      id="productClimate"
+    >
+
+      <option value="کوهستان">
+        کوهستان
+      </option>
+
+      <option value="جنگل">
+        جنگل
+      </option>
+
+      <option value="کویر">
+        کویر
+      </option>
+
+      <option value="دریا">
+        دریا
+      </option>
+
+      <option value="عمومی">
+        عمومی
+      </option>
+
     </select>
 
-    <label class="form-label">لینک تصویر</label>
-    <input class="form-input" id="productImage" placeholder="https://...">
+    <label class="form-label">
+      لینک تصویر
+    </label>
 
-    <label class="form-label">توضیحات</label>
+    <input
+      class="form-input"
+      id="productImage"
+      placeholder="https://..."
+    >
+
+    <label class="form-label">
+      توضیحات
+    </label>
+
     <textarea
       class="form-textarea"
       id="productDescription"
       placeholder="توضیحات کامل محصول..."
     ></textarea>
 
-    <label class="form-label">قیمت به تومان</label>
+    <label class="form-label">
+      قیمت به تومان
+    </label>
+
     <input
       class="form-input"
       id="productPrice"
@@ -1835,11 +2248,17 @@ footer p{
 
     <div class="form-buttons">
 
-      <button class="form-save" onclick="saveProduct()">
+      <button
+        class="form-save"
+        onclick="saveProduct()"
+      >
         ذخیره محصول
       </button>
 
-      <button class="form-cancel" onclick="closeProductForm()">
+      <button
+        class="form-cancel"
+        onclick="closeProductForm()"
+      >
         انصراف
       </button>
 
@@ -1851,7 +2270,10 @@ footer p{
 
 <!-- ================= TOAST ================= -->
 
-<div class="toast" id="toast"></div>
+<div
+  class="toast"
+  id="toast"
+></div>
 
 <script>
 
@@ -1866,7 +2288,10 @@ const SUPABASE_KEY =
   "sb_publishable_6sNq0COlyIB4up8s-_H7Zg_Tz7b91ub";
 
 const supabaseClient =
-  supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
 
 /* =====================================================
@@ -1874,8 +2299,15 @@ const supabaseClient =
 ===================================================== */
 
 let products = [];
-let cart = JSON.parse(localStorage.getItem("fourAghlimCart") || "[]");
+
+let cart =
+  JSON.parse(
+    localStorage.getItem("fourAghlimCart") || "[]"
+  );
+
 let selectedProduct = null;
+
+let pageQuantity = 1;
 
 
 /* =====================================================
@@ -1918,14 +2350,16 @@ function formatPrice(value){
   }
 
   return Number(value)
-    .toLocaleString("fa-IR") + " تومان";
+    .toLocaleString("fa-IR") +
+    " تومان";
 
 }
 
 
 function showToast(message){
 
-  const toast = document.getElementById("toast");
+  const toast =
+    document.getElementById("toast");
 
   toast.textContent = message;
 
@@ -1933,9 +2367,12 @@ function showToast(message){
 
   clearTimeout(window.toastTimer);
 
-  window.toastTimer = setTimeout(() => {
-    toast.classList.remove("show");
-  },2500);
+  window.toastTimer =
+    setTimeout(() => {
+
+      toast.classList.remove("show");
+
+    },2500);
 
 }
 
@@ -1946,7 +2383,8 @@ function showToast(message){
 
 async function loadProducts(){
 
-  const grid = document.getElementById("productsGrid");
+  const grid =
+    document.getElementById("productsGrid");
 
   grid.innerHTML = `
     <div class="no-products">
@@ -1954,10 +2392,14 @@ async function loadProducts(){
     </div>
   `;
 
-  const { data, error } = await supabaseClient
-    .from("products")
-    .select("*")
-    .order("created_at",{ascending:false});
+  const { data,error } =
+    await supabaseClient
+      .from("products")
+      .select("*")
+      .order(
+        "created_at",
+        {ascending:false}
+      );
 
   if(error){
 
@@ -1969,7 +2411,9 @@ async function loadProducts(){
       </div>
     `;
 
-    showToast("خطا در دریافت محصولات");
+    showToast(
+      "خطا در دریافت محصولات"
+    );
 
     return;
   }
@@ -1987,21 +2431,30 @@ async function loadProducts(){
 
 function productCard(product){
 
-  const image = product.image
-    ? escapeHtml(product.image)
-    : "https://uploadkon.ir/uploads/b60929_26file-000000000cc8820ab8e50e624e626707.png";
+  const image =
+    product.image
+      ? escapeHtml(product.image)
+      : "https://uploadkon.ir/uploads/b60929_26file-000000000cc8820ab8e50e624e626707.png";
 
-  const name = escapeHtml(product.name);
-  const climate = escapeHtml(product.climate || "عمومی");
-  const description = escapeHtml(
-    product.description || "توضیحی برای این محصول ثبت نشده است."
-  );
+  const name =
+    escapeHtml(product.name);
+
+  const climate =
+    escapeHtml(
+      product.climate || "عمومی"
+    );
+
+  const description =
+    escapeHtml(
+      product.description ||
+      "توضیحی برای این محصول ثبت نشده است."
+    );
 
   return `
 
     <article
       class="product-card"
-      onclick="openProductDetails('${product.id}')"
+      onclick="openProductPage('${product.id}')"
     >
 
       <div class="product-image">
@@ -2041,7 +2494,10 @@ function productCard(product){
 
           <button
             class="add-cart-btn"
-            onclick="event.stopPropagation(); addToCart('${product.id}')"
+            onclick="
+              event.stopPropagation();
+              addToCart('${product.id}')
+            "
           >
             افزودن به سبد
           </button>
@@ -2058,13 +2514,16 @@ function productCard(product){
 
 
 /* =====================================================
-   RENDER PRODUCTS
+   RENDER
 ===================================================== */
 
 function renderProducts(list){
 
-  const grid = document.getElementById("productsGrid");
-  const count = document.getElementById("productsCount");
+  const grid =
+    document.getElementById("productsGrid");
+
+  const count =
+    document.getElementById("productsCount");
 
   count.textContent =
     `${Number(list.length).toLocaleString("fa-IR")} محصول`;
@@ -2080,49 +2539,63 @@ function renderProducts(list){
     return;
   }
 
-  grid.innerHTML = list.map(productCard).join("");
+  grid.innerHTML =
+    list.map(productCard).join("");
 
 }
 
 
 /* =====================================================
-   SEARCH + FILTER
+   SEARCH
 ===================================================== */
 
 function filterShop(){
 
   const search =
-    document.getElementById("searchInput")
+    document
+      .getElementById("searchInput")
       .value
       .trim()
       .toLowerCase();
 
   const climate =
-    document.getElementById("climateFilter").value;
+    document
+      .getElementById("climateFilter")
+      .value;
 
-  const filtered = products.filter(product => {
+  const filtered =
+    products.filter(product => {
 
-    const name =
-      String(product.name || "").toLowerCase();
+      const name =
+        String(
+          product.name || ""
+        ).toLowerCase();
 
-    const description =
-      String(product.description || "").toLowerCase();
+      const description =
+        String(
+          product.description || ""
+        ).toLowerCase();
 
-    const productClimate =
-      String(product.climate || "");
+      const productClimate =
+        String(
+          product.climate || ""
+        );
 
-    const searchMatch =
-      !search ||
-      name.includes(search) ||
-      description.includes(search);
+      const searchMatch =
+        !search ||
+        name.includes(search) ||
+        description.includes(search);
 
-    const climateMatch =
-      climate === "همه" ||
-      productClimate === climate;
+      const climateMatch =
+        climate === "همه" ||
+        productClimate === climate;
 
-    return searchMatch && climateMatch;
+      return (
+        searchMatch &&
+        climateMatch
+      );
 
-  });
+    });
 
   renderProducts(filtered);
 
@@ -2130,63 +2603,152 @@ function filterShop(){
 
 
 /* =====================================================
-   PRODUCT DETAILS
+   PRODUCT PAGE
 ===================================================== */
 
-function openProductDetails(id){
+function openProductPage(id){
 
   const product =
-    products.find(item => String(item.id) === String(id));
+    products.find(
+      item =>
+        String(item.id) ===
+        String(id)
+    );
 
   if(!product){
-    showToast("محصول پیدا نشد");
+
+    showToast(
+      "محصول پیدا نشد"
+    );
+
     return;
   }
 
   selectedProduct = product;
 
-  document.getElementById("detailImage").src =
-    product.image ||
-    "https://uploadkon.ir/uploads/b60929_26file-000000000cc8820ab8e50e624e626707.png";
+  pageQuantity = 1;
 
-  document.getElementById("detailImage").alt =
-    product.name || "محصول";
+  document.getElementById("pageQuantity")
+    .textContent = "۱";
 
-  document.getElementById("detailName").textContent =
-    product.name || "محصول";
+  document.getElementById("pageImage")
+    .src =
+      product.image ||
+      "https://uploadkon.ir/uploads/b60929_26file-000000000cc8820ab8e50e624e626707.png";
 
-  document.getElementById("detailClimate").textContent =
-    product.climate || "عمومی";
+  document.getElementById("pageImage")
+    .alt =
+      product.name || "محصول";
 
-  document.getElementById("detailDescription").textContent =
-    product.description ||
-    "توضیحی برای این محصول ثبت نشده است.";
+  document.getElementById("pageName")
+    .textContent =
+      product.name || "محصول";
 
-  document.getElementById("detailPrice").textContent =
-    formatPrice(product.price);
+  document.getElementById("pageClimate")
+    .textContent =
+      product.climate || "عمومی";
 
-  document.getElementById("detailAddButton").onclick =
-    function(){
+  document.getElementById("pageDescription")
+    .textContent =
+      product.description ||
+      "توضیحی برای این محصول ثبت نشده است.";
 
-      addToCart(product.id);
-      closeProductModal();
+  document.getElementById("pagePrice")
+    .textContent =
+      formatPrice(product.price);
 
-    };
+  updateProductPageCartCount();
 
-  document.getElementById("productModal")
+  document.getElementById("productPage")
     .classList.add("active");
 
-  document.body.style.overflow = "hidden";
+  document.body.classList.add("no-scroll");
+
+  window.scrollTo(0,0);
 
 }
 
 
-function closeProductModal(){
+function closeProductPage(){
 
-  document.getElementById("productModal")
+  document.getElementById("productPage")
     .classList.remove("active");
 
-  document.body.style.overflow = "";
+  document.body.classList.remove("no-scroll");
+
+  selectedProduct = null;
+
+}
+
+
+function changePageQuantity(change){
+
+  pageQuantity += change;
+
+  if(pageQuantity < 1){
+    pageQuantity = 1;
+  }
+
+  if(pageQuantity > 99){
+    pageQuantity = 99;
+  }
+
+  document.getElementById("pageQuantity")
+    .textContent =
+    pageQuantity.toLocaleString("fa-IR");
+
+}
+
+
+function addPageProductToCart(){
+
+  if(!selectedProduct){
+    return;
+  }
+
+  for(let i=0;i<pageQuantity;i++){
+
+    addToCart(
+      selectedProduct.id,
+      false
+    );
+
+  }
+
+  showToast(
+    `${pageQuantity.toLocaleString("fa-IR")} عدد به سبد اضافه شد`
+  );
+
+  closeProductPage();
+
+}
+
+
+function openCartFromProduct(){
+
+  closeProductPage();
+
+  setTimeout(() => {
+    openCart();
+  },150);
+
+}
+
+
+function updateProductPageCartCount(){
+
+  const count =
+    cart.reduce(
+      (sum,item) =>
+        sum +
+        Number(item.quantity || 0),
+      0
+    );
+
+  document.getElementById(
+    "productPageCartCount"
+  ).textContent =
+    count.toLocaleString("fa-IR");
 
 }
 
@@ -2205,18 +2767,31 @@ function saveCart(){
 }
 
 
-function addToCart(id){
+function addToCart(id,showMessage=true){
 
   const product =
-    products.find(item => String(item.id) === String(id));
+    products.find(
+      item =>
+        String(item.id) ===
+        String(id)
+    );
 
   if(!product){
-    showToast("محصول پیدا نشد");
+
+    showToast(
+      "محصول پیدا نشد"
+    );
+
     return;
+
   }
 
   const existing =
-    cart.find(item => String(item.id) === String(id));
+    cart.find(
+      item =>
+        String(item.id) ===
+        String(id)
+    );
 
   if(existing){
 
@@ -2227,10 +2802,15 @@ function addToCart(id){
     cart.push({
 
       id:product.id,
+
       name:product.name,
+
       image:product.image,
+
       price:product.price,
+
       climate:product.climate,
+
       quantity:1
 
     });
@@ -2238,10 +2818,20 @@ function addToCart(id){
   }
 
   saveCart();
+
   updateCartCount();
+
+  updateProductPageCartCount();
+
   renderCart();
 
-  showToast("محصول به سبد اضافه شد");
+  if(showMessage){
+
+    showToast(
+      "محصول به سبد اضافه شد"
+    );
+
+  }
 
 }
 
@@ -2250,7 +2840,9 @@ function updateCartCount(){
 
   const count =
     cart.reduce(
-      (sum,item) => sum + Number(item.quantity || 0),
+      (sum,item) =>
+        sum +
+        Number(item.quantity || 0),
       0
     );
 
@@ -2284,6 +2876,7 @@ function renderCart(){
     summaryTotal.textContent = "۰ تومان";
 
     return;
+
   }
 
   container.innerHTML =
@@ -2320,25 +2913,32 @@ function renderCart(){
 
               <button
                 class="qty-btn"
-                onclick="changeQuantity('${item.id}',1)"
+                onclick="
+                  changeQuantity('${item.id}',1)
+                "
               >
                 +
               </button>
 
               <span class="qty-number">
-                ${Number(item.quantity).toLocaleString("fa-IR")}
+                ${Number(item.quantity)
+                  .toLocaleString("fa-IR")}
               </span>
 
               <button
                 class="qty-btn"
-                onclick="changeQuantity('${item.id}',-1)"
+                onclick="
+                  changeQuantity('${item.id}',-1)
+                "
               >
                 −
               </button>
 
               <button
                 class="remove-item"
-                onclick="removeFromCart('${item.id}')"
+                onclick="
+                  removeFromCart('${item.id}')
+                "
               >
                 حذف
               </button>
@@ -2355,7 +2955,9 @@ function renderCart(){
 
   const totalQuantity =
     cart.reduce(
-      (sum,item) => sum + Number(item.quantity || 0),
+      (sum,item) =>
+        sum +
+        Number(item.quantity || 0),
       0
     );
 
@@ -2363,7 +2965,10 @@ function renderCart(){
     totalQuantity.toLocaleString("fa-IR");
 
   const allPriced =
-    cart.every(item => hasPrice(item.price));
+    cart.every(
+      item =>
+        hasPrice(item.price)
+    );
 
   const total =
     cart.reduce(
@@ -2393,7 +2998,9 @@ function changeQuantity(id,change){
 
   const item =
     cart.find(
-      item => String(item.id) === String(id)
+      item =>
+        String(item.id) ===
+        String(id)
     );
 
   if(!item){
@@ -2406,13 +3013,19 @@ function changeQuantity(id,change){
 
     cart =
       cart.filter(
-        item => String(item.id) !== String(id)
+        item =>
+          String(item.id) !==
+          String(id)
       );
 
   }
 
   saveCart();
+
   updateCartCount();
+
+  updateProductPageCartCount();
+
   renderCart();
 
 }
@@ -2422,11 +3035,17 @@ function removeFromCart(id){
 
   cart =
     cart.filter(
-      item => String(item.id) !== String(id)
+      item =>
+        String(item.id) !==
+        String(id)
     );
 
   saveCart();
+
   updateCartCount();
+
+  updateProductPageCartCount();
+
   renderCart();
 
 }
@@ -2441,10 +3060,16 @@ function clearCart(){
   cart = [];
 
   saveCart();
+
   updateCartCount();
+
+  updateProductPageCartCount();
+
   renderCart();
 
-  showToast("سبد خرید خالی شد");
+  showToast(
+    "سبد خرید خالی شد"
+  );
 
 }
 
@@ -2480,26 +3105,35 @@ function closeCart(){
 function openClimate(climate){
 
   const panel =
-    document.getElementById("climatePanel");
+    document.getElementById(
+      "climatePanel"
+    );
 
   const title =
-    document.getElementById("climateTitle");
+    document.getElementById(
+      "climateTitle"
+    );
 
   const grid =
-    document.getElementById("climateProducts");
+    document.getElementById(
+      "climateProducts"
+    );
 
-  title.textContent = climate;
+  title.textContent =
+    climate;
 
   const list =
     products.filter(
-      product => product.climate === climate
+      product =>
+        product.climate === climate
     );
 
   if(!list.length){
 
     grid.innerHTML = `
       <div class="no-products">
-        هنوز محصولی برای ${escapeHtml(climate)}
+        هنوز محصولی برای
+        ${escapeHtml(climate)}
         ثبت نشده است.
       </div>
     `;
@@ -2512,17 +3146,19 @@ function openClimate(climate){
   }
 
   panel.classList.add("active");
-  document.body.style.overflow = "hidden";
+
+  document.body.classList.add("no-scroll");
 
 }
 
 
 function closeClimate(){
 
-  document.getElementById("climatePanel")
-    .classList.remove("active");
+  document.getElementById(
+    "climatePanel"
+  ).classList.remove("active");
 
-  document.body.style.overflow = "";
+  document.body.classList.remove("no-scroll");
 
 }
 
@@ -2533,22 +3169,26 @@ function closeClimate(){
 
 function openMobileMenu(){
 
-  document.getElementById("mobileMenu")
-    .classList.add("active");
+  document.getElementById(
+    "mobileMenu"
+  ).classList.add("active");
 
-  document.getElementById("menuOverlay")
-    .classList.add("active");
+  document.getElementById(
+    "menuOverlay"
+  ).classList.add("active");
 
 }
 
 
 function closeMobileMenu(){
 
-  document.getElementById("mobileMenu")
-    .classList.remove("active");
+  document.getElementById(
+    "mobileMenu"
+  ).classList.remove("active");
 
-  document.getElementById("menuOverlay")
-    .classList.remove("active");
+  document.getElementById(
+    "menuOverlay"
+  ).classList.remove("active");
 
 }
 
@@ -2568,7 +3208,7 @@ function scrollToStore(){
 
 
 /* =====================================================
-   ADMIN
+   ADMIN AUTH
 ===================================================== */
 
 async function getSession(){
@@ -2587,7 +3227,7 @@ async function checkAdmin(user){
     return false;
   }
 
-  const { data, error } =
+  const { data,error } =
     await supabaseClient
       .from("admin_users")
       .select("user_id")
@@ -2597,6 +3237,7 @@ async function checkAdmin(user){
   if(error){
 
     console.error(error);
+
     return false;
 
   }
@@ -2608,8 +3249,9 @@ async function checkAdmin(user){
 
 async function openAdmin(){
 
-  document.getElementById("adminPanel")
-    .classList.add("active");
+  document.getElementById(
+    "adminPanel"
+  ).classList.add("active");
 
   const session =
     await getSession();
@@ -2631,7 +3273,9 @@ async function openAdmin(){
 
     showAdminLogin();
 
-    showToast("دسترسی مدیر ندارید");
+    showToast(
+      "دسترسی مدیر ندارید"
+    );
 
     return;
 
@@ -2644,30 +3288,35 @@ async function openAdmin(){
 
 function closeAdmin(){
 
-  document.getElementById("adminPanel")
-    .classList.remove("active");
+  document.getElementById(
+    "adminPanel"
+  ).classList.remove("active");
 
 }
 
 
 function showAdminLogin(){
 
-  document.getElementById("adminLoginBox")
-    .style.display = "flex";
+  document.getElementById(
+    "adminLoginBox"
+  ).style.display = "flex";
 
-  document.getElementById("adminDashboard")
-    .style.display = "none";
+  document.getElementById(
+    "adminDashboard"
+  ).style.display = "none";
 
 }
 
 
 function showAdminDashboard(){
 
-  document.getElementById("adminLoginBox")
-    .style.display = "none";
+  document.getElementById(
+    "adminLoginBox"
+  ).style.display = "none";
 
-  document.getElementById("adminDashboard")
-    .style.display = "block";
+  document.getElementById(
+    "adminDashboard"
+  ).style.display = "block";
 
   loadAdminProducts();
 
@@ -2677,31 +3326,41 @@ function showAdminDashboard(){
 async function adminLogin(){
 
   const email =
-    document.getElementById("adminEmail").value.trim();
+    document.getElementById(
+      "adminEmail"
+    ).value.trim();
 
   const password =
-    document.getElementById("adminPassword").value;
+    document.getElementById(
+      "adminPassword"
+    ).value;
 
   if(!email || !password){
 
-    showToast("ایمیل و رمز عبور را وارد کنید");
+    showToast(
+      "ایمیل و رمز عبور را وارد کنید"
+    );
+
     return;
 
   }
 
-  const { data, error } =
-    await supabaseClient.auth.signInWithPassword({
+  const { data,error } =
+    await supabaseClient.auth
+      .signInWithPassword({
 
-      email,
-      password
+        email,
+        password
 
-    });
+      });
 
   if(error){
 
     console.error(error);
 
-    showToast("ایمیل یا رمز عبور اشتباه است");
+    showToast(
+      "ایمیل یا رمز عبور اشتباه است"
+    );
 
     return;
 
@@ -2714,7 +3373,9 @@ async function adminLogin(){
 
     await supabaseClient.auth.signOut();
 
-    showToast("این حساب دسترسی مدیریت ندارد");
+    showToast(
+      "این حساب دسترسی مدیریت ندارد"
+    );
 
     return;
 
@@ -2722,7 +3383,9 @@ async function adminLogin(){
 
   showAdminDashboard();
 
-  showToast("ورود موفق بود");
+  showToast(
+    "ورود موفق بود"
+  );
 
 }
 
@@ -2733,7 +3396,9 @@ async function adminLogout(){
 
   showAdminLogin();
 
-  showToast("از حساب مدیریت خارج شدید");
+  showToast(
+    "از حساب مدیریت خارج شدید"
+  );
 
 }
 
@@ -2745,7 +3410,9 @@ async function adminLogout(){
 async function loadAdminProducts(){
 
   const container =
-    document.getElementById("adminProducts");
+    document.getElementById(
+      "adminProducts"
+    );
 
   container.innerHTML = `
     <div class="no-products">
@@ -2753,11 +3420,14 @@ async function loadAdminProducts(){
     </div>
   `;
 
-  const { data, error } =
+  const { data,error } =
     await supabaseClient
       .from("products")
       .select("*")
-      .order("created_at",{ascending:false});
+      .order(
+        "created_at",
+        {ascending:false}
+      );
 
   if(error){
 
@@ -2808,7 +3478,9 @@ async function loadAdminProducts(){
             </strong>
 
             <span>
-              ${escapeHtml(product.climate || "عمومی")}
+              ${escapeHtml(
+                product.climate || "عمومی"
+              )}
               ·
               ${formatPrice(product.price)}
             </span>
@@ -2819,14 +3491,18 @@ async function loadAdminProducts(){
 
             <button
               class="admin-edit"
-              onclick="editProduct('${product.id}')"
+              onclick="
+                editProduct('${product.id}')
+              "
             >
               ویرایش
             </button>
 
             <button
               class="admin-delete"
-              onclick="deleteProduct('${product.id}')"
+              onclick="
+                deleteProduct('${product.id}')
+              "
             >
               حذف
             </button>
@@ -2846,48 +3522,82 @@ async function loadAdminProducts(){
    PRODUCT FORM
 ===================================================== */
 
-function openProductForm(product = null){
+function openProductForm(product=null){
 
-  document.getElementById("productFormModal")
-    .classList.add("active");
+  document.getElementById(
+    "productFormModal"
+  ).classList.add("active");
 
   if(product){
 
-    document.getElementById("formTitle")
-      .textContent = "ویرایش محصول";
+    document.getElementById(
+      "formTitle"
+    ).textContent =
+      "ویرایش محصول";
 
-    document.getElementById("productId")
-      .value = product.id;
+    document.getElementById(
+      "productId"
+    ).value =
+      product.id;
 
-    document.getElementById("productName")
-      .value = product.name || "";
+    document.getElementById(
+      "productName"
+    ).value =
+      product.name || "";
 
-    document.getElementById("productClimate")
-      .value = product.climate || "عمومی";
+    document.getElementById(
+      "productClimate"
+    ).value =
+      product.climate || "عمومی";
 
-    document.getElementById("productImage")
-      .value = product.image || "";
+    document.getElementById(
+      "productImage"
+    ).value =
+      product.image || "";
 
-    document.getElementById("productDescription")
-      .value = product.description || "";
+    document.getElementById(
+      "productDescription"
+    ).value =
+      product.description || "";
 
-    document.getElementById("productPrice")
-      .value =
+    document.getElementById(
+      "productPrice"
+    ).value =
       hasPrice(product.price)
         ? product.price
         : "";
 
   }else{
 
-    document.getElementById("formTitle")
-      .textContent = "افزودن محصول";
+    document.getElementById(
+      "formTitle"
+    ).textContent =
+      "افزودن محصول";
 
-    document.getElementById("productId").value = "";
-    document.getElementById("productName").value = "";
-    document.getElementById("productClimate").value = "کوهستان";
-    document.getElementById("productImage").value = "";
-    document.getElementById("productDescription").value = "";
-    document.getElementById("productPrice").value = "";
+    document.getElementById(
+      "productId"
+    ).value = "";
+
+    document.getElementById(
+      "productName"
+    ).value = "";
+
+    document.getElementById(
+      "productClimate"
+    ).value =
+      "کوهستان";
+
+    document.getElementById(
+      "productImage"
+    ).value = "";
+
+    document.getElementById(
+      "productDescription"
+    ).value = "";
+
+    document.getElementById(
+      "productPrice"
+    ).value = "";
 
   }
 
@@ -2896,15 +3606,16 @@ function openProductForm(product = null){
 
 function closeProductForm(){
 
-  document.getElementById("productFormModal")
-    .classList.remove("active");
+  document.getElementById(
+    "productFormModal"
+  ).classList.remove("active");
 
 }
 
 
 async function editProduct(id){
 
-  const { data, error } =
+  const { data,error } =
     await supabaseClient
       .from("products")
       .select("*")
@@ -2914,7 +3625,11 @@ async function editProduct(id){
   if(error){
 
     console.error(error);
-    showToast("خطا در دریافت محصول");
+
+    showToast(
+      "خطا در دریافت محصول"
+    );
+
     return;
 
   }
@@ -2931,31 +3646,41 @@ async function editProduct(id){
 async function saveProduct(){
 
   const id =
-    document.getElementById("productId").value;
+    document.getElementById(
+      "productId"
+    ).value;
 
   const name =
-    document.getElementById("productName")
-      .value.trim();
+    document.getElementById(
+      "productName"
+    ).value.trim();
 
   const climate =
-    document.getElementById("productClimate")
-      .value;
+    document.getElementById(
+      "productClimate"
+    ).value;
 
   const image =
-    document.getElementById("productImage")
-      .value.trim();
+    document.getElementById(
+      "productImage"
+    ).value.trim();
 
   const description =
-    document.getElementById("productDescription")
-      .value.trim();
+    document.getElementById(
+      "productDescription"
+    ).value.trim();
 
   const priceValue =
-    document.getElementById("productPrice")
-      .value.trim();
+    document.getElementById(
+      "productPrice"
+    ).value.trim();
 
   if(!name){
 
-    showToast("نام محصول را وارد کنید");
+    showToast(
+      "نام محصول را وارد کنید"
+    );
+
     return;
 
   }
@@ -2963,9 +3688,15 @@ async function saveProduct(){
   const productData = {
 
     name,
+
     climate,
-    image: image || null,
-    description: description || null,
+
+    image:
+      image || null,
+
+    description:
+      description || null,
+
     price:
       priceValue === ""
         ? null
@@ -2983,7 +3714,8 @@ async function saveProduct(){
         .update(productData)
         .eq("id",id);
 
-    error = result.error;
+    error =
+      result.error;
 
   }else{
 
@@ -2992,7 +3724,8 @@ async function saveProduct(){
         .from("products")
         .insert(productData);
 
-    error = result.error;
+    error =
+      result.error;
 
   }
 
@@ -3012,6 +3745,7 @@ async function saveProduct(){
   closeProductForm();
 
   await loadProducts();
+
   await loadAdminProducts();
 
   showToast(
@@ -3024,18 +3758,22 @@ async function saveProduct(){
 
 
 /* =====================================================
-   DELETE PRODUCT
+   DELETE
 ===================================================== */
 
 async function deleteProduct(id){
 
   const product =
     products.find(
-      item => String(item.id) === String(id)
+      item =>
+        String(item.id) ===
+        String(id)
     );
 
   const productName =
-    product ? product.name : "این محصول";
+    product
+      ? product.name
+      : "این محصول";
 
   const confirmed =
     confirm(
@@ -3066,9 +3804,12 @@ async function deleteProduct(id){
   }
 
   await loadProducts();
+
   await loadAdminProducts();
 
-  showToast("محصول حذف شد");
+  showToast(
+    "محصول حذف شد"
+  );
 
 }
 
@@ -3077,49 +3818,46 @@ async function deleteProduct(id){
    KEYBOARD
 ===================================================== */
 
-document.addEventListener("keydown",function(event){
+document.addEventListener(
+  "keydown",
+  function(event){
 
-  if(event.key === "Escape"){
+    if(event.key === "Escape"){
 
-    closeProductModal();
-    closeCart();
-    closeClimate();
-    closeMobileMenu();
+      closeProductPage();
 
-  }
+      closeCart();
 
-});
+      closeClimate();
 
+      closeMobileMenu();
 
-/* =====================================================
-   CLICK OUTSIDE PRODUCT MODAL
-===================================================== */
-
-document.getElementById("productModal")
-  .addEventListener("click",function(event){
-
-    if(event.target === this){
-      closeProductModal();
     }
 
-  });
+  }
+);
 
 
 /* =====================================================
    INITIAL
 ===================================================== */
 
-document.addEventListener("DOMContentLoaded",function(){
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
 
-  loadProducts();
+    loadProducts();
 
-  updateCartCount();
+    updateCartCount();
 
-  renderCart();
+    updateProductPageCartCount();
 
-});
+    renderCart();
+
+  }
+);
 
 </script>
 
 </body>
-   </html>
+    </html>
